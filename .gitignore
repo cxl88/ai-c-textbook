@@ -17,3 +17,6 @@ Thumbs.db
 __pycache__/
 node_modules/
 .env
+
+# 例外：说明与客户要求文档进仓库
+!docs/**/*.docx
