@@ -1,0 +1,9 @@
+bad_lab_run.c: In function 'main':
+bad_lab_run.c:18:17: warning: initialization of 'char' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+   18 |     char code = "g";                    // 故障编码
+      |                 ^~~
+bad_lab_run.c:26:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
+   26 |     printf("空气湿度：%d%%\n", wet);
+      |            ^~~~~~~~~~~~~~~~~~  ~~~
+      |                                |
+      |                                double

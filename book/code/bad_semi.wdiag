@@ -1,0 +1,7 @@
+bad_semi.c: In function 'main':
+bad_semi.c:5:35: error: expected ';' before 'printf'
+    5 |     printf("姓名：%s\n", "林小禾")
+      |                                   ^
+      |                                   ;
+    6 |     printf("性别：%s\n", "女");
+      |     ~~~~~~                         

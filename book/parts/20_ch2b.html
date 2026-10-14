@@ -1,0 +1,329 @@
+
+<!-- ======================================================= 任务二 -->
+<h2 class="task"><tocmark level="2" text="任务二　实训室设备告警字符加密传输"/><span class="tag">任务二</span>实训室设备告警字符加密传输</h2>
+
+<h3>任务描述</h3>
+<div class="taskdesc"><p>任务一中 203 实训室的教师计算机会向实训中心后台上报告警信息。告警信息使用小写字母 g～n 中的一个代表不同的故障类型（见表2-10）。为了让告警信息在传输过程中不被无关人员直接看懂，约定加密规则：输入一个告警字母，发送其对应大写字母的相邻下一个字母作为加密报文。例如，告警字母 g 对应的大写字母是 G，加密报文就是 H。请编写 C 语言程序实现告警加密报文的显示。</p></div>
+<p class="tcap"><b>表2-10</b>告警字母与故障类型</p>
+<table class="center alarm">
+  <tr><th>g</th><td>显示器无信号</td><th>h</th><td>鼠标失灵</td><th>i</th><td>键盘失灵</td><th>j</th><td>网络中断</td></tr>
+  <tr><th>k</th><td>投影仪异常</td><th>l</th><td>音箱无声音</td><th>m</th><td>打印机卡纸</td><th>n</th><td>其他故障</td></tr>
+</table>
+
+<div class="prompt"><div class="ph"><span>AI 助学 · 传输为什么会出错</span><span>DeepSeek / 豆包</span></div><div class="pbd">
+<p><span class="r">提问 1</span>我是高职一年级学生。实训室的计算机要通过网络向后台上报告警信息，信息在传输过程中为什么会出错？请举 4 个生活中容易理解的原因，每个不超过 30 字。</p>
+<p><span class="r">提问 2</span>把告警字母“加密”后再发送，能防止传输出错吗？加密和校验分别解决什么问题？请用寄快递打个比方。</p>
+<div class="pnote">核对要点：传输出错的常见原因有电磁干扰、线路太长导致信号衰减、接口接触不良、网络拥堵造成数据丢失等。加密的作用是让别人看不懂内容，并不能防止出错；要发现传输中的错误，需要使用“校验”（如奇偶校验、CRC 校验），发现错误后再要求重新发送。这些内容会在网络、通信类课程中继续学习。</div>
+</div></div>
+
+<h3>任务分析</h3>
+<div class="ipo">
+  <div class="k">输入</div><div>小写字母 g～n 中的一个，如 g</div>
+  <div class="k">处理</div><div>转成大写字母（g → G），再取相邻的下一个字母（G → H）</div>
+  <div class="k">输出</div><div>加密后的告警报文，如 H</div>
+</div>
+<figure>
+<svg viewBox="0 0 520 92" width="100%" font-family="BSans">
+  <g font-size="9.4" fill="#4D4D4D" text-anchor="middle">
+    <text x="68" y="13">告警字母（输入）</text><text x="260" y="13">对应的大写字母</text><text x="452" y="13">加密报文（输出）</text>
+  </g>
+  <rect x="20" y="21" width="96" height="62" rx="3" fill="#F4F7FB" stroke="#1D4F91" stroke-width="1"/>
+  <rect x="212" y="21" width="96" height="62" rx="3" fill="#F4F7FB" stroke="#1D4F91" stroke-width="1"/>
+  <rect x="404" y="21" width="96" height="62" rx="3" fill="#1D4F91"/>
+  <g stroke="#C5D3E7" stroke-width="0.8"><path d="M20 61 H116"/><path d="M212 61 H308"/></g>
+  <path d="M404 61 H500" stroke="#4A75AE" stroke-width="0.8"/>
+  <g font-family="BMono, BSans" font-size="24" font-weight="700" text-anchor="middle">
+    <text x="68" y="51" fill="#153A6B">g</text><text x="260" y="51" fill="#153A6B">G</text><text x="452" y="51" fill="#FFFFFF">H</text>
+  </g>
+  <g font-size="9" text-anchor="middle">
+    <text x="68" y="76" fill="#4D4D4D">ASCII 码 103</text><text x="260" y="76" fill="#4D4D4D">ASCII 码 71</text><text x="452" y="76" fill="#DCE6F3">ASCII 码 72</text>
+  </g>
+  <g stroke="#4A75AE" stroke-width="1.4"><path d="M120 52 H206" marker-end="url(#arr)"/><path d="M312 52 H398" marker-end="url(#arr)"/></g>
+  <g font-size="10" font-weight="700" fill="#153A6B" text-anchor="middle"><text x="163" y="45">减 32</text><text x="355" y="45">加 1</text></g>
+  <g font-size="8.6" fill="#4D4D4D" text-anchor="middle"><text x="163" y="67">小写变大写</text><text x="355" y="67">取下一个字母</text></g>
+</svg>
+<figcaption><b>图2-12</b>告警字母的加密过程</figcaption>
+</figure>
+<p>要完成这个任务，需要弄清三个问题：① 字母在计算机中是怎样存放的，为什么能“加 1”“减 32”？② 小写字母和大写字母之间有什么关系？③ 怎样从键盘输入一个字母？下面的相关知识将逐一解答。</p>
+
+<h3>相关知识</h3>
+<h4><anchor id="p2-char"/>1. 字符</h4>
+<p>计算机只能存放二进制数（由 0 和 1 组成），字母、数字、符号等字符要先变成整数才能存放。为此，人们给每个字符规定了一个整数编号，叫作字符的<b>编码</b>。C 语言程序中的字符采用 <b>ASCII 码</b>（美国信息交换标准代码），例如字母 g 的 ASCII 码是 103。把字符 g 存入 char 型变量时，内存中存放的其实是整数 103 的二进制形式（见图2-13）。也就是说，<b>字符是以整数形式存放在内存单元中的</b>。</p>
+<figure>
+<svg viewBox="0 0 520 82" width="100%" font-family="BSans">
+  <text x="4" y="47" font-family="BMono, BSans" font-size="11.5" fill="#1F1F1F"><tspan fill="#1D4F91" font-weight="700">char</tspan> code = <tspan fill="#3F6FA6">'g'</tspan>;</text>
+  <path d="M126 43 H156" stroke="#4A75AE" stroke-width="1.3" marker-end="url(#arr)"/>
+  <text x="238" y="16" font-size="9" fill="#153A6B" text-anchor="middle" font-weight="700">变量 code 占 1 个字节（8 位）</text>
+  <g stroke="#1D4F91" stroke-width="0.8" fill="#E8EEF7">
+    <rect x="166" y="26" width="18" height="26"/><rect x="184" y="26" width="18" height="26"/><rect x="202" y="26" width="18" height="26"/><rect x="220" y="26" width="18" height="26"/>
+    <rect x="238" y="26" width="18" height="26"/><rect x="256" y="26" width="18" height="26"/><rect x="274" y="26" width="18" height="26"/><rect x="292" y="26" width="18" height="26"/>
+  </g>
+  <g font-family="BMono, BSans" font-size="12" font-weight="700" fill="#153A6B" text-anchor="middle">
+    <text x="175" y="44">0</text><text x="193" y="44">1</text><text x="211" y="44">1</text><text x="229" y="44">0</text><text x="247" y="44">0</text><text x="265" y="44">1</text><text x="283" y="44">1</text><text x="301" y="44">1</text>
+  </g>
+  <text x="238" y="70" font-size="9" fill="#4D4D4D" text-anchor="middle">存放的是 g 的 ASCII 码 103（二进制 01100111）</text>
+  <g stroke="#4A75AE" stroke-width="1.2" fill="none"><path d="M314 39 C330 39 334 26 352 26" marker-end="url(#arr)"/><path d="M314 39 C330 39 334 54 352 54" marker-end="url(#arr)"/></g>
+  <text x="360" y="30" font-size="10" fill="#1F1F1F">按 <tspan font-family="BMono, BSans" fill="#153A6B">%c</tspan> 输出，得到字符 <tspan font-family="BMono, BSans" font-size="13" font-weight="700" fill="#1D4F91">g</tspan></text>
+  <text x="360" y="58" font-size="10" fill="#1F1F1F">按 <tspan font-family="BMono, BSans" fill="#153A6B">%d</tspan> 输出，得到整数 <tspan font-family="BMono, BSans" font-size="13" font-weight="700" fill="#1D4F91">103</tspan></text>
+</svg>
+<figcaption><b>图2-13</b>字符 g 在内存中的存放</figcaption>
+</figure>
+<p>同一个字符型数据，用 <code>%c</code> 输出得到字符本身，用 <code>%d</code> 输出得到它的 ASCII 码。</p>
+
+<p class="exh"><b>例2-5</b>　输出字符和它的 ASCII 码。</p>
+<code-file src="char_code.c" title="例2-5　char_code.c" ln/>
+<conwin src="char_code" dir="project02"/>
+<figcaption><b>图2-14</b>例2-5 的运行结果</figcaption>
+<p>第 8 行 <code>'g' - 'G'</code> 的结果是 32，说明字符可以像整数一样参加运算，参加运算的是它们的 ASCII 码。同一个字母，小写字母的编码比大写字母大 32，因此：</p>
+<div class="fmt"><code>小写字母 - 32 → 对应的大写字母</code>　　<code>大写字母 + 32 → 对应的小写字母</code></div>
+<p>字母的编码是按字母表顺序连续排列的，所以“大写字母 + 1”就是它在字母表中的下一个字母，如 <code>'G' + 1</code> 就是 <code>'H'</code>。第 9 行还说明：字符 <code>'3'</code> 的 ASCII 码是 51，它和整数 3 不是一回事。</p>
+
+<h4>2. 字符集</h4>
+<p>计算机能使用的全部字符和它们的编码合在一起，叫作<b>字符集</b>。C 语言程序使用 ASCII 字符集，共有 128 个字符，编码为 0～127。按用途可以分为字母、数字、专门符号、空格符和不能显示的字符五类（见图2-15 和表2-11），完整的 ASCII 码表见附录A（<pref to="appx-a"/>）。</p>
+<figure>
+<svg viewBox="0 0 520 108" width="100%" font-family="BSans">
+  <text x="136.75" y="11" font-size="9" fill="#153A6B" font-weight="700" text-anchor="middle">空格</text>
+  <path d="M136.75 14 V33" stroke="#858585" stroke-width="0.6"/>
+  <g font-size="9" fill="#153A6B" font-weight="700" text-anchor="middle">
+    <text x="72.4" y="27">不能显示的字符</text><text x="168" y="27">专门符号</text><text x="216.7" y="27">数字</text>
+    <text x="314.2" y="27">大写字母</text><text x="439" y="27">小写字母</text>
+  </g>
+  <g font-size="7.6" fill="#4A75AE" text-anchor="middle"><text x="249.85" y="27">符号</text><text x="376.6" y="27">符号</text><text x="497.5" y="27">符号</text></g>
+  <g stroke="#FFFFFF" stroke-width="0.4">
+    <rect x="10" y="34" width="124.8" height="22" fill="#D9D9D9"/>
+    <rect x="138.7" y="34" width="58.5" height="22" fill="#E8EEF7"/>
+    <rect x="197.2" y="34" width="39" height="22" fill="#4A75AE"/>
+    <rect x="236.2" y="34" width="27.3" height="22" fill="#E8EEF7"/>
+    <rect x="263.5" y="34" width="101.4" height="22" fill="#153A6B"/>
+    <rect x="364.9" y="34" width="23.4" height="22" fill="#E8EEF7"/>
+    <rect x="388.3" y="34" width="101.4" height="22" fill="#1D4F91"/>
+    <rect x="489.7" y="34" width="15.6" height="22" fill="#E8EEF7"/>
+    <rect x="505.3" y="34" width="3.9" height="22" fill="#D9D9D9"/>
+  </g>
+  <rect x="134.8" y="34" width="3.9" height="22" fill="#FFFFFF" stroke="#858585" stroke-width="0.5"/>
+  <rect x="10" y="34" width="499.2" height="22" fill="none" stroke="#858585" stroke-width="0.6"/>
+  <text x="72.4" y="48.5" font-size="8.4" fill="#4D4D4D" text-anchor="middle">换行、回车、制表等</text>
+  <g font-family="BMono, BSans" font-size="8.6" text-anchor="middle">
+    <text x="168" y="48.5" fill="#153A6B">! # % + -</text>
+    <text x="216.7" y="48.5" fill="#FFFFFF" font-size="9.5">0～9</text>
+    <text x="314.2" y="48.5" fill="#FFFFFF" font-size="9.5">A～Z</text>
+    <text x="439" y="48.5" fill="#FFFFFF" font-size="9.5">a～z</text>
+  </g>
+  <g stroke="#858585" stroke-width="0.6">
+    <path d="M11.95 56 v4"/><path d="M136.75 56 v4"/><path d="M199.15 56 v4"/><path d="M234.25 56 v4"/><path d="M265.45 56 v4"/>
+    <path d="M362.95 56 v4"/><path d="M390.25 56 v4"/><path d="M487.75 56 v4"/><path d="M507.25 56 v4"/>
+  </g>
+  <g font-family="BMono, BSans" font-size="8.2" fill="#4D4D4D" text-anchor="middle">
+    <text x="11.95" y="69">0</text><text x="136.75" y="69">32</text><text x="234.25" y="69">57</text><text x="362.95" y="69">90</text><text x="487.75" y="69">122</text><text x="507.25" y="69">127</text>
+  </g>
+  <g font-family="BMono, BSans" font-weight="700" fill="#1D4F91" text-anchor="middle">
+    <text x="199.15" y="69" font-size="8.2">48</text><text x="265.45" y="69" font-size="8.2">65</text><text x="390.25" y="69" font-size="8.2">97</text>
+    <text x="199.15" y="81" font-size="9">'0'</text><text x="265.45" y="81" font-size="9">'A'</text><text x="390.25" y="81" font-size="9">'a'</text>
+  </g>
+  <text x="260" y="102" font-size="9" fill="#4D4D4D" text-anchor="middle">记住三个起点：'0' 是 48，'A' 是 65，'a' 是 97；同一个字母，小写字母的编码比大写字母大 32</text>
+</svg>
+<figcaption><b>图2-15</b>ASCII 字符的编码分布</figcaption>
+</figure>
+<p class="tcap"><b>表2-11</b>ASCII 字符的分类</p>
+<table>
+  <tr><th style="width:17%">类别</th><th style="width:30%">ASCII 码范围</th><th style="width:8%" class="c">个数</th><th>举例与说明</th></tr>
+  <tr><td>字母</td><td>大写 A～Z：65～90<br>小写 a～z：97～122</td><td class="c">52</td><td><code>'A'</code> 是 65，<code>'G'</code> 是 71；<code>'a'</code> 是 97，<code>'g'</code> 是 103</td></tr>
+  <tr><td>数字</td><td>0～9：48～57</td><td class="c">10</td><td><code>'0'</code> 是 48，<code>'7'</code> 是 55。数字字符不是数值，<code>'7'</code> 的值是 55 而不是 7</td></tr>
+  <tr><td>专门符号</td><td>33～47、58～64、91～96、123～126</td><td class="c">32</td><td>如 <code>'+'</code> 是 43，<code>'@'</code> 是 64，<code>'_'</code> 是 95</td></tr>
+  <tr><td>空格符</td><td>32</td><td class="c">1</td><td>看不见，但占一个字符的位置</td></tr>
+  <tr><td>不能显示的字符</td><td>0～31、127</td><td class="c">33</td><td>也叫控制字符，用来控制输出，如换行（10）、回车（13）、空字符（0）</td></tr>
+</table>
+<div class="box"><div class="bt"><svg><use href="#i-tip"/></svg>小智提示：ASCII 码不用死记</div>
+<p>只要记住三个“起点”：<code>'0'</code> 是 48，<code>'A'</code> 是 65，<code>'a'</code> 是 97，其他字符按顺序往后数。例如 <code>'3'</code> 是 48 + 3 = 51，G 是第 7 个字母，<code>'G'</code> 是 65 + 6 = 71，<code>'g'</code> 是 97 + 6 = 103。注意：ASCII 字符集中没有汉字，汉字使用 GBK、UTF-8 等编码，一个汉字要占 2 个或更多字节。</p></div>
+
+<h4>3. 字符常量与变量</h4>
+<h5>1）字符型常量</h5>
+<p><b>（1）普通字符。</b>用单引号括起来的一个字符，如 <code>'C'</code>、<code>'g'</code>、<code>'3'</code>、<code>'+'</code>、<code>' '</code>（空格）。使用时要注意：单引号中只能有一个字符；字母区分大小写，<code>'g'</code> 和 <code>'G'</code> 是两个不同的字符；单引号只是字符常量的标志，并不是字符本身的一部分。</p>
+<p><b>（2）转义字符。</b>以反斜杠 <code>\</code> 开头、后面跟一个或几个字符的特殊字符常量，用来表示不能显示的控制字符，或者在程序中有特殊用途、不能直接写出的字符。例如 <code>'\n'</code> 虽然写了两个符号，但只表示一个字符（换行符，ASCII 码为 10）。常用的转义字符见表2-12。</p>
+<p class="tcap"><b>表2-12</b>常用的转义字符</p>
+<table>
+  <tr><th style="width:15%" class="c">转义字符</th><th>含义</th><th style="width:13%" class="c">ASCII 码</th></tr>
+  <tr><td class="c"><code>\n</code></td><td>换行，光标移到下一行的开头</td><td class="c">10</td></tr>
+  <tr><td class="c"><code>\t</code></td><td>横向跳格，光标跳到下一个制表位（每 8 列一个制表位）</td><td class="c">9</td></tr>
+  <tr><td class="c"><code>\r</code></td><td>回车，光标回到本行的开头</td><td class="c">13</td></tr>
+  <tr><td class="c"><code>\0</code></td><td>空字符，用作字符串的结束标志</td><td class="c">0</td></tr>
+  <tr><td class="c"><code>\\</code></td><td>反斜杠 \</td><td class="c">92</td></tr>
+  <tr><td class="c"><code>\'</code></td><td>单引号 '</td><td class="c">39</td></tr>
+  <tr><td class="c"><code>\"</code></td><td>双引号 "</td><td class="c">34</td></tr>
+  <tr><td class="c"><code>\ddd</code></td><td>ddd 是 1～3 位八进制数，表示该编码对应的字符，如 <code>'\101'</code> 就是 <code>'A'</code></td><td class="c">—</td></tr>
+  <tr><td class="c"><code>\xhh</code></td><td>hh 是十六进制数（一般为 1～2 位），表示该编码对应的字符，如 <code>'\x42'</code> 就是 <code>'B'</code></td><td class="c">—</td></tr>
+</table>
+<code-file src="escape2.c" title="escape2.c" ln/>
+<out src="escape2"/>
+<p>第 5 行中，单引号、双引号、反斜杠在 C 语言中有特殊用途，要输出它们本身，需要在前面加上反斜杠。第 7 行中，八进制数 101、103 分别是十进制数 65、67，十六进制数 42 是十进制数 66，所以输出 A、B、C。</p>
+
+<h5>2）字符串常量</h5>
+<p>用双引号括起来的一串字符叫作<b>字符串常量</b>，如 <code>"203实训室"</code>、<code>"g"</code>。存放字符串时，系统会自动在末尾加上一个转义字符 <code>'\0'</code>，作为字符串的结束标志。所以，<code>'g'</code> 是字符常量，只占 1 个字节；<code>"g"</code> 是字符串常量，占 2 个字节（见图2-16）。字符串中 <code>'\0'</code> 前面的字符个数叫作字符串的<b>长度</b>，可以用 string.h 中的 <code>strlen</code> 函数求出。</p>
+<figure>
+<svg viewBox="0 0 520 92" width="100%" font-family="BSans">
+  <g font-size="9.4" fill="#153A6B" font-weight="700" text-anchor="middle">
+    <text x="70" y="16"><tspan font-family="BMono, BSans">'g'</tspan>　字符常量</text>
+    <text x="236" y="16"><tspan font-family="BMono, BSans">"g"</tspan>　字符串常量</text>
+    <text x="418" y="16"><tspan font-family="BMono, BSans">"203"</tspan>　字符串常量</text>
+  </g>
+  <g stroke="#1D4F91" stroke-width="0.8">
+    <rect x="58" y="27" width="24" height="26" fill="#E8EEF7"/>
+    <rect x="212" y="27" width="24" height="26" fill="#E8EEF7"/><rect x="236" y="27" width="24" height="26" fill="#D9D9D9"/>
+    <rect x="370" y="27" width="24" height="26" fill="#E8EEF7"/><rect x="394" y="27" width="24" height="26" fill="#E8EEF7"/><rect x="418" y="27" width="24" height="26" fill="#E8EEF7"/><rect x="442" y="27" width="24" height="26" fill="#D9D9D9"/>
+  </g>
+  <g font-family="BMono, BSans" font-size="12" font-weight="700" fill="#153A6B" text-anchor="middle">
+    <text x="70" y="45">g</text>
+    <text x="224" y="45">g</text><text x="248" y="45" fill="#4D4D4D">\0</text>
+    <text x="382" y="45">2</text><text x="406" y="45">0</text><text x="430" y="45">3</text><text x="454" y="45" fill="#4D4D4D">\0</text>
+  </g>
+  <g font-size="9" fill="#4D4D4D" text-anchor="middle">
+    <text x="70" y="69">占 1 个字节</text>
+    <text x="236" y="69">占 2 个字节，长度为 1</text>
+    <text x="418" y="69">占 4 个字节，长度为 3</text>
+  </g>
+  <text x="260" y="88" font-size="8.6" fill="#858585" text-anchor="middle">灰色格子中的 \0 是系统自动加上的字符串结束标志（ASCII 码为 0）</text>
+</svg>
+<figcaption><b>图2-16</b>字符常量与字符串常量在内存中的存放</figcaption>
+</figure>
+<code-file src="str_len.c" title="str_len.c" ln/>
+<out src="str_len"/>
+<div class="box warn"><div class="bt"><svg><use href="#i-warn"/></svg>注意：'g' 和 "g" 不能混用</div>
+<p>字符常量用单引号，只能有一个字符；字符串常量用双引号，末尾还有一个 <code>'\0'</code>。char 型变量只能存放一个字符，所以 <code>char code = 'g';</code> 是正确的，而 <code>char code = "g";</code> 是错误的写法。任务三中会看到这样写的后果。</p></div>
+
+<h5>3）字符型变量</h5>
+<p>用 <code>char</code> 定义的变量叫作字符型变量，用来存放一个字符，占 1 个字节。例如：</p>
+<snip>char type = 'C';                    // 实训室类型
+char code = 'g';                    // 告警字母
+char upper;                         // 大写字母
+upper = code - 32;                  // 小写转大写：103 - 32 = 71，即 'G'</snip>
+<p>因为字符以 ASCII 码的形式存放，所以字符型变量也可以看作一个“小整数”，能参加算术运算。在小熊猫C++ 中，char 型变量能存放的整数范围是 −128～127（unsigned char 为 0～255），ASCII 码 0～127 都在这个范围内。</p>
+
+<h4>4. 字符的输入与输出</h4>
+<p>任务一中的数据都是直接写在程序里的。而本任务的告警字母每次可能不同，需要在程序运行时<b>从键盘输入</b>。C 语言常用 getchar 函数和 scanf 函数输入数据，它们都在 stdio.h 中。</p>
+<h5>1）getchar 函数和 putchar 函数</h5>
+<p>getchar 函数从键盘读入一个字符，putchar 函数输出一个字符，一般形式为：</p>
+<div class="fmt"><code>字符变量 = getchar();</code>　　　<code>putchar(字符);</code></div>
+<p class="exh"><b>例2-6</b>　从键盘输入一个字母，再把它输出。</p>
+<code-file src="getchar_demo.c" title="例2-6　getchar_demo.c" ln/>
+<conwin src="getchar_demo" dir="project02" ins="请输入一个字母：|g"/>
+<figcaption><b>图2-17</b>例2-6 的运行结果</figcaption>
+<p>程序运行到第 7 行时会停下来，等待从键盘输入。输入 g 并按 Enter 键后，getchar 读入字符 g，存入变量 c。第 10 行的 <code>putchar('\n')</code> 输出一个换行符。本书的运行窗口中，<b>带下划线的内容是从键盘输入的</b>，输入后都要按 Enter 键。</p>
+
+<h5>2）scanf 函数</h5>
+<p>getchar 只能输入一个字符，而 scanf 函数可以按指定的格式输入各种类型的数据，一般形式为：</p>
+<div class="fmt"><code>scanf("格式控制字符串", &amp;变量1, &amp;变量2, …);</code></div>
+<p>例如 <code>scanf("%c", &amp;code);</code> 表示：从键盘读入一个字符，存入变量 code。变量名前面的 <code>&amp;</code> 叫作<b>取地址运算符</b>，<code>&amp;code</code> 表示变量 code 在内存中的位置（地址），scanf 根据这个地址把读入的数据存进去，就像快递员要按门牌号送货一样。scanf 常用的格式说明符见表2-13。</p>
+<p class="tcap"><b>表2-13</b>scanf 常用的格式说明符</p>
+<table>
+  <tr><th style="width:15%">变量的类型</th><th style="width:20%" class="c">scanf 中的写法</th><th style="width:40%">输入示例</th><th class="c">printf 中的写法</th></tr>
+  <tr><td><code>int</code></td><td class="c"><code>%d</code></td><td><code>scanf("%d", &amp;people);</code></td><td class="c"><code>%d</code></td></tr>
+  <tr><td><code>float</code></td><td class="c"><code>%f</code></td><td><code>scanf("%f", &amp;volt);</code></td><td class="c"><code>%f</code></td></tr>
+  <tr><td><code>double</code></td><td class="c"><code>%lf</code></td><td><code>scanf("%lf", &amp;temp);</code></td><td class="c"><code>%f</code></td></tr>
+  <tr><td><code>char</code></td><td class="c"><code>%c</code></td><td><code>scanf("%c", &amp;code);</code></td><td class="c"><code>%c</code></td></tr>
+</table>
+<p>使用 scanf 时要注意以下几点：</p>
+<ol class="paren">
+  <li>格式说明符要与变量的类型一致。特别注意，double 型变量输入时要用 <code>%lf</code>，输出时用 <code>%f</code> 即可。</li>
+  <li>变量名前面不要漏写 <code>&amp;</code>，否则编译器会给出警告，程序运行时也可能出错。</li>
+  <li>一次输入多个数值时，如 <code>scanf("%d %lf", &amp;people, &amp;temp);</code>，输入的数据之间用空格隔开，最后按 Enter 键。</li>
+  <li>输入之前，先用 printf 输出一句提示，告诉使用者应该输入什么。</li>
+</ol>
+
+<div class="box"><div class="bt"><svg><use href="#i-think"/></svg>课堂练习</div>
+<ol>
+  <li>已知 <code>'A'</code> 的 ASCII 码是 65，则 <code>'D'</code> 的 ASCII 码是<span class="fill"></span>，<code>'d'</code> 的是<span class="fill"></span>。</li>
+  <li>执行 <code>char c = 'b' - 32;</code> 后，<code>printf("%c", c);</code> 的输出结果是<span class="fill"></span>。</li>
+  <li>下列选项中，不是字符常量的是（　　）。<div class="opts o4"><span>A. <code>'a'</code></span><span>B. <code>'\n'</code></span><span>C. <code>"a"</code></span><span>D. <code>'3'</code></span></div></li>
+  <li>字符串 <code>"abc"</code> 在内存中占<span class="fill"></span>个字节，用 strlen 求出的长度是<span class="fill"></span>。</li>
+  <li>已定义 <code>double temp;</code>，从键盘输入温度的正确语句是（　　）。<div class="opts"><span>A. <code>scanf("%f", &amp;temp);</code></span><span>B. <code>scanf("%lf", &amp;temp);</code></span><span>C. <code>scanf("%lf", temp);</code></span><span>D. <code>scanf("%d", &amp;temp);</code></span></div></li>
+  <li><code>printf("%c %d\n", 'a' + 1, 'a' + 1);</code> 的输出结果是<span class="fill"></span>。</li>
+</ol></div>
+
+<h3>任务实施</h3>
+<div class="step"><span class="no">第一步</span><span class="st">程序框架</span></div>
+<p>本程序在任务一的基础上编写，仍然用符号常量表示实训室编号和类型：</p>
+<snip title="第一步：程序框架">/* 程序名：alarm.c
+   功能：输入告警字母，显示加密后的告警报文 */
+#include &lt;stdio.h&gt;
+#define ROOM 203                          // 实训室编号
+#define TYPE 'C'                          // 实训室类型
+
+int main(void)
+{
+    /* 第二步：定义变量 */
+
+    /* 第三步：输入、处理、输出 */
+
+    return 0;
+}</snip>
+
+<div class="step"><span class="no">第二步</span><span class="st">定义变量</span></div>
+<p>告警字母、大写字母和加密报文都是一个字符，都定义为 char 型变量（见表2-14）。</p>
+<p class="tcap"><b>表2-14</b>任务二的变量</p>
+<table>
+  <tr><th style="width:20%">数据</th><th style="width:16%">变量名</th><th style="width:14%">类型</th><th>值从哪里来</th></tr>
+  <tr><td>告警字母</td><td><code>code</code></td><td><code>char</code></td><td>从键盘输入，如 <code>'g'</code></td></tr>
+  <tr><td>大写字母</td><td><code>upper</code></td><td><code>char</code></td><td>计算得出：<code>code - 32</code></td></tr>
+  <tr><td>加密报文</td><td><code>secret</code></td><td><code>char</code></td><td>计算得出：<code>upper + 1</code></td></tr>
+</table>
+<snip title="第二步：定义变量">char code;                            // 告警字母（g～n）
+char upper;                           // 对应的大写字母
+char secret;                          // 加密报文</snip>
+
+<div class="step"><span class="no">第三步</span><span class="st">输入、处理、输出</span></div>
+<p>先输出提示，再用 scanf 读入告警字母；处理分两步，先减 32 变成大写字母，再加 1 得到加密报文；最后输出结果。</p>
+<snip title="第三步：输入、处理、输出（节选）">printf("请输入告警字母（g～n）：");
+scanf("%c", &amp;code);                   // 输入：从键盘读入一个字符
+
+upper = code - 32;                    // 处理 1：小写字母转为大写字母
+secret = upper + 1;                   // 处理 2：取相邻的下一个字母
+
+printf("加密报文：%c\n", secret);      // 输出：加密报文</snip>
+
+<div class="step"><span class="no">完整程序</span><span class="st">告警字符加密</span></div>
+<code-file src="alarm.c" title="alarm.c　告警字符加密" ln/>
+<conwin src="alarm" dir="project02" ins="请输入告警字母（g～n）：|g"/>
+<figcaption><b>图2-18</b>告警字符加密程序的运行结果</figcaption>
+<p>程序写好后，要多用几组数据测试。再分别输入 j 和 n，运行结果见表2-15，都符合加密规则。</p>
+<p class="tcap"><b>表2-15</b>告警字符加密程序测试记录</p>
+<table class="center">
+  <tr><th>输入的告警字母</th><th>故障类型</th><th>大写字母</th><th>加密报文</th><th>是否符合规则</th></tr>
+  <tr><td><code>g</code></td><td>显示器无信号</td><td>G</td><td>H</td><td><span class="ok">√</span></td></tr>
+  <tr><td><code>j</code></td><td>网络中断</td><td>J</td><td>K</td><td><span class="ok">√</span></td></tr>
+  <tr><td><code>n</code></td><td>其他故障</td><td>N</td><td>O</td><td><span class="ok">√</span></td></tr>
+</table>
+<div class="box warn"><div class="bt"><svg><use href="#i-warn"/></svg>想一想：输入大写字母 G 会怎样？</div>
+<p>实际运行可以看到，大写字母一行显示的是单引号 <code>'</code>，加密报文是 <code>(</code>。这是因为 <code>'G'</code> 的 ASCII 码 71 减去 32 得 39，正好是单引号的 ASCII 码，再加 1 得 40，是左圆括号。程序只能正确处理 g～n，学习了选择结构（if 语句）之后，就可以先检查输入是否合法，再进行加密。</p></div>
+<div class="box"><div class="bt"><svg><use href="#i-more"/></svg>知识拓展：恺撒密码</div>
+<p>把字母按字母表顺序移动固定位数的加密方法，与古罗马时期的“恺撒密码”原理相同。这种方法非常容易被破解，只适合用来学习字符运算；实际的信息系统要使用复杂得多的加密算法来保护数据。</p></div>
+
+<h3>技能训练</h3>
+<div class="ex">
+<p class="noind"><b>训练 1　字符型数据：后台还原告警字母。</b>实训中心后台收到加密报文后，要还原出原来的告警字母：先减 1 得到大写字母，再加 32 转为小写字母。请把下面的程序补充完整（预期运行结果见图2-19），并查表2-10 说出该告警表示的故障类型。</p>
+<snip title="decode.c（待补充）" ln>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    char secret;                        // 收到的加密报文
+    char code;                          // 还原出的告警字母
+
+    printf("请输入收到的加密报文（H～O）：");
+    secret = ①__________;               // 用 getchar 读入一个字符
+    code = ②______________;             // 先减 1，再加 32
+    printf("还原出的告警字母：%c\n", ③______);
+    return 0;
+}</snip>
+<conwin src="decode" dir="project02" ins="请输入收到的加密报文（H～O）：|K"/>
+<figcaption><b>图2-19</b>训练 1 的预期运行结果</figcaption>
+<p class="noind left">填写：①<span class="fill"></span>　②<span class="fill w2"></span>　③<span class="fill"></span>　故障类型：<span class="fill"></span></p>
+
+<p class="noind" style="margin-top:0.8em"><b>训练 2　数字字符与整数。</b>阅读下面的程序，先写出你预测的运行结果，再上机运行，核对预测是否正确。</p>
+<code-file src="digit.c" title="digit.c" ln/>
+<table class="center pred">
+  <tr><th style="width:20%">程序行</th><th style="width:40%">预测的输出</th><th>实际的输出</th></tr>
+  <tr><td>第 8 行</td><td></td><td></td></tr>
+  <tr><td>第 9 行</td><td></td><td></td></tr>
+  <tr><td>第 10 行</td><td></td><td></td></tr>
+</table>
+<p class="noind">提示：查表2-11 或附录A，找出 <code>'7'</code> 和 <code>'0'</code> 的 ASCII 码。想一想：为什么要用 <code>ch - '0'</code> 才能得到整数 7？</p>
+</div>

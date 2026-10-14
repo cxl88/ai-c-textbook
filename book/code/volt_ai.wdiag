@@ -1,0 +1,4 @@
+volt_ai.c: In function 'main':
+volt_ai.c:5:26: warning: unsigned conversion from 'int' to 'unsigned char' changes value from '380' to '124' [-Woverflow]
+    5 |     unsigned char volt = 380;           // 按 AI 的建议：电压用 unsigned char 保存
+      |                          ^~~

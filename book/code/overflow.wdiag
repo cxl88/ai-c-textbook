@@ -1,0 +1,4 @@
+overflow.c: In function 'main':
+overflow.c:6:14: warning: overflow in conversion from 'int' to 'char' changes value from '380' to '124' [-Woverflow]
+    6 |     char b = 380;                       // 超出得更多
+      |              ^~~

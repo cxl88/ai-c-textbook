@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>封面</title>
+<style>
+/* 封面（v2）：成品 185×260 mm，四边出血 3 mm，页面 191×266 mm；只用主色深蓝系 + 白 */
+@font-face { font-family: "BSans"; src: url("../../fonts/NotoSansSC-400.ttf"); font-weight: 400; }
+@font-face { font-family: "BSans"; src: url("../../fonts/NotoSansSC-700.ttf"); font-weight: 700; }
+@font-face { font-family: "BSans"; src: url("../../fonts/NotoSansSC-900.ttf"); font-weight: 900; }
+@font-face { font-family: "BMono"; src: url("../../fonts/JetBrainsMono-400.ttf"); font-weight: 400; }
+@font-face { font-family: "BMono"; src: url("../../fonts/JetBrainsMono-700.ttf"); font-weight: 700; }
+@page { size: 191mm 266mm; margin: 0; }
+html, body { margin: 0; padding: 0; }
+body { width: 191mm; height: 266mm; position: relative; overflow: hidden; background: #fff; font-family: "BSans";
+       -webkit-print-color-adjust: exact; print-color-adjust: exact; font-variant-ligatures: none; }
+svg.bg { position: absolute; left: 0; top: 0; width: 191mm; height: 266mm; }
+.en { position: absolute; left: 19mm; top: 19mm; font-family: "BMono", "BSans"; font-size: 7.2pt; letter-spacing: 2.2pt; color: rgba(255,255,255,0.62); }
+.t1 { position: absolute; left: 19mm; top: 33mm; font-size: 17pt; font-weight: 700; letter-spacing: 7pt; color: #C5D3E7; }
+.t2 { position: absolute; left: 18mm; top: 43mm; font-size: 38pt; font-weight: 900; letter-spacing: 2pt; color: #fff; line-height: 1.2; white-space: nowrap; }
+.ln { position: absolute; left: 19mm; top: 68mm; width: 16mm; height: 1.3pt; background: #fff; opacity: 0.9; }
+.tag { position: absolute; left: 19mm; top: 72mm; font-size: 9.5pt; letter-spacing: 1.5pt; color: rgba(255,255,255,0.88); }
+.code { position: absolute; font-family: "BMono", "BSans"; font-size: 6.6pt; line-height: 1.55; color: rgba(197,211,231,0.5); white-space: pre; }
+.au { position: absolute; left: 19mm; top: 216mm; font-size: 14pt; font-weight: 700; letter-spacing: 3pt; color: #153A6B; }
+</style></head>
+<body>
+<svg class="bg" viewBox="0 0 191 266">
+  <defs>
+    <linearGradient id="bgG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0B2242"/><stop offset="0.6" stop-color="#153A6B"/><stop offset="1" stop-color="#1D4F91"/></linearGradient>
+    <linearGradient id="cG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C5D3E7"/><stop offset="1" stop-color="#4A75AE"/></linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#4A75AE" stop-opacity="0.55"/><stop offset="1" stop-color="#4A75AE" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="6" height="6" patternUnits="userSpaceOnUse"><path d="M6 0 H0 V6" fill="none" stroke="#C5D3E7" stroke-width="0.12" opacity="0.18"/></pattern>
+  </defs>
+  <!-- 蓝色主体（含出血） -->
+  <rect width="191" height="203" fill="url(#bgG)"/>
+  <rect width="191" height="203" fill="url(#grid)"/>
+  <!-- 光晕 -->
+  <circle cx="116" cy="140" r="62" fill="url(#halo)"/>
+  <!-- 电路走线 -->
+  <g stroke="#C5D3E7" stroke-width="0.4" fill="none" opacity="0.38">
+    <path d="M191 96 H170 L163 103 H152"/><path d="M191 112 H176 L171 117 H160"/><path d="M191 172 H168 L161 165 H152"/>
+    <path d="M0 150 H20 L27 143 H40"/><path d="M0 166 H14 L20 172 H34"/><path d="M0 188 H30 L36 182 H52"/>
+    <path d="M88 203 V192 L94 186 V180"/><path d="M140 203 V196 L134 190"/>
+  </g>
+  <g fill="#C5D3E7" opacity="0.6">
+    <circle cx="152" cy="103" r="0.9"/><circle cx="160" cy="117" r="0.9"/><circle cx="152" cy="165" r="0.9"/><circle cx="40" cy="143" r="0.9"/>
+    <circle cx="34" cy="172" r="0.9"/><circle cx="52" cy="182" r="0.9"/><circle cx="94" cy="180" r="0.9"/><circle cx="134" cy="190" r="0.9"/>
+  </g>
+  <!-- 字母 C：由光带与节点构成 -->
+  <path d="M148.5 107.5 A46 46 0 1 0 148.5 172.5" fill="none" stroke="url(#cG)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M148.5 107.5 A46 46 0 1 0 148.5 172.5" fill="none" stroke="#FFFFFF" stroke-width="0.5" stroke-dasharray="1.4 2.6" opacity="0.75"/>
+  <circle cx="148.5" cy="107.5" r="3" fill="#FFFFFF"/><circle cx="148.5" cy="172.5" r="3" fill="#FFFFFF"/>
+  <circle cx="148.5" cy="107.5" r="5.2" fill="none" stroke="#FFFFFF" stroke-width="0.4" opacity="0.6"/><circle cx="148.5" cy="172.5" r="5.2" fill="none" stroke="#FFFFFF" stroke-width="0.4" opacity="0.6"/>
+  <!-- C 中的神经网络 -->
+  <g stroke="#C5D3E7" stroke-width="0.35" opacity="0.7">
+    <line x1="96" y1="122" x2="116" y2="114"/><line x1="96" y1="122" x2="116" y2="131"/><line x1="96" y1="122" x2="116" y2="148"/>
+    <line x1="96" y1="140" x2="116" y2="114"/><line x1="96" y1="140" x2="116" y2="131"/><line x1="96" y1="140" x2="116" y2="148"/><line x1="96" y1="140" x2="116" y2="165"/>
+    <line x1="96" y1="158" x2="116" y2="131"/><line x1="96" y1="158" x2="116" y2="148"/><line x1="96" y1="158" x2="116" y2="165"/>
+    <line x1="116" y1="114" x2="136" y2="131"/><line x1="116" y1="131" x2="136" y2="131"/><line x1="116" y1="148" x2="136" y2="131"/><line x1="116" y1="165" x2="136" y2="148"/>
+    <line x1="116" y1="114" x2="136" y2="148"/><line x1="116" y1="131" x2="136" y2="148"/><line x1="116" y1="148" x2="136" y2="148"/>
+  </g>
+  <g fill="#FFFFFF">
+    <circle cx="96" cy="122" r="2.1"/><circle cx="96" cy="140" r="2.1"/><circle cx="96" cy="158" r="2.1"/>
+  </g>
+  <g fill="#C5D3E7">
+    <circle cx="116" cy="114" r="2.1"/><circle cx="116" cy="131" r="2.1"/><circle cx="116" cy="148" r="2.1"/><circle cx="116" cy="165" r="2.1"/>
+  </g>
+  <g fill="#FFFFFF" stroke="#C5D3E7" stroke-width="0.6"><circle cx="136" cy="131" r="2.5"/><circle cx="136" cy="148" r="2.5"/></g>
+  <text x="104" y="171" font-family="BMono, BSans" font-size="3.4" fill="#C5D3E7" opacity="0.7" text-anchor="middle" letter-spacing="0.8">01100111</text>
+  <!-- AI 助教 小智（白色机身） -->
+  <g transform="translate(146 124) scale(0.5)">
+    <line x1="32" y1="5" x2="32" y2="13" stroke="#C5D3E7" stroke-width="2.4"/>
+    <circle cx="32" cy="5" r="3.4" fill="#FFFFFF"/>
+    <rect x="5" y="25" width="6" height="15" rx="3" fill="#C5D3E7"/><rect x="53" y="25" width="6" height="15" rx="3" fill="#C5D3E7"/>
+    <rect x="9" y="12" width="46" height="40" rx="14" fill="#FFFFFF"/>
+    <rect x="15" y="19" width="34" height="25" rx="9" fill="#0E2747"/>
+    <circle cx="25" cy="30" r="3.8" fill="#BFD4F2"/><circle cx="39" cy="30" r="3.8" fill="#BFD4F2"/>
+    <path d="M26 37 Q32 41.5 38 37" stroke="#BFD4F2" stroke-width="2.1" fill="none" stroke-linecap="round"/>
+    <rect x="22" y="53" width="20" height="7" rx="3" fill="#C5D3E7"/>
+  </g>
+  <!-- 蓝白分界 -->
+  <rect x="0" y="203" width="191" height="1.6" fill="#4A75AE"/>
+  <rect x="19" y="236" width="153" height="0.35" fill="#C5D3E7"/>
+  <!-- 右下角小图形：字符编码格子 -->
+  <g font-family="BMono, BSans" font-size="3.6" text-anchor="middle">
+    <rect x="142" y="214" width="7" height="8" fill="#E8EEF7" stroke="#4A75AE" stroke-width="0.3"/><text x="145.5" y="219.3" fill="#153A6B">C</text>
+    <rect x="149" y="214" width="7" height="8" fill="#E8EEF7" stroke="#4A75AE" stroke-width="0.3"/><text x="152.5" y="219.3" fill="#153A6B">+</text>
+    <rect x="156" y="214" width="7" height="8" fill="#1D4F91" stroke="#1D4F91" stroke-width="0.3"/><text x="159.5" y="219.3" fill="#FFFFFF">A</text>
+    <rect x="163" y="214" width="7" height="8" fill="#1D4F91" stroke="#1D4F91" stroke-width="0.3"/><text x="166.5" y="219.3" fill="#FFFFFF">I</text>
+  </g>
+</svg>
+<div class="en">C PROGRAMMING · EMPOWERED BY AI</div>
+<div class="t1">人工智能助力</div>
+<div class="t2">C语言程序设计</div>
+<div class="ln"></div>
+<div class="tag">AI 助学　·　任务驱动　·　图解实训</div>
+<div class="code" style="left:19mm; top:92mm">#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    printf("Hello, AI!\n");
+    return 0;
+}</div>
+<div class="code" style="left:19mm; top:126mm">char code = 'g';
+double temp = 24.5;</div>
+<div class="au">冯丽娜　编著</div>
+</body></html>

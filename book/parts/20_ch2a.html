@@ -1,0 +1,463 @@
+<section class="ch2">
+
+<!-- ======================================================= 项目首页 -->
+<!--BLANK-->
+<div class="opener">
+<svg class="bg" viewBox="0 0 191 266" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="op2g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#112E57"/><stop offset="1" stop-color="#1D4F91"/></linearGradient>
+  </defs>
+  <rect width="191" height="134" fill="url(#op2g)"/>
+  <g fill="#FFFFFF" opacity="0.13">
+    <rect x="120" y="58" width="7" height="34"/><rect x="131" y="44" width="7" height="48"/><rect x="142" y="66" width="7" height="26"/>
+    <rect x="153" y="36" width="7" height="56"/><rect x="164" y="52" width="7" height="40"/><rect x="175" y="28" width="7" height="64"/>
+  </g>
+  <g stroke="#FFFFFF" stroke-width="0.3" opacity="0.28" fill="none">
+    <path d="M116 92 H186"/><path d="M123 54 L134 40 L145 62 L156 32 L167 48 L178 24"/>
+  </g>
+  <g fill="#FFFFFF" opacity="0.4"><circle cx="123" cy="54" r="1"/><circle cx="134" cy="40" r="1"/><circle cx="145" cy="62" r="1"/><circle cx="156" cy="32" r="1"/><circle cx="167" cy="48" r="1"/><circle cx="178" cy="24" r="1"/></g>
+  <text x="186" y="128" font-family="BMono, BSans" font-size="58" font-weight="700" fill="#FFFFFF" opacity="0.07" text-anchor="end">02</text>
+  <text x="26" y="124" font-family="BMono, BSans" font-size="4.2" fill="#FFFFFF" opacity="0.42">const int seats = 48;  double temp = 24.5;</text>
+  <use href="#bot" x="150" y="104" width="24" height="24"/>
+</svg>
+<div class="oc">
+  <div class="kick">PROJECT 02</div>
+  <div class="pno"><tocmark level="1" text="项目二　读懂身边多样数据" odd="1"/>项目二</div>
+  <div class="otitle">读懂身边多样数据</div>
+  <div class="oline"></div>
+  <div class="osub">从实训室的 AI 智能数据看板出发，认识常量与变量、数据类型和字符，学会为不同特点的数据选对“存放方式”，并能诊断常见的数据异常。</div>
+</div>
+<div class="nav">
+  <div class="nh">学习导航</div>
+  <div class="it"><span class="n">01</span><span class="t">任务一　建立实训室数据档案</span><span class="d">常量与变量，整型、浮点型、字符型、布尔型，标识符</span></div>
+  <div class="it"><span class="n">02</span><span class="t">任务二　实训室设备告警字符加密传输</span><span class="d">字符与 ASCII 编码，字符常量与变量，字符的输入与输出</span></div>
+  <div class="it"><span class="n">03</span><span class="t">任务三　实训室数据字典适配与异常诊断</span><span class="d">取值范围与精度，类型转换，整数除法，格式匹配，错误与警告</span></div>
+</div>
+<div class="meta"><span><b>建议学时</b>10 学时</span><span><b>开发环境</b>小熊猫C++ 3.4</span><span><b>AI 工具</b>DeepSeek、豆包</span></div>
+</div>
+
+<!-- ======================================================= 情境导入 -->
+<h2 class="sec first"><tocmark level="2" text="情境导入"/>情境导入</h2>
+
+<p>新学期，实训室上线了 AI 智能数据看板，实时展示实训室编号、在室人数、环境温度、计算机额定电压和开关机状态等多样化实训数据（见图2-1）。这些数据有的固定不变，有的实时变化，在程序中是如何区分、存储这些不同特点的数据呢？</p>
+
+<figure>
+<div class="ui">
+  <div class="ui-bar"><span class="ui-dot"></span>实训室 AI 智能数据看板<span class="ui-r">6 号实训楼 · 14:05 更新</span></div>
+  <div class="ui-main">
+    <div class="ui-side"><div class="on">数据总览</div><div>环境监测</div><div>设备状态</div><div>告警记录</div><div>AI 助手</div></div>
+    <div class="ui-card">
+      <div class="ui-ch">203 实训室 · 实时数据</div>
+      <div class="ui-dash">
+        <div class="dc"><div class="lb">实训室编号</div><div class="v">203</div><span class="tg fix">固定不变</span></div>
+        <div class="dc"><div class="lb">实训室类型</div><div class="v">C<small>计算机类</small></div><span class="tg fix">固定不变</span></div>
+        <div class="dc"><div class="lb">总座位数</div><div class="v">48<small>个</small></div><span class="tg fix">固定不变</span></div>
+        <div class="dc"><div class="lb">计算机额定电压</div><div class="v">220<small>V</small></div><span class="tg fix">固定不变</span></div>
+        <div class="dc"><div class="lb">在室人数</div><div class="v">36<small>人</small></div><span class="tg live">实时变化</span></div>
+        <div class="dc"><div class="lb">环境温度</div><div class="v">24.5<small>℃</small></div><span class="tg live">实时变化</span></div>
+        <div class="dc"><div class="lb">教师计算机</div><div class="v">开机</div><span class="tg live">实时变化</span></div>
+        <div class="dc"><div class="lb">空座位数</div><div class="v">12<small>个</small></div><span class="tg calc">计算得出</span></div>
+      </div>
+      <div class="ui-ai"><svg><use href="#bot"/></svg><span>小智：看板上的数据，有的固定不变，有的实时变化，还有的要计算得出。你能把它们分分类吗？</span></div>
+    </div>
+  </div>
+</div>
+<figcaption><b>图2-1</b>实训室 AI 智能数据看板（示意图，数据为课堂模拟）</figcaption>
+</figure>
+
+<div class="talk">
+  <div class="say"><svg><use href="#he"/></svg><div class="b"><span class="who">小禾：</span>看板上有整数、有小数、有字母，还有“开机”“关机”，程序是怎么把它们存起来的？</div></div>
+  <div class="say"><svg><use href="#lin"/></svg><div class="b"><span class="who">林老师：</span>处理数据之前，先要弄清两件事：这个数据会不会变？它是什么样的数据？会变的和不变的，存放的方法不一样；整数、小数、字母，也要放进不同类型的“格子”里。</div></div>
+  <div class="say zhi"><svg><use href="#bot"/></svg><div class="b"><span class="who">小智：</span>我可以帮你们分析每项数据的特点。不过选哪种类型，最后还要你们自己判断、自己验证哦！</div></div>
+</div>
+
+<p>本项目依托 AI 辅助学习，认识 C 语言的常量与变量，掌握各种数据类型，读懂并规范处理身边的各类数据。</p>
+
+<!-- ======================================================= 三维目标 -->
+<h2 class="sec"><tocmark level="2" text="三维目标"/>三维目标</h2>
+<div class="goals">
+  <div><div class="gh">知识目标</div><ul>
+    <li>理解常量与变量的含义，掌握符号常量和 const 只读变量的定义方法</li>
+    <li>掌握变量的三要素以及定义、初始化和赋值</li>
+    <li>掌握整型、浮点型的特点和用法，了解字符型、布尔型</li>
+    <li>理解字符的 ASCII 编码，掌握字符常量、字符串常量和字符变量</li>
+    <li>理解取值范围、精度、类型转换和整数除法</li>
+  </ul></div>
+  <div><div class="gh">能力目标</div><ul>
+    <li>能根据数据的特点选择合适的数据类型，并规范命名</li>
+    <li>能用 printf、scanf、getchar 输入输出各类数据</li>
+    <li>能利用字符编码完成大小写转换等运算</li>
+    <li>能根据编译器提示和运行结果诊断数据异常</li>
+    <li>能借助 AI 查找问题，并用运行结果检验 AI 的建议</li>
+  </ul></div>
+  <div><div class="gh">素养目标</div><ul>
+    <li>养成先分析数据、再选择类型的严谨习惯</li>
+    <li>命名规范、注释清楚，让别人也能读懂代码</li>
+    <li>认识数据错误可能带来的隐患，树立质量意识</li>
+    <li>对待 AI 的建议，坚持用证据说话</li>
+  </ul></div>
+</div>
+
+<!-- ======================================================= 知识导图 -->
+<h2 class="sec"><tocmark level="2" text="知识导图"/>知识导图</h2>
+<figure>
+<svg viewBox="0 0 520 262" width="100%" font-family="BSans">
+  <g stroke="#9DB3D3" stroke-width="1.3" fill="none">
+    <path d="M128 131 C150 131 150 46 168 46"/><path d="M128 131 L168 131"/><path d="M128 131 C150 131 150 216 168 216"/>
+    <path d="M312 46 C324 46 324 16 338 16"/><path d="M312 46 C324 46 324 36 338 36"/><path d="M312 46 C324 46 324 56 338 56"/><path d="M312 46 C324 46 324 76 338 76"/>
+    <path d="M312 131 C324 131 324 101 338 101"/><path d="M312 131 C324 131 324 121 338 121"/><path d="M312 131 C324 131 324 141 338 141"/><path d="M312 131 C324 131 324 161 338 161"/>
+    <path d="M312 216 C324 216 324 186 338 186"/><path d="M312 216 C324 216 324 206 338 206"/><path d="M312 216 C324 216 324 226 338 226"/><path d="M312 216 C324 216 324 246 338 246"/>
+  </g>
+  <rect x="8" y="106" width="120" height="50" rx="4" fill="#1D4F91"/>
+  <text x="68" y="127" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">项目二</text>
+  <text x="68" y="145" fill="#fff" font-size="10.5" text-anchor="middle">读懂身边多样数据</text>
+  <g font-size="10.5" font-weight="700" text-anchor="middle">
+    <rect x="168" y="31" width="144" height="30" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="240" y="50" fill="#153A6B">任务一 建立实训室数据档案</text>
+    <rect x="168" y="116" width="144" height="30" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="240" y="135" fill="#153A6B">任务二 告警字符加密传输</text>
+    <rect x="168" y="201" width="144" height="30" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="240" y="220" fill="#153A6B">任务三 数据字典与异常诊断</text>
+  </g>
+  <g font-size="9.6" fill="#1F1F1F">
+    <text x="342" y="19.5">常量：直接常量、符号常量、const</text><text x="342" y="39.5">变量：三要素、定义与赋值</text><text x="342" y="59.5">类型：整型、浮点型、字符型、布尔型</text><text x="342" y="79.5">标识符：关键字、用户标识符</text>
+    <text x="342" y="104.5">字符的存放：ASCII 编码</text><text x="342" y="124.5">字符集：字母、数字、符号、控制字符</text><text x="342" y="144.5">字符常量、转义字符、字符串常量</text><text x="342" y="164.5">字符的输入：getchar、scanf</text>
+    <text x="342" y="189.5">取值范围与溢出</text><text x="342" y="209.5">精度与类型转换</text><text x="342" y="229.5">整数除法与强制类型转换</text><text x="342" y="249.5">格式匹配、错误与警告</text>
+  </g>
+  <g fill="#1D4F91"><circle cx="338" cy="16" r="1.8"/><circle cx="338" cy="36" r="1.8"/><circle cx="338" cy="56" r="1.8"/><circle cx="338" cy="76" r="1.8"/>
+  <circle cx="338" cy="101" r="1.8"/><circle cx="338" cy="121" r="1.8"/><circle cx="338" cy="141" r="1.8"/><circle cx="338" cy="161" r="1.8"/>
+  <circle cx="338" cy="186" r="1.8"/><circle cx="338" cy="206" r="1.8"/><circle cx="338" cy="226" r="1.8"/><circle cx="338" cy="246" r="1.8"/></g>
+</svg>
+<figcaption><b>图2-2</b>项目二知识导图</figcaption>
+</figure>
+
+<!-- ======================================================= 任务一 -->
+<h2 class="task"><tocmark level="2" text="任务一　建立实训室数据档案"/><span class="tag">任务一</span>建立实训室数据档案</h2>
+
+<h3>任务描述</h3>
+<div class="taskdesc"><p>学校 6 号实训楼 203 实训室需要建立一份简易数据档案。档案显示：实训室类型 C、编号 203、总座位数 48、当前在室人数、当前环境温度、当前教师计算机是否开机。某时刻采集到在室 36 人、温度 24.5 ℃、计算机开机，请编写 C 语言程序显示 203 实训室的当前档案信息和空座位数。</p></div>
+
+<h3>任务分析</h3>
+<div class="ipo">
+  <div class="k">已知</div><div>实训室类型 C、编号 203、总座位数 48、当前在室人数 36、当前环境温度 24.5 ℃、当前教师计算机开机</div>
+  <div class="k">求解</div><div>空座位数 = 总座位数 − 当前在室人数</div>
+  <div class="k">输出</div><div>实训室类型、编号、总座位数、当前在室人数、当前环境温度、当前教师计算机是否开机、空座位数</div>
+</div>
+<p>这些数据各有特点（见表2-1）：有的在程序运行中固定不变，有的随时会变；有的是整数，有的是小数，还有字母和“开、关”两种状态。要把它们正确地写进程序，需要学习常量与变量、数据类型和标识符的知识。</p>
+<p class="tcap"><b>表2-1</b>203 实训室档案数据的特点</p>
+<table class="center">
+  <tr><th>数据</th><th>当前值</th><th>是否变化</th><th>数据的形式</th></tr>
+  <tr><td>实训室类型</td><td>C</td><td>固定不变</td><td>一个字母</td></tr>
+  <tr><td>编号</td><td>203</td><td>固定不变</td><td>整数</td></tr>
+  <tr><td>总座位数</td><td>48</td><td>固定不变</td><td>整数</td></tr>
+  <tr><td>当前在室人数</td><td>36</td><td>随时变化</td><td>整数</td></tr>
+  <tr><td>当前环境温度</td><td>24.5 ℃</td><td>随时变化</td><td>小数</td></tr>
+  <tr><td>教师计算机是否开机</td><td>开机</td><td>随时变化</td><td>开、关两种状态</td></tr>
+  <tr><td>空座位数</td><td>由程序计算</td><td>随人数变化</td><td>整数</td></tr>
+</table>
+
+<h3>相关知识</h3>
+<h4>1. 常量与变量</h4>
+<p>程序中的数据有两种表现形式：常量和变量。在程序运行过程中，值<b>不能改变</b>的量叫作<b>常量</b>，如实训室编号 203、总座位数 48；值<b>可以改变</b>的量叫作<b>变量</b>，如当前在室人数、当前环境温度。</p>
+
+<h5>1）常量</h5>
+<p>常量按写法不同，可以分为直接常量和符号常量；此外，用 <code>const</code> 修饰的变量值也不能改变，可以当作常量使用。</p>
+<p><b>（1）直接常量。</b>直接写在程序中、一看就知道值的数据叫作直接常量（也叫字面常量）。按数据类型不同，常用的直接常量见表2-2。</p>
+<p class="tcap"><b>表2-2</b>常用的直接常量</p>
+<table>
+  <tr><th style="width:15%">类型</th><th style="width:27%">写法</th><th style="width:25%">示例</th><th>说明</th></tr>
+  <tr><td>整型常量</td><td>不带小数点的数</td><td><code>48</code>　<code>-5</code>　<code>0</code></td><td>还可以写成八进制（以 0 开头）或十六进制（以 0x 开头）</td></tr>
+  <tr><td>浮点型常量</td><td>带小数点的数</td><td><code>24.5</code>　<code>0.5</code>　<code>-3.0</code></td><td>也可以写成指数形式，如 <code>2.45e1</code> 表示 2.45×10<sup>1</sup></td></tr>
+  <tr><td>字符常量</td><td>用单引号括起来的一个字符</td><td><code>'C'</code>　<code>'g'</code>　<code>'3'</code></td><td><code>'3'</code> 是字符，不是整数 3</td></tr>
+  <tr><td>字符串常量</td><td>用双引号括起来的一串字符</td><td><code>"203实训室"</code>　<code>"g"</code></td><td>可以包含多个字符</td></tr>
+</table>
+<p>同一个整数可以用不同的进制来写。下面的程序用十进制、八进制、十六进制三种写法表示同一个整数 203，再统一用 <code>%d</code>（十进制）输出：</p>
+<code-file src="radix.c" title="radix.c"/>
+<out src="radix"/>
+<p>以 0 开头的整数会被当作八进制数，所以平时写整数时，不要在前面随意补 0（例如把 203 写成 0203，它的值就变成了 131）。</p>
+
+<p><b>（2）符号常量。</b>用 <code>#define</code> 给常量起一个名字，这个名字叫作符号常量。一般形式为：</p>
+<div class="fmt"><code>#define 符号常量名 常量值</code></div>
+<p>例如 <code>#define ROOM 203</code>。程序编译之前，预处理器会把程序中所有的 ROOM 替换成 203。使用符号常量有两个好处：一是<b>见名知意</b>，看到 ROOM 就知道是实训室编号；二是<b>一改全改</b>，编号变了只需要修改这一行。习惯上，符号常量名全部用大写字母；<code>#define</code> 是预处理指令，末尾<b>不加分号</b>，名字和值之间也不写等号。</p>
+
+<p><b>（3）只读变量（常变量）。</b>定义变量时在前面加上关键字 <code>const</code>，变量的值在程序运行过程中就不能再修改，相当于一个常量。例如：</p>
+<snip>const int seats = 48;               // 总座位数，以后不能再修改</snip>
+<p>用 <code>const</code> 修饰的变量叫作只读变量（也叫常变量），它有类型、有名字，必须在定义时给出初值。</p>
+
+<p class="exh"><b>例2-1</b>　输出实训室数据中的各种常量。</p>
+<code-file src="const_demo.c" title="例2-1　const_demo.c" ln/>
+<conwin src="const_demo" dir="project02"/>
+<figcaption><b>图2-3</b>例2-1 的运行结果</figcaption>
+<p>程序第 2 行用 <code>#define</code> 定义了符号常量 ROOM，第 6 行用 <code>const</code> 定义了只读变量 seats，第 8～11 行输出的都是直接常量。<code>#define</code> 与 <code>const</code> 都能让数据“固定不变”，它们的区别见表2-3。</p>
+<p class="tcap"><b>表2-3</b>#define 与 const 的区别</p>
+<table>
+  <tr><th style="width:16%">比较项目</th><th style="width:40%"><code>#define ROOM 203</code></th><th><code>const int seats = 48;</code></th></tr>
+  <tr><td>本质</td><td>预处理指令：编译前把名字替换成值</td><td>定义一个值不能修改的变量</td></tr>
+  <tr><td>有无类型</td><td>没有类型，只是简单替换</td><td>有类型（如 int）</td></tr>
+  <tr><td>书写格式</td><td>不用等号，末尾不加分号</td><td>用等号赋初值，末尾加分号</td></tr>
+  <tr><td>命名习惯</td><td>全部大写，如 ROOM</td><td>一般小写，如 seats</td></tr>
+  <tr><td>本书用法</td><td>程序中固定的配置值，如楼栋号、编号</td><td>需要明确类型的固定数据，如总座位数</td></tr>
+</table>
+
+<h5><anchor id="p2-var"/>2）变量</h5>
+<p>变量就像实训室储物柜里的一个个格子：格子上贴着标签（<b>变量名</b>），格子有一定的大小、规定了能放什么东西（<b>变量类型</b>），格子里放着物品（<b>变量值</b>），物品可以取出、换成新的。变量名、变量类型和变量值叫作变量的<b>三要素</b>（见图2-4）。</p>
+<figure>
+<svg viewBox="0 0 520 132" width="100%" font-family="BSans">
+  <g font-family="BMono, BSans" font-size="15">
+    <text x="14" y="62" fill="#1D4F91" font-weight="700">int</text><text x="56" y="62" fill="#1F1F1F">people</text>
+    <text x="128" y="62" fill="#1F1F1F">=</text><text x="146" y="62" fill="#1F1F1F">36</text><text x="164" y="62" fill="#1F1F1F">;</text>
+  </g>
+  <g stroke="#4A75AE" stroke-width="1" fill="none"><path d="M14 70 v5 h27 v-5"/><path d="M56 70 v5 h54 v-5"/><path d="M146 70 v5 h18 v-5"/>
+  <path d="M27.5 75 v10"/><path d="M83 75 v10"/><path d="M155 75 v10"/></g>
+  <g font-size="9" fill="#153A6B" text-anchor="middle" font-weight="700"><text x="27.5" y="96">类型</text><text x="83" y="96">变量名</text><text x="155" y="96">值</text></g>
+  <path d="M184 57 H236" stroke="#4A75AE" stroke-width="1.2" marker-end="url(#arr)"/>
+  <rect x="246" y="34" width="112" height="62" rx="2" fill="#E8EEF7" stroke="#1D4F91" stroke-width="1"/>
+  <rect x="265" y="23" width="74" height="20" rx="2" fill="#1D4F91"/>
+  <text x="302" y="37" font-family="BMono, BSans" font-size="11" fill="#fff" text-anchor="middle">people</text>
+  <text x="302" y="80" font-family="BMono, BSans" font-size="22" font-weight="700" fill="#153A6B" text-anchor="middle">36</text>
+  <text x="302" y="114" font-size="9" fill="#4D4D4D" text-anchor="middle">int 型的“格子”：4 个字节</text>
+  <g font-size="9.4" fill="#1F1F1F">
+    <text x="378" y="44"><tspan fill="#153A6B" font-weight="700">① 变量名</tspan>：格子上的标签</text>
+    <text x="378" y="68"><tspan fill="#153A6B" font-weight="700">② 类型</tspan>：决定能放什么数据</text>
+    <text x="378" y="92"><tspan fill="#153A6B" font-weight="700">③ 值</tspan>：格子里当前的数据</text>
+    <text x="378" y="108" font-size="8.6" fill="#4D4D4D">　　　 可以换成新的值</text>
+  </g>
+</svg>
+<figcaption><b>图2-4</b>变量的三要素</figcaption>
+</figure>
+
+<p><b>（1）变量的定义。</b>变量必须<b>先定义、后使用</b>。定义变量的一般形式为：</p>
+<div class="fmt"><code>类型名 变量名;</code>　或　<code>类型名 变量名 = 初值;</code></div>
+<p class="tcap"><b>表2-4</b>变量的定义、初始化和赋值</p>
+<table>
+  <tr><th style="width:15%">操作</th><th style="width:28%">写法</th><th>说明</th></tr>
+  <tr><td>定义</td><td><code>int people;</code></td><td>准备一个存放整数的“格子”，名叫 people，此时格子里的值不确定，不能直接使用</td></tr>
+  <tr><td>定义多个变量</td><td><code>int people, empty;</code></td><td>一次定义多个同类型的变量，变量名之间用逗号隔开</td></tr>
+  <tr><td>定义并初始化</td><td><code>int people = 36;</code></td><td>定义的同时放入初值 36（推荐写法）</td></tr>
+  <tr><td>赋值</td><td><code>people = 40;</code></td><td>用新值 40 替换格子里原来的值</td></tr>
+</table>
+<p><b>（2）变量的赋值。</b><code>=</code> 叫作<b>赋值号</b>，它的作用是把右边的值存入左边的变量，而不是数学中的“等于”。例如 <code>people = people - 2;</code> 表示先取出 people 原来的值减去 2，再把结果存回 people。</p>
+
+<p class="exh"><b>例2-2</b>　实训室上课时有 36 人，后来又来了 4 人，再后来走了 2 人。用变量记录在室人数的变化。</p>
+<code-file src="assign.c" title="例2-2　assign.c" ln/>
+<conwin src="assign" dir="project02"/>
+<figcaption><b>图2-5</b>例2-2 的运行结果</figcaption>
+
+<p><b>（3）只读变量不能再赋值。</b>用 <code>const</code> 定义的只读变量，如果再给它赋值，编译时就会报错：</p>
+<code-file src="bad_const.c" title="bad_const.c（有错误）" ln bad mark="6"/>
+<diag src="bad_const"/>
+<p>提示的意思是“给只读变量 seats 赋值”。如果实训室真的换成了 50 个座位，应该修改定义处的初值 48，再重新编译运行。</p>
+
+<h4>2. 数据类型</h4>
+<p>数据类型决定了数据在内存中占多大的空间、能表示什么范围的值、能进行哪些运算。C 语言的数据类型可以分为基本类型、构造类型、指针类型和空类型等（见图2-6）。本项目重点学习基本类型中的整型、浮点型、字符型和布尔型。</p>
+<figure>
+<svg viewBox="0 0 520 232" width="100%" font-family="BSans">
+  <g stroke="#9DB3D3" stroke-width="1.3" fill="none">
+    <path d="M112 115 C130 115 130 66 146 66"/><path d="M112 115 C130 115 130 152 146 152"/><path d="M112 115 C130 115 130 182 146 182"/><path d="M112 115 C130 115 130 212 146 212"/>
+    <path d="M232 66 C250 66 250 17 266 17"/><path d="M232 66 C250 66 250 47 266 47"/><path d="M232 66 C250 66 250 77 266 77"/><path d="M232 66 C250 66 250 107 266 107"/>
+  </g>
+  <rect x="258" y="1" width="258" height="126" rx="3" fill="none" stroke="#4A75AE" stroke-width="0.8" stroke-dasharray="3 2"/>
+  <text x="510" y="121" font-size="8.4" fill="#4A75AE" text-anchor="end">本项目重点学习</text>
+  <rect x="4" y="99" width="108" height="32" rx="3" fill="#1D4F91"/><text x="58" y="119.5" fill="#fff" font-size="11" font-weight="700" text-anchor="middle">C 语言数据类型</text>
+  <g font-size="10.5" font-weight="700" text-anchor="middle">
+    <rect x="146" y="54" width="86" height="24" rx="3" fill="#1D4F91"/><text x="189" y="70" fill="#fff">基本类型</text>
+    <rect x="146" y="140" width="86" height="24" rx="3" fill="#F2F2F2" stroke="#B5B5B5" stroke-width="0.8"/><text x="189" y="156" fill="#4D4D4D">构造类型</text>
+    <rect x="146" y="170" width="86" height="24" rx="3" fill="#F2F2F2" stroke="#B5B5B5" stroke-width="0.8"/><text x="189" y="186" fill="#4D4D4D">指针类型</text>
+    <rect x="146" y="200" width="86" height="24" rx="3" fill="#F2F2F2" stroke="#B5B5B5" stroke-width="0.8"/><text x="189" y="216" fill="#4D4D4D">空类型</text>
+  </g>
+  <g font-size="10" font-weight="700" text-anchor="middle">
+    <rect x="266" y="6" width="70" height="22" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="301" y="21" fill="#153A6B">整型</text>
+    <rect x="266" y="36" width="70" height="22" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="301" y="51" fill="#153A6B">浮点型</text>
+    <rect x="266" y="66" width="70" height="22" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="301" y="81" fill="#153A6B">字符型</text>
+    <rect x="266" y="96" width="70" height="22" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/><text x="301" y="111" fill="#153A6B">布尔型</text>
+  </g>
+  <g font-family="BMono, BSans" font-size="9.5" fill="#1F1F1F">
+    <text x="346" y="21">short  int  long  long long</text><text x="346" y="51">float  double</text><text x="346" y="81">char</text><text x="346" y="111">_Bool</text>
+  </g>
+  <g font-size="9" fill="#4D4D4D">
+    <text x="244" y="156">数组、结构体、共用体、枚举（后续学习）</text>
+    <text x="244" y="186">用来存放数据的地址（后续学习）</text>
+    <text x="244" y="216">void，表示“没有”，如 int main(void) 中的 void</text>
+  </g>
+</svg>
+<figcaption><b>图2-6</b>C 语言的数据类型</figcaption>
+</figure>
+
+<h5>1）整型</h5>
+<p>整型用来存放没有小数部分的整数，如人数、座位数、次数。按占用空间的大小，整型分为 short（短整型）、int（整型）、long（长整型）和 long long（长长整型），最常用的是 int。各种整型的字节数和取值范围见表2-5。</p>
+<p class="tcap"><b>表2-5</b>整型的字节数和取值范围（小熊猫C++，64 位 Windows）</p>
+<table>
+  <tr><th style="width:15%">类型</th><th style="width:10%" class="c">字节数</th><th style="width:40%">取值范围</th><th>适用场合</th></tr>
+  <tr><td><code>short</code></td><td class="c">2</td><td>−32768～32767</td><td>较小的整数</td></tr>
+  <tr><td><code>int</code></td><td class="c">4</td><td>−2147483648～2147483647（约 ±21 亿）</td><td>一般的整数，如人数、座位数（最常用）</td></tr>
+  <tr><td><code>long</code></td><td class="c">4</td><td>与 int 相同</td><td>较少使用（在 Linux 等系统中占 8 字节）</td></tr>
+  <tr><td><code>long long</code></td><td class="c">8</td><td>约 −9.2×10<sup>18</sup>～9.2×10<sup>18</sup></td><td>很大的整数</td></tr>
+</table>
+<p>在类型名前加上 <code>unsigned</code>，表示无符号类型，只能存放 0 和正整数，如 unsigned int 的取值范围是 0～4294967295。同一种类型在不同的编译器、不同的操作系统中占用的字节数可能不同，可以用 <code>sizeof</code> 运算符查看。</p>
+
+<p class="exh"><b>例2-3</b>　查看各种数据类型在小熊猫C++ 中占用的字节数。</p>
+<code-file src="sizeof_demo.c" title="例2-3　sizeof_demo.c" ln/>
+<conwin src="sizeof_demo" dir="project02"/>
+<figcaption><b>图2-7</b>例2-3 的运行结果</figcaption>
+<p><code>sizeof(类型名)</code> 求出该类型占用的字节数；前面的 <code>(int)</code> 把求出的结果转换为 int 型，以便用 <code>%d</code> 输出（这种写法叫强制类型转换，见<pref to="p2-cast"/>）。</p>
+
+<h5>2）浮点型</h5>
+<p>浮点型用来存放带小数的数，如温度 24.5 ℃、电压 219.8 V。常用的浮点型有 float（单精度浮点型）和 double（双精度浮点型），它们的比较见表2-6。</p>
+<p class="tcap"><b>表2-6</b>float 与 double 的比较</p>
+<table>
+  <tr><th style="width:13%">类型</th><th style="width:10%" class="c">字节数</th><th style="width:16%">有效数字</th><th style="width:33%">取值范围（绝对值）</th><th class="c">输出</th><th class="c">输入</th></tr>
+  <tr><td><code>float</code></td><td class="c">4</td><td>约 6～7 位</td><td>约 1.2×10<sup>−38</sup>～3.4×10<sup>38</sup></td><td class="c"><code>%f</code></td><td class="c"><code>%f</code></td></tr>
+  <tr><td><code>double</code></td><td class="c">8</td><td>约 15～16 位</td><td>约 2.2×10<sup>−308</sup>～1.8×10<sup>308</sup></td><td class="c"><code>%f</code></td><td class="c"><code>%lf</code></td></tr>
+</table>
+<p>“有效数字”的位数反映了数据的精度。下面的程序把同一个数分别存入 float 型和 double 型变量，比较它们的精度。</p>
+<p class="exh"><b>例2-4</b>　比较 float 和 double 的精度。</p>
+<code-file src="float_demo.c" title="例2-4　float_demo.c" ln/>
+<conwin src="float_demo" dir="project02"/>
+<figcaption><b>图2-8</b>例2-4 的运行结果</figcaption>
+<p>float 型只能保证约 7 位有效数字，1234567.89 存入后变成了 1234567.875；double 型的有效数字多，输出结果与原数一致。因此，本书中的小数统一使用 <b>double</b> 型。输出时，<code>%f</code> 默认显示 6 位小数，<code>%.1f</code>、<code>%.2f</code> 分别显示 1 位、2 位小数。</p>
+
+<h5>3）字符型</h5>
+<p>字符型（char）用来存放<b>一个</b>字符，如实训室类型 'C'、告警字母 'g'，占 1 个字节，输出时用 <code>%c</code>。例如：</p>
+<snip>char type = 'C';                    // 实训室类型</snip>
+<p>字符在内存中是怎样存放的、字符能不能参加运算，将在任务二中详细介绍（见<pref to="p2-char"/>）。</p>
+
+<h5>4）布尔型</h5>
+<p>布尔型（_Bool）用来表示“是”或“否”、“开”或“关”这类只有两种状态的数据，如“教师计算机是否开机”。布尔型变量只有两个值：1（真，表示“是”）和 0（假，表示“否”），占 1 个字节；把其他非 0 的值存入布尔型变量，都会变成 1。输出时一般用 <code>%d</code>。</p>
+<code-file src="bool_demo.c" title="bool_demo.c"/>
+<out src="bool_demo"/>
+<p>布尔型在后续学习选择结构（根据条件选择执行不同的语句）时会大量使用，本书这里只介绍它的基本用法。C 语言还提供了头文件 stdbool.h，引入后可以写成 bool、true、false，本书暂不使用。</p>
+
+<h4>3. 标识符</h4>
+<p>程序中用来给变量、符号常量、函数等命名的名字叫作<b>标识符</b>，如 people、seats、ROOM、main、printf。标识符分为系统标识符和用户标识符两类。</p>
+
+<h5>1）系统标识符</h5>
+<p>系统标识符是 C 语言事先规定好的标识符，包括关键字和预定义标识符。</p>
+<p><b>（1）关键字。</b>关键字是 C 语言保留的、有特定含义的单词，如 int、double、return，只能按规定的用途使用，不能另作他用。C 语言的常用关键字见表2-7。</p>
+<p class="tcap"><b>表2-7</b>C 语言的常用关键字</p>
+<table class="kwt">
+  <tr><th style="width:13%">用途</th><th>关键字及含义</th></tr>
+  <tr><td>数据类型</td><td><code>int</code> 整型　<code>short</code> 短整型　<code>long</code> 长整型　<code>float</code> 单精度浮点型　<code>double</code> 双精度浮点型　<code>char</code> 字符型　<code>_Bool</code> 布尔型　<code>void</code> 空类型　<code>signed</code> 有符号　<code>unsigned</code> 无符号</td></tr>
+  <tr><td>类型修饰</td><td><code>const</code> 只读　<code>static</code> 静态　<code>extern</code> 外部　<code>auto</code> 自动　<code>register</code> 寄存器　<code>volatile</code> 易变</td></tr>
+  <tr><td>流程控制</td><td><code>if</code> 如果　<code>else</code> 否则　<code>switch</code> 开关　<code>case</code> 情况　<code>default</code> 默认　<code>for</code>、<code>while</code>、<code>do</code> 循环　<code>break</code> 跳出　<code>continue</code> 继续　<code>return</code> 返回　<code>goto</code> 转向</td></tr>
+  <tr><td>其他</td><td><code>sizeof</code> 求字节数　<code>struct</code> 结构体　<code>union</code> 共用体　<code>enum</code> 枚举　<code>typedef</code> 定义类型别名</td></tr>
+</table>
+<div class="box"><div class="bt"><svg><use href="#i-tip"/></svg>小智提示：怎样记住关键字？</div>
+<ol>
+  <li><b>分批记：</b>先记本项目用到的 int、float、double、char、_Bool、const、void、return、sizeof，其他的随着学习逐步掌握。</li>
+  <li><b>联想英文原词：</b>int 来自 integer（整数），char 来自 character（字符），const 来自 constant（常量），sizeof 就是 size of（……的大小）。</li>
+  <li><b>记住特点：</b>关键字都由小写字母组成（_Bool 等少数几个以下划线开头）。</li>
+  <li><b>借助编辑器：</b>在小熊猫C++ 中，关键字会自动显示成蓝色；如果拼错了，颜色就不会变。</li>
+</ol></div>
+<p><b>（2）预定义标识符。</b>如 printf、scanf、main、define、include 等，它们不是关键字，但在 C 语言中已经有特定的含义（库函数名、主函数名、预处理指令名）。为了避免混乱，不要用它们给自己的变量命名。</p>
+
+<h5>2）用户标识符</h5>
+<p>用户标识符是编程者自己起的名字，如变量名 people、符号常量名 ROOM。用户标识符必须遵守以下规则：</p>
+<ol class="paren">
+  <li>只能由字母（A～Z、a～z）、数字（0～9）和下划线（_）组成。</li>
+  <li>第一个字符必须是字母或下划线，不能是数字。</li>
+  <li>区分大小写，age 和 Age 是两个不同的标识符。</li>
+  <li>不能与关键字同名。</li>
+</ol>
+<p>此外，起名还要做到<b>见名知意</b>：尽量用简单的英文单词，如 age（年龄）、seats（座位数）、temp（温度）；多个单词之间用下划线连接，如 room_num（房间号）。不要用 a、b、c 这类看不出含义的名字，也尽量不用拼音缩写。表2-8 给出了一些正误示例。</p>
+<p class="tcap"><b>表2-8</b>用户标识符正误示例</p>
+<table>
+  <tr><th style="width:13%">标识符</th><th style="width:9%" class="c">是否合法</th><th style="width:28%">原因</th><th style="width:13%">标识符</th><th style="width:9%" class="c">是否合法</th><th>原因</th></tr>
+  <tr><td><code>age</code></td><td class="c"><span class="ok">√</span></td><td>由字母组成</td><td><code>2room</code></td><td class="c"><span class="ng">×</span></td><td>以数字开头</td></tr>
+  <tr><td><code>room2</code></td><td class="c"><span class="ok">√</span></td><td>字母开头，后面可以有数字</td><td><code>room-num</code></td><td class="c"><span class="ng">×</span></td><td>含有减号“-”</td></tr>
+  <tr><td><code>room_num</code></td><td class="c"><span class="ok">√</span></td><td>用下划线连接两个单词</td><td><code>room num</code></td><td class="c"><span class="ng">×</span></td><td>含有空格</td></tr>
+  <tr><td><code>_temp</code></td><td class="c"><span class="ok">√</span></td><td>可以以下划线开头（本书不建议）</td><td><code>int</code></td><td class="c"><span class="ng">×</span></td><td>与关键字同名</td></tr>
+</table>
+
+<div class="box"><div class="bt"><svg><use href="#i-think"/></svg>课堂练习</div>
+<ol>
+  <li>下列选项中，属于字符常量的是（　　）。<div class="opts o4"><span>A. <code>"C"</code></span><span>B. <code>'C'</code></span><span>C. <code>C</code></span><span>D. <code>'CC'</code></span></div></li>
+  <li>定义符号常量 PI 表示 3.14，正确的是（　　）。<div class="opts"><span>A. <code>#define PI 3.14</code></span><span>B. <code>#define PI 3.14;</code></span><span>C. <code>#define PI = 3.14</code></span><span>D. <code>define PI 3.14</code></span></div></li>
+  <li>判断：执行 <code>const int seats = 48;</code> 后，还可以用 <code>seats = 50;</code> 修改它的值。（　　）</li>
+  <li>在下列标识符中找出合法的：<code>score</code>　<code>3d</code>　<code>max_num</code>　<code>a b</code>　<code>float</code>　<code>Float</code>　<code>_count</code>　<code>room-1</code>　<code>seat2</code>　<code>#num</code>。<br>合法的标识符有：<span class="fill w3"></span>。</li>
+  <li>为下列数据选择合适的类型，并写出定义语句：风扇数量 12 台；实测电压 219.8 V；设备等级 B；风扇是否开启（已开启）。</li>
+  <li>执行 <code>int a = 5; a = a + 3;</code> 后，<code>printf("%d", a);</code> 的输出结果是<span class="fill"></span>。</li>
+</ol></div>
+
+<h3>任务实施</h3>
+<p>按照项目一中学过的步骤编写程序：先写程序框架，再定义变量，最后写输入、处理和输出。</p>
+
+<div class="step"><span class="no">第一步</span><span class="st">程序框架</span></div>
+<p>实训室类型 C 和编号 203 在程序中固定不变，用 <code>#define</code> 定义为符号常量，写在 main 函数前面：</p>
+<snip title="第一步：程序框架">/* 程序名：lab.c
+   功能：显示 203 实训室的当前数据档案 */
+#include &lt;stdio.h&gt;
+#define TYPE 'C'                        // 符号常量：实训室类型（字符型）
+#define ROOM 203                        // 符号常量：实训室编号（整型）
+
+int main(void)
+{
+    /* 第二步：定义变量 */
+
+    /* 第三步：输入、处理、输出 */
+
+    return 0;
+}</snip>
+
+<div class="step"><span class="no">第二步</span><span class="st">定义变量</span></div>
+<p>根据表2-1 中各项数据的特点，确定每项数据的表示方法、名字和类型（见表2-9），再写出定义语句。</p>
+<p class="tcap"><b>表2-9</b>档案数据的表示方法</p>
+<table>
+  <tr><th>数据</th><th>表示方法</th><th>名字</th><th>类型</th><th>初值</th></tr>
+  <tr><td>实训室类型</td><td>符号常量</td><td><code>TYPE</code></td><td>字符型</td><td><code>'C'</code></td></tr>
+  <tr><td>编号</td><td>符号常量</td><td><code>ROOM</code></td><td>整型</td><td><code>203</code></td></tr>
+  <tr><td>总座位数</td><td>只读变量</td><td><code>seats</code></td><td><code>const int</code></td><td><code>48</code></td></tr>
+  <tr><td>当前在室人数</td><td>变量</td><td><code>people</code></td><td><code>int</code></td><td><code>36</code></td></tr>
+  <tr><td>当前环境温度</td><td>变量</td><td><code>temp</code></td><td><code>double</code></td><td><code>24.5</code></td></tr>
+  <tr><td>教师计算机是否开机</td><td>变量</td><td><code>power</code></td><td><code>_Bool</code></td><td><code>1</code>（开机）</td></tr>
+  <tr><td>空座位数</td><td>变量</td><td><code>empty</code></td><td><code>int</code></td><td>由程序计算</td></tr>
+</table>
+<div class="prompt"><div class="ph"><span>AI 助学 · 请 AI 检查类型选择</span><span>DeepSeek / 豆包</span></div><div class="pbd">
+<p><span class="r">身份</span>我是 C 语言初学者，<span class="r">背景</span>正在为实训室数据档案选择数据类型，<span class="r">材料</span>我的选择是：<span class="slot">（粘贴表2-9 中“数据”“类型”两列）</span>，<span class="r">要求</span>请逐项判断是否合适并说明理由；不合适的，请告诉我应该换成什么类型。</p>
+<div class="pnote">AI 的意见要回到程序中验证：按建议修改后编译运行，看输出是否与表2-9 中的初值一致。</div>
+</div></div>
+
+<snip title="第二步：定义变量">const int seats = 48;               // 只读变量：总座位数
+int people = 36;                    // 整型变量：当前在室人数
+double temp = 24.5;                 // 浮点型变量：当前环境温度（℃）
+_Bool power = 1;                    // 布尔型变量：教师计算机是否开机
+int empty;                          // 整型变量：空座位数</snip>
+
+<div class="step"><span class="no">第三步</span><span class="st">输入、处理、输出</span></div>
+<p>本任务的数据都是采集好的已知值，直接作为变量的初值，不需要从键盘输入（键盘输入的方法将在任务二中学习）。处理只有一步：用公式算出空座位数。输出时，格式说明符要与数据类型对应：整数用 <code>%d</code>，小数用 <code>%.1f</code>，字符用 <code>%c</code>。</p>
+<snip title="第三步：处理和输出（节选）">empty = seats - people;             // 处理：空座位数 = 总座位数 - 在室人数
+
+printf("实训室类型：%c\n", TYPE);
+printf("当前环境温度：%.1f ℃\n", temp);
+printf("空座位数：%d\n", empty);</snip>
+
+<div class="step"><span class="no">完整程序</span><span class="st">203 实训室数据档案</span></div>
+<code-file src="lab.c" title="lab.c　203 实训室数据档案" ln/>
+<conwin src="lab" dir="project02"/>
+<figcaption><b>图2-9</b>203 实训室数据档案的运行结果</figcaption>
+<p>空座位数 12 是程序算出来的，不是直接写进去的。如果把第 10 行的在室人数改为 40，重新编译运行，空座位数会自动变为 8。</p>
+
+<h3>技能训练</h3>
+<div class="ex">
+<p class="noind"><b>训练 1　整型数据：204 实训室空座位统计。</b>204 实训室共有 40 个座位，当前在室 25 人，今日已安排 3 场实训。请把下面的程序补充完整，输出实训室编号、今日实训场次和空座位数（预期运行结果见图2-10）。</p>
+<snip title="seat204.c（待补充）" ln>#include &lt;stdio.h&gt;
+#define ROOM 204                        // 实训室编号
+
+int main(void)
+{
+    const int seats = 40;               // 总座位数
+    ①______ people = 25;               // 当前在室人数
+    int times = 3;                      // 今日实训场次
+    int empty;                          // 空座位数
+
+    empty = ②______________;
+    printf("实训室编号：%d\n", ③______);
+    printf("今日实训场次：%d\n", times);
+    printf("空座位数：%d\n", ④______);
+    return 0;
+}</snip>
+<conwin src="seat204" dir="project02"/>
+<figcaption><b>图2-10</b>训练 1 的预期运行结果</figcaption>
+<p class="noind left">填写：①<span class="fill"></span>　②<span class="fill w2"></span>　③<span class="fill"></span>　④<span class="fill"></span></p>
+
+<p class="noind" style="margin-top:0.8em"><b>训练 2　浮点型数据：计算平均温度。</b>上午三次测得 203 实训室的温度分别为 24.5 ℃、25.1 ℃、23.9 ℃。请编写程序 temp_avg.c，求三次温度的平均值，结果保留 1 位小数（预期运行结果见图2-11）。</p>
+<p class="noind">提示：① 温度有小数，用 double 型变量保存；② 平均值 = (t1 + t2 + t3) / 3，注意加括号；③ 用 <code>%.1f</code> 输出。</p>
+<conwin src="temp_avg" dir="project02"/>
+<figcaption><b>图2-11</b>训练 2 的预期运行结果</figcaption>
+</div>

@@ -1,0 +1,8 @@
+bad_case.c: In function 'main':
+bad_case.c:5:5: warning: implicit declaration of function 'Printf'; did you mean 'printf'? [-Wimplicit-function-declaration]
+    5 |     Printf("姓名：%s\n", "林小禾");
+      |     ^~~~~~
+      |     printf
+C:/Program Files/RedPanda-Cpp/mingw64/bin/../lib/gcc/x86_64-w64-mingw32/11.5.0/../../../../x86_64-w64-mingw32/bin/ld.exe: C:\users\root\Temp\ccqJgIma.o: in function `main':
+D:\wb/bad_case.c:5: undefined reference to `Printf'
+collect2.exe: error: ld returned 1 exit status

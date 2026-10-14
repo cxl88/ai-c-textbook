@@ -1,0 +1,8 @@
+short     占 2 字节
+int       占 4 字节
+long      占 4 字节
+long long 占 8 字节
+float     占 4 字节
+double    占 8 字节
+char      占 1 字节
+_Bool     占 1 字节

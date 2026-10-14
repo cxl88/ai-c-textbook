@@ -1,0 +1,4 @@
+bad_const.c: In function 'main':
+bad_const.c:6:11: error: assignment of read-only variable 'seats'
+    6 |     seats = 50;                         // 错误：试图修改只读变量
+      |           ^

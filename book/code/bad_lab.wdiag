@@ -1,0 +1,12 @@
+bad_lab.c: In function 'main':
+bad_lab.c:18:17: warning: initialization of 'char' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+   18 |     char code = "g";                    // 故障编码
+      |                 ^~~
+bad_lab.c:21:10: error: assignment of read-only variable 'room'
+   21 |     room = 204;                         // 想顺便改成 204 实训室
+      |          ^
+bad_lab.c:27:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
+   27 |     printf("空气湿度：%d%%\n", wet);
+      |            ^~~~~~~~~~~~~~~~~~  ~~~
+      |                                |
+      |                                double

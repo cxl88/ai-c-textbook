@@ -1,0 +1,5 @@
+bad_cnsemi.c: In function 'main':
+bad_cnsemi.c:5:35: error: expected ';' before '\U0000ff1b'
+    5 |     printf("姓名：%s\n", "林小禾")；
+      |                                   ^~
+      |                                   ;
