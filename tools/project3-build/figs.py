@@ -616,6 +616,8 @@ figs['f_train2'] = f_train2()
 figs['ico_practice'] = f'''<svg viewBox="0 0 54 54" width="54" height="54"><rect x="1" y="1" width="52" height="52" rx="10" fill="{C}"/>
 <path d="M16 38l3-9 15-15 6 6-15 15z" fill="#fff"/><path d="M16 38l3-9 6 6z" fill="{L}"/><path d="M31 17l6 6" stroke="{C}" stroke-width="2"/></svg>'''
 
+exec(open('figs_new.py', encoding='utf8').read())
+
 CSS = f'''
 body {{ margin:0; background:#fff; font-family:{FONT}; }}
 .fig {{ display:inline-block; padding:6px; background:#fff; margin:10px; }}
@@ -631,7 +633,7 @@ body {{ margin:0; background:#fff; font-family:{FONT}; }}
 '''
 
 with open('fig/figs.html', 'w', encoding='utf8') as fh:
-    fh.write(f'<!doctype html><meta charset="utf-8"><style>{CSS}</style><body>')
+    fh.write(f'<!doctype html><meta charset="utf-8"><style>{CSS}{CSS2}</style><body>')
     for k, v in figs.items():
         fh.write(f'<div class="fig" id="{k}">{v}</div>\n')
 print(' '.join(figs))

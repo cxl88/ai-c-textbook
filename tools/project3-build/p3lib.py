@@ -609,3 +609,18 @@ class Book(Doc):
         r = etree.SubElement(p, W + 'r')
         etree.SubElement(r, W + 'br').set(W + 'type', 'page')
         return self.add(p)
+
+
+# ------------------------------------------------------------ 第二稿新增：趣味栏目
+def _fun(self, title, items, icon):
+    """趣味小站：沿用“小智提示”底色框，换成彩色图标"""
+    self._box(140, title, items, icon=icon)
+
+
+def _activity(self, title, items, icon, note):
+    """课堂活动 / 小游戏：沿用“课堂练习”边框框，换成彩色图标"""
+    self._box(86, title, items, icon=icon, note=note, numbered=True)
+
+
+Book.fun = _fun
+Book.activity = _activity
