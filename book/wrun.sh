@@ -5,7 +5,7 @@
 #   name.wout2 …      还有 name.in2、name.in3 … 时，逐个作为输入再运行，结果依次存为 .wout2/.wret2 …
 # 以 bad_ 开头的程序含有编译错误或“未定义行为”，只编译、不运行。
 # 编译选项与小熊猫C++ 3.4 默认的“MinGW-w64 GCC 11.5.0 64-bit Debug”配置相同；WEXTRA 可临时附加选项（如 -Wconversion）。
-B=${CODE_DIR:-/tmp/claude-0/-home-claude/eb12d1b1-b62e-5147-8680-f587d91346f6/scratchpad/book3/code}
+B=${CODE_DIR:-$(cd "$(dirname "$0")" && pwd)/code}
 W=/root/cstudy/wb
 export DISPLAY=:99 WINEPREFIX=/root/.wine64b WINEDEBUG=-all LANG=zh_CN.UTF-8 LC_ALL=zh_CN.UTF-8
 rm -f $W/PARTDONE.txt

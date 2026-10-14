@@ -1,0 +1,10 @@
+bad_ex125b.c:1:19: warning: extra tokens at end of #include directive
+    1 | #include <stdio.h>;
+      |                   ^
+bad_ex125b.c: In function 'main':
+bad_ex125b.c:5:13: error: expected ';' before '}' token
+    5 |     return 0
+      |             ^
+      |             ;
+    6 | }
+      | ~            

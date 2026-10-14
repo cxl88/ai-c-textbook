@@ -22,7 +22,7 @@ int main(void)
     rate = people / seats * 100;        // 计算座位使用率
 
     printf("%d号楼 %d 实训室（类型 %c）\n", BUILDING, room, type);
-    printf("在室人数：%d  今日场次：%d  故障次数：%d\n", people, times, faults);
+    printf("人数：%d  场次：%d  故障：%d\n", people, times, faults);
     printf("室内温度：%d ℃\n", temp);
     printf("空气湿度：%.1f%%\n", wet);
     printf("供电电压：%d V\n", volt);

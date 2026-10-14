@@ -1,0 +1,7 @@
+bad_profile14.c: In function 'main':
+bad_profile14.c:14:33: error: expected ';' before 'printf'
+   14 |     printf("年龄：%d 岁\n", age)
+      |                                 ^
+      |                                 ;
+   15 |     printf("学号：%s\n", "2026150218");
+      |     ~~~~~~                       

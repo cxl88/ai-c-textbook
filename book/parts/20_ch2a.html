@@ -181,12 +181,7 @@
 <p><b>（3）只读变量（常变量）。</b>定义变量时在前面加上关键字 <code>const</code>，变量的值在程序运行过程中就不能再修改，相当于一个常量。例如：</p>
 <snip>const int seats = 48;               // 总座位数，以后不能再修改</snip>
 <p>用 <code>const</code> 修饰的变量叫作只读变量（也叫常变量），它有类型、有名字。只读变量定义以后不能再赋值，所以<b>本书要求在定义时给出初值</b>。C 语言本身允许定义时不给初值，但这样的只读变量以后也不能赋值，就得不到有用的值了。</p>
-
-<p class="exh"><b>⟦例2-1⟧</b>　输出实训室数据中的各种常量。</p>
-<code-file src="const_demo.c" title="⟦例2-1⟧　const_demo.c" ln/>
-<conwin src="const_demo" dir="project02"/>
-<figcaption><b>⟦图2-3⟧</b>⟦例2-1⟧ 的运行结果</figcaption>
-<p>程序第 2 行用 <code>#define</code> 定义了符号常量 ROOM，第 6 行用 <code>const</code> 定义了只读变量 seats，第 8～11 行输出的都是直接常量。<code>#define</code> 与 <code>const</code> 都能让数据“固定不变”，它们的区别见⟦表2-3⟧。</p>
+<p><code>#define</code> 与 <code>const</code> 都能让数据“固定不变”，它们的区别见⟦表2-3⟧。</p>
 <p class="tcap"><b>⟦表2-3⟧</b>#define 与 const 的区别</p>
 <table>
   <tr><th style="width:16%">比较项目</th><th style="width:40%"><code>#define ROOM 203</code></th><th><code>const int seats = 48;</code></th></tr>
@@ -196,6 +191,12 @@
   <tr><td>命名习惯</td><td>全部大写，如 ROOM</td><td>一般小写，如 seats</td></tr>
   <tr><td>本书用法</td><td>程序中固定的配置值，如楼栋号、编号</td><td>需要明确类型的固定数据，如总座位数</td></tr>
 </table>
+
+<p class="exh"><b>⟦例2-1⟧</b>　输出实训室数据中的各种常量。</p>
+<code-file src="const_demo.c" title="⟦例2-1⟧　const_demo.c" ln/>
+<conwin src="const_demo" dir="project02"/>
+<figcaption><b>⟦图2-3⟧</b>⟦例2-1⟧ 的运行结果</figcaption>
+<p>程序第 2 行用 <code>#define</code> 定义了符号常量 ROOM，第 6 行用 <code>const</code> 定义了只读变量 seats，第 8～11 行输出的都是直接常量。</p>
 
 <h5><anchor id="p2-var"/>2）变量</h5>
 <p>变量就像实训室储物柜里的一个个格子：格子上贴着标签（<b>变量名</b>），格子有一定的大小、规定了能放什么东西（<b>变量类型</b>），格子里放着物品（<b>变量值</b>），物品可以取出、换成新的。变量名、变量类型和变量值叫作变量的<b>三要素</b>（见⟦图2-4⟧）。</p>
@@ -368,7 +369,7 @@
 
 <div class="box"><div class="bt"><svg><use href="#i-think"/></svg>课堂练习</div>
 <ol>
-  <li>下列选项中，属于字符常量的是（　　）。<div class="opts o4"><span>A. <code>"C"</code></span><span>B. <code>'C'</code></span><span>C. <code>C</code></span><span>D. <code>'CC'</code></span></div></li>
+  <li>下列选项中，属于字符常量的是（　　）。<div class="opts o4"><span>A. <code>"C"</code></span><span>B. <code>'C'</code></span><span>C. <code>C</code></span><span>D. <code>67</code></span></div></li>
   <li>定义符号常量 PI 表示 3.14，正确的是（　　）。<div class="opts"><span>A. <code>#define PI 3.14</code></span><span>B. <code>#define PI 3.14;</code></span><span>C. <code>#define PI = 3.14</code></span><span>D. <code>define PI 3.14</code></span></div></li>
   <li>判断：执行 <code>const int seats = 48;</code> 后，还可以用 <code>seats = 50;</code> 修改它的值。（　　）</li>
   <li>在下列标识符中找出合法的：<code>score</code>　<code>3d</code>　<code>max_num</code>　<code>a b</code>　<code>float</code>　<code>Float</code>　<code>_count</code>　<code>room-1</code>　<code>seat2</code>　<code>#num</code>。<br>合法的标识符有：<span class="fill w3"></span>。</li>
@@ -409,11 +410,6 @@ int main(void)
   <tr><td>教师计算机是否开机</td><td>变量</td><td><code>power</code></td><td><code>_Bool</code></td><td><code>1</code>（开机）</td></tr>
   <tr><td>空座位数</td><td>变量</td><td><code>empty</code></td><td><code>int</code></td><td>由程序计算</td></tr>
 </table>
-<div class="prompt"><div class="ph"><span>AI 助学 · 请 AI 检查类型选择</span><span>DeepSeek / 豆包</span></div><div class="pbd">
-<p><span class="r">身份</span>我是 C 语言初学者，<span class="r">背景</span>正在为实训室数据档案选择数据类型，<span class="r">材料</span>我的选择是：<span class="slot">（粘贴⟦表2-9⟧ 中“数据”“类型”两列）</span>，<span class="r">要求</span>请逐项判断是否合适并说明理由；不合适的，请告诉我应该换成什么类型。</p>
-<div class="pnote">AI 的意见要回到程序中验证：按建议修改后编译运行，看输出是否与⟦表2-9⟧ 中的初值一致。</div>
-</div></div>
-
 <snip title="第二步：定义变量">const int seats = 48;               // 只读变量：总座位数
 int people = 36;                    // 整型变量：当前在室人数
 double temp = 24.5;                 // 浮点型变量：当前环境温度（℃）
@@ -433,6 +429,10 @@ printf("空座位数：%d\n", empty);</snip>
 <conwin src="lab" dir="project02"/>
 <figcaption><b>⟦图2-9⟧</b>203 实训室数据档案的运行结果</figcaption>
 <p>空座位数 12 是程序算出来的，不是直接写进去的。如果把第 10 行的在室人数改为 40，重新编译运行，空座位数会自动变为 8。</p>
+<div class="prompt"><div class="ph"><span>AI 助学 · 请 AI 检查类型选择</span><span>DeepSeek / 豆包</span></div><div class="pbd">
+<p><span class="r">身份</span>我是 C 语言初学者，<span class="r">背景</span>正在为实训室数据档案选择数据类型，<span class="r">材料</span>我的选择是：<span class="slot">（粘贴⟦表2-9⟧ 中“数据”“类型”两列）</span>，<span class="r">要求</span>请逐项判断是否合适并说明理由；不合适的，请告诉我应该换成什么类型。</p>
+<div class="pnote">AI 的意见要回到程序中验证：按建议修改后编译运行，看输出是否与⟦表2-9⟧ 中的初值一致。</div>
+</div></div>
 
 <h3>技能训练</h3>
 <div class="ex">

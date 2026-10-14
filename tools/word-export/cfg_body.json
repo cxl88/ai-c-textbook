@@ -1,0 +1,3 @@
+{"prefix":"b","pref":{"9":"p1-note","16":"p1-printf","22":"p1-profile","49":"p2-var","64":"p2-char","86":"p2-cast","107":"appx-a"},
+"anchors":[{"name":"p1-note","sel":"p.tcap","text":"个人学习认知笔记"},{"name":"p1-printf","sel":"h4","text":"数据的输出——printf函数"},{"name":"p1-profile","sel":"div.step","text":"完整程序个人专属档案卡片"},{"name":"p2-var","sel":"h5","text":"2）变量"},{"name":"p2-char","sel":"h4","text":"1.字符"},{"name":"p2-cast","sel":"h4","text":"3.类型转换"},{"name":"appx-a","sel":"section.appx h2","text":"附录A"}],
+"sections":[{"sel":"section.ch1","name":"ch1"},{"sel":"section.ch2","name":"ch2"},{"sel":"section.appx","name":"appx"}]}

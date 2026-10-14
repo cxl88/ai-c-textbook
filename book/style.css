@@ -112,6 +112,7 @@ em { font-style: normal; font-family: "BSans"; color: var(--c-dk); }
 code { font-family: "BMonoH", "BSans"; font-size: 1em; color: var(--c-dk); background: var(--c-bg); padding: 0 2pt; border-radius: 1.5pt; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 a { color: inherit; text-decoration: none; }
 .pref { font-family: "BSans"; color: var(--c-dk); white-space: nowrap; }
+.ref { white-space: nowrap; }
 .pref::before { content: "第 "; }
 .pref::after { content: " 页"; }
 sup { line-height: 0; }
@@ -177,6 +178,12 @@ td.blank2 { height: 15mm; }
 }
 .code.bad { border-left-color: #7A7A7A; background: #F6F6F6; }
 .code.bad .fn { background: #E9E9E9; color: #333; }
+/* 长程序排到新一页开头的段：“文件名（续）”标题，样式与首页的文件名一致 */
+.code .ckc {
+  display: block; font-family: "BSans"; font-size: 8pt; font-weight: 700; color: var(--c-dk); background: var(--c-bg);
+  margin: -6pt -7pt 5pt; padding: 1.5pt 7pt; border-bottom: 0.5pt solid #D3DAE5;
+}
+.code.bad .ckc { background: #E9E9E9; color: #333; }
 .code .ln { display: inline-block; width: 1.1em; color: #98A3B3; text-align: right; margin-right: 1em; }
 .code .mkl { text-decoration: underline wavy var(--c); text-decoration-thickness: 0.6pt; text-underline-offset: 2.5pt; }
 .hl-k { color: var(--c); font-weight: 700; }

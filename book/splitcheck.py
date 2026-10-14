@@ -43,6 +43,7 @@ def code(m):
     return re.sub(r'<div class="ck">', ck, m.group(0))
 
 s = re.sub(r'<div class="code[^"]*\blong\b[^"]*">.*?</div></div>', code, s, flags=re.S)
+(ROOT / "dbg").mkdir(exist_ok=True)
 (ROOT / "dbg/split.html").write_text(s.replace('href="', 'href="../out/').replace('src="', 'src="../out/') if False else s, encoding="utf-8")
 subprocess.run(["node", str(ROOT / "render.js"), str(ROOT / "dbg/split.html"), str(ROOT / "dbg/split.pdf")], check=True)
 txt = subprocess.run(["pdftotext", "-layout", str(ROOT / "dbg/split.pdf"), "-"], capture_output=True, text=True).stdout.split("\f")

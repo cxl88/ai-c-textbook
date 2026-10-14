@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<fontconfig>
+  <!-- preview-only substitutes for the Windows fonts named in the Word file -->
+  <alias binding="same"><family>宋体</family><prefer><family>Noto Serif SC</family></prefer></alias>
+  <alias binding="same"><family>SimSun</family><prefer><family>Noto Serif SC</family></prefer></alias>
+  <alias binding="same"><family>黑体</family><prefer><family>Noto Sans SC</family></prefer></alias>
+  <alias binding="same"><family>SimHei</family><prefer><family>Noto Sans SC</family></prefer></alias>
+  <alias binding="same"><family>微软雅黑</family><prefer><family>Noto Sans SC</family></prefer></alias>
+  <alias binding="same"><family>Microsoft YaHei</family><prefer><family>Noto Sans SC</family></prefer></alias>
+  <alias binding="same"><family>Consolas</family><prefer><family>JetBrains Mono</family></prefer></alias>
+  <alias binding="same"><family>Times New Roman</family><prefer><family>Liberation Serif</family></prefer></alias>
+  <alias binding="same"><family>Arial</family><prefer><family>Liberation Sans</family></prefer></alias>
+</fontconfig>

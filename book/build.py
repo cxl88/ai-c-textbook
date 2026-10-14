@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""《人工智能助力C语言程序设计》印刷版构建脚本（v2）
+"""《人工智能助力C语言程序设计》印刷版构建脚本（v4）
 
 流程：parts/*.html → 预处理（代码高亮、运行窗口、编译提示）→ Chromium 排版 →
 用 pdftotext 读回页码 → 回填目录与“详见第×页”、保证项目首页落在右页 →
@@ -87,7 +87,10 @@ def align_comments(src):
     return "\n".join(out)
 
 
-def code_block(src, title=None, ln=False, bad=False, mark=None):
+CK_INFO = {}        # 长程序分段：段号 → (同一程序中上一段的段号或 None, 续页标题中的文件名)
+
+
+def code_block(src, title=None, ln=False, bad=False, mark=None, cont=None):
     src = align_comments(src.strip("\n"))
     h = hl(src)
     marks = {int(x) for x in mark.split(",")} if mark else set()
@@ -112,13 +115,29 @@ def code_block(src, title=None, ln=False, bad=False, mark=None):
                 chunks.append(cur); cur = []
         if cur:
             chunks.append(cur)
-        merged = []
+        # 过短的段并入后一段（开头的注释、#include 跟着后面的定义；一两行的处理跟着后面的输出），最后一段过短时并入前一段
+        merged, carry = [], []
         for c in chunks:
-            if merged and (len(c) < MIN_CHUNK or len(merged[-1]) < MIN_CHUNK):
-                merged[-1] += c
+            c, carry = carry + c, []
+            if len(c) < MIN_CHUNK:
+                carry = c
             else:
                 merged.append(c)
-        body = "".join(f'<div class="ck">{chr(10).join(c)}</div>' for c in merged)
+        if carry:
+            if merged:
+                merged[-1] += carry
+            else:
+                merged.append(carry)
+        # 每段开头放一个隐形标记，排版后据此判断哪一段被排到了新的一页；
+        # 排到新页开头的段加“文件名（续）”标题（占位符 ⟪CKC…⟫ 由 fill_conts 填写）
+        body, prev = "", None
+        for c in merged:
+            k = len(CK_INFO)
+            CK_INFO[k] = (prev, cont or title or "")
+            mk = f'<span class="mkw"><span class="mk">QCKQ{k:03d}Q</span></span>'
+            # 标记放在该段第一行的末尾，不改变 pdftotext 读出的文字顺序（verify_body 据此核对版面）
+            body += f'<div class="ck">⟪CKC{k:03d}⟫{c[0]}{mk}{chr(10).join([""] + c[1:]) if len(c) > 1 else ""}</div>'
+            prev = k
         return f'<div class="{cls} long">{fn}{body}</div>'
     return f'<pre class="{cls}">{fn}{h}</pre>'
 
@@ -247,8 +266,9 @@ def attrs(s):
 
 
 BODY_PARTS = ["10_ch1.html", "20_ch2a.html", "20_ch2b.html", "20_ch2c.html", "90_appx.html"]
-LONG_CODE = 13       # 13 行及以上的程序才允许跨页，且只在空行处（程序的段落之间）分页；12 行以内的短程序和待补充、待诊断的练习整段排在同一页
-MIN_CHUNK = 5        # 分页后每一段至少 5 行，过短的段并入相邻段
+LONG_CODE = 21       # 21 行及以上的长程序才允许跨页，且只在空行处（程序的段落之间）分页，续页开头加“文件名（续）”；
+                     # 20 行以内的程序和待补充、待诊断的练习整段排在同一页
+MIN_CHUNK = 8        # 分页后每一段至少 8 行，过短的段并入相邻段（避免页底只留下程序开头几行）
 LONG_TABLE = 5       # 不少于 5 行的表格允许跨页（表头行在下一页重复，两边各至少 2 行）；短表格和供填写的表格整表排在同一页
 
 
@@ -285,7 +305,12 @@ def number_items(s):
     missing = sorted(set(re.findall(r"⟦([^⟧]*)⟧", s)) - set(num))
     if missing:
         raise SystemExit(f"引用了未定义的编号标签：{missing}")
-    return re.sub(r"⟦([^⟧]*)⟧", lambda m: num[m.group(1)], s)
+    # 正文中的引用（如“见图1-10”）放进 <span class="ref">（不换行），编号不会被拆在两行；标签属性中的照常替换
+    s = re.sub(r"<b>⟦([^⟧]*)⟧</b>", lambda m: f"<b>{num[m.group(1)]}</b>", s)
+    parts = re.split(r"(<[^>]+>)", s)
+    for i, p in enumerate(parts):
+        parts[i] = re.sub(r"⟦([^⟧]*)⟧", lambda m: num[m.group(1)] if i % 2 else f'<span class="ref">{num[m.group(1)]}</span>', p)
+    return "".join(parts)
 
 
 def keep_together(s):
@@ -305,9 +330,11 @@ def preprocess(s):
     s = re.sub(r'<anno([^>]*)>(.*?)</anno>', lambda m: (lambda a: anno_block(
         (CODE / a["src"]).read_text(encoding="utf-8"), a.get("title", a["src"]), m.group(2)))(attrs(m.group(1))), s, flags=re.S)
     s = re.sub(r'<code-file([^>]*)/>', lambda m: (lambda a: code_block(
-        (CODE / a["src"]).read_text(encoding="utf-8"), a.get("title", a["src"]), "ln" in a, "bad" in a, a.get("mark")))(attrs(m.group(1))), s)
+        (CODE / a["src"]).read_text(encoding="utf-8"), a.get("title", a["src"]), "ln" in a, "bad" in a, a.get("mark"),
+        a["src"]))(attrs(m.group(1))), s)
     s = re.sub(r'<snip([^>]*)>(.*?)</snip>', lambda m: (lambda a: code_block(
-        html.unescape(m.group(2)), a.get("title"), "ln" in a, "bad" in a, a.get("mark")))(attrs(m.group(1))), s, flags=re.S)
+        html.unescape(m.group(2)), a.get("title"), "ln" in a, "bad" in a, a.get("mark"),
+        (re.findall(r"[\w.]+\.c\b", a.get("title", "")) or [None])[0]))(attrs(m.group(1))), s, flags=re.S)
 
     def conw(m):
         a = attrs(m.group(1))
@@ -365,7 +392,21 @@ def fill_prefs(s, refpages):
 
 
 def strip_markers(s):
-    return re.sub(r'<span class="mkw"><span class="mk">Q(?:TOC|REF)Q\d{3}Q</span></span>', '', s)
+    return re.sub(r'<span class="mkw"><span class="mk">Q(?:TOC|REF|CK)Q\d{3}Q</span></span>', '', s)
+
+
+def fill_conts(s, flags):
+    """排到新一页开头的程序段（段号在 flags 中）加“文件名（续）”标题，其余段去掉占位符。"""
+    def ck(m):
+        k = int(m.group(1))
+        return f'<span class="ckc">{html.escape(CK_INFO[k][1])}（续）</span>' if k in flags else ""
+    return re.sub(r"⟪CKC(\d{3})⟫", ck, s)
+
+
+def cont_flags(texts):
+    """根据各段开头的标记所在页，找出排到新一页开头的段（与同一程序的上一段不在同一页）。"""
+    pg = find(texts, r'QCKQ(\d{3})Q')
+    return {k for k, (prev, _) in CK_INFO.items() if prev is not None and k in pg and prev in pg and pg[k] > pg[prev]}
 
 
 def render(html_path, pdf_path):
@@ -404,9 +445,9 @@ def build_body(defs):
     src = "\n".join((ROOT / "parts" / p).read_text(encoding="utf-8") for p in BODY_PARTS)
     src = preprocess(number_items(keep_together(src)))
     src, toc, odd, refs = add_markers(src)
-    blanks, pages, refpages = set(), {}, {}
-    for rnd in range(8):
-        doc = head(BOOK) + defs + fill_prefs(with_blanks(src, blanks), refpages) + "</body></html>"
+    blanks, pages, refpages, flags = set(), {}, {}, set()
+    for rnd in range(10):
+        doc = head(BOOK) + defs + fill_conts(fill_prefs(with_blanks(src, blanks), refpages), flags) + "</body></html>"
         (OUT / "body.html").write_text(doc, encoding="utf-8")
         render(OUT / "body.html", OUT / "body.pdf")
         texts = page_texts(OUT / "body.pdf")
@@ -416,7 +457,9 @@ def build_body(defs):
         miss = [toc[i][1] for i in range(len(toc)) if i not in new] + [r for r, p in newref.items() if p is None]
         if miss:
             print("WARN missing markers:", miss)
-        changed = False
+        newflags = cont_flags(texts)
+        changed = newflags != flags
+        flags = newflags
         for k, i in enumerate(odd):                 # 项目首页必须落在右页（奇数页）
             if i in new and new[i] % 2 == 0:
                 blanks ^= {k}
@@ -425,13 +468,16 @@ def build_body(defs):
             shutil.copy(OUT / "body.pdf", OUT / "body_mk.pdf")
             break
         pages, refpages = new, newref
+    else:
+        print("WARN 排版没有收敛")
     undefined = sorted(set(re.findall(r'<pref to="([^"]+)"', src)) - set(refs))
     if undefined:
         print("WARN undefined page refs:", undefined)
-    doc = head(BOOK) + defs + strip_markers(fill_prefs(with_blanks(src, blanks), refpages)) + "</body></html>"
+    print("续页标题：", sorted(CK_INFO[k][1] for k in flags))
+    doc = head(BOOK) + defs + strip_markers(fill_conts(fill_prefs(with_blanks(src, blanks), refpages), flags)) + "</body></html>"
     (OUT / "body.html").write_text(doc, encoding="utf-8")
     render(OUT / "body.html", OUT / "body.pdf")
-    marked = fill_prefs(with_blanks(src, blanks), refpages)
+    marked = fill_conts(fill_prefs(with_blanks(src, blanks), refpages), flags)
     reftargets = {}
     for rid, k in refs.items():                    # 每个引用标记后面紧跟的 8 个可见字符，用来核对页码
         j = marked.find(f"QREFQ{k:03d}Q")
@@ -443,9 +489,10 @@ def build_body(defs):
 
 def verify_body(toc, pages, reftargets):
     """核对：去掉标记后版面不变；目录中的每个标题确实出现在所标的页上。"""
-    sq = lambda t: re.sub(r"Q(?:TOC|REF)Q\d{3}Q", "", squash(t))
+    sq = lambda t: re.sub(r"Q(?:TOC|REF|CK)Q\d{3}Q", "", squash(t))
     a, b = page_texts(OUT / "body_mk.pdf"), page_texts(OUT / "body.pdf")
-    if len(a) != len(b) or any(sq(x) != sq(y) for x, y in zip(a, b)):
+    # 逐页比较文字（不计顺序：程序段标记会让 pdftotext 把行号读到行尾，但不改变每页的内容）
+    if len(a) != len(b) or any(sorted(sq(x)) != sorted(sq(y)) for x, y in zip(a, b)):
         print("WARN 去掉标记后版面发生变化")
     for i, (lvl, text) in enumerate(toc):
         key = squash(re.sub(r"<[^>]+>", "", text))
@@ -678,7 +725,7 @@ def test(parts):
     defs = (ROOT / "parts" / "defs.html").read_text(encoding="utf-8")
     src = "\n".join((ROOT / "parts" / p).read_text(encoding="utf-8") for p in parts)
     src, toc, odd, refs = add_markers(preprocess(number_items(keep_together(src))))
-    doc = head(BOOK) + defs + strip_markers(fill_prefs(with_blanks(src, set()), {})) + "</body></html>"
+    doc = head(BOOK) + defs + strip_markers(fill_conts(fill_prefs(with_blanks(src, set()), {}), set())) + "</body></html>"
     (OUT / "test.html").write_text(doc, encoding="utf-8")
     render(OUT / "test.html", OUT / "test.pdf")
     print("test pages:", len(PdfReader(OUT / "test.pdf").pages))

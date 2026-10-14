@@ -1,0 +1,9 @@
+bad_206.c: In function 'main':
+bad_206.c:13:11: error: assignment of read-only variable 'seats'
+   13 |     seats = 52;                         // 新增了 2 个座位
+      |           ^
+bad_206.c:17:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
+   17 |     printf("供电电压：%d V\n", volt);
+      |            ^~~~~~~~~~~~~~~~~~  ~~~~
+      |                                |
+      |                                double
