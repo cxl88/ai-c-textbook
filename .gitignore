@@ -1,0 +1,19 @@
+# 字体（体积大，按 fonts/README.md 下载）
+fonts/*.ttf
+fonts/*.otf
+# 排版输出
+out/
+book/out/
+# 成品（改放 GitHub Release）
+*.pdf
+*.docx
+*.zip
+*.mp4
+*.gif
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+*.swp
+__pycache__/
+node_modules/
+.env
