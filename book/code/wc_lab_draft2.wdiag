@@ -1,0 +1,10 @@
+wc_lab_draft2.c: In function 'main':
+wc_lab_draft2.c:14:16: warning: conversion from 'double' to 'int' changes value from '2.45e+1' to '24' [-Wfloat-conversion]
+   14 |     int temp = 24.5;                    // 室内环境温度（℃）
+      |                ^~~~
+wc_lab_draft2.c:15:17: warning: conversion from 'double' to 'float' changes value from '5.6200000000000003e+1' to '5.62000008e+1f' [-Wfloat-conversion]
+   15 |     float wet = 56.2;                   // 空气湿度（%）
+      |                 ^~~~
+wc_lab_draft2.c:16:17: warning: conversion from 'int' to 'char' changes value from '220' to '-36' [-Wconversion]
+   16 |     char volt = 220;                    // 实际供电电压（V）
+      |                 ^~~

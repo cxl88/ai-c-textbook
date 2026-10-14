@@ -5,8 +5,8 @@
 <h3>任务描述</h3>
 <div class="taskdesc"><p>学校 6 号实训楼共有 10 个实训室，每个实训室都需要建立一份完整运行的数据档案。包含：实训室类型（'A'～'Z'）、编号（201～210）、总座位数（48）、实时在室人数、今日实训场次、设备故障次数、室内环境温度（1 位小数）、空气湿度（1 位小数）、实际供电电压（0～380 V）、设备开关机状态、故障编码（'g'～'n'）。以下是某位同学的 C 语言编程过程，请完成异常诊断。</p></div>
 
-<p class="noind"><b>（1）设计数据字典。</b>编程之前，这位同学先为每项数据确定了变量名、范围或精度和类型，整理成<b>数据字典</b>（见表2-16）。</p>
-<p class="tcap"><b>表2-16</b>某同学设计的数据字典（初稿）</p>
+<p class="noind"><b>（1）设计数据字典。</b>编程之前，这位同学先为每项数据确定了变量名、范围或精度和类型，整理成<b>数据字典</b>（见⟦表2-16⟧）。</p>
+<p class="tcap"><b>⟦表2-16⟧</b>某同学设计的数据字典（初稿）</p>
 <table class="dict">
   <tr><th style="width:15%">变量名</th><th style="width:19%">含义</th><th style="width:19%">范围/精度</th><th style="width:15%">类型</th><th>选择理由</th></tr>
   <tr><td><code>BUILDING</code></td><td>楼栋号</td><td>6</td><td>符号常量</td><td>固定不变</td></tr>
@@ -27,26 +27,32 @@
 <p class="noind"><b>（2）编写程序。</b>按照数据字典，这位同学以 203 实训室为例写出了下面的程序（带注释）。</p>
 <code-file src="bad_lab.c" title="bad_lab.c　某同学的程序（初稿）" ln bad/>
 
-<p class="noind"><b>（3）编译和运行。</b>按 F9 编译，信息面板中出现了 1 个错误、2 个警告（见图2-20），没有生成可执行程序。</p>
-<figure><img class="frame" src="../img/ide_badlab.png"><figcaption><b>图2-20</b>编译 bad_lab.c 的提示信息</figcaption></figure>
-<p>这位同学删除第 21 行后再编译，只剩下 2 个警告，程序可以运行了，运行结果如图2-21 所示。</p>
-<conwin src="bad_lab_run" dir="project02" title="D:\CStudy\project02\bad_lab.exe"/>
-<figcaption><b>图2-21</b>删除第 21 行后的运行结果</figcaption>
+<p class="noind"><b>（3）编译。</b>按 F9 编译，信息面板中出现了 1 个错误、2 个警告（见⟦图2-20⟧），没有生成可执行程序。</p>
+<figure><img class="frame" src="../img/ide_badlab.png"><figcaption><b>⟦图2-20⟧</b>编译 bad_lab.c 的提示信息</figcaption></figure>
+<p>第 21 行是错误，必须改正。两条警告也不能放过：第 18 行把字符写成了字符串，第 27 行用 <code>%d</code> 输出 float 型数据，都属于<b>类型或格式不匹配</b>。对这样的写法，C 语言标准没有规定程序会得到什么结果（叫作<b>未定义行为</b>），换一台计算机、换一个编译器或换一组编译选项，运行结果都可能不同。所以，<b>出现这类警告的程序要先改正，不运行</b>，更不能用它的运行结果下结论。</p>
+<p class="noind"><b>（4）改正后再运行。</b>这位同学按编译提示改了 3 行（见⟦表:draft2⟧），得到第二稿 lab_draft2.c。再次编译，没有出现任何错误和警告，运行结果如⟦图2-21⟧ 所示。</p>
+<p class="tcap"><b>⟦表:draft2⟧</b>第二稿按编译提示修改的 3 行</p>
+<table>
+  <tr><th style="width:9%" class="c">行号</th><th style="width:44%">初稿 bad_lab.c</th><th>第二稿 lab_draft2.c</th></tr>
+  <tr><td class="c">18</td><td><code>char code = "g";</code></td><td><code>char code = 'g';</code></td></tr>
+  <tr><td class="c">21</td><td><code>room = 204;</code></td><td>行首加 <code>//</code> 改为注释，相当于删去</td></tr>
+  <tr><td class="c">27</td><td><code>printf("空气湿度：%d%%\n", wet);</code></td><td><code>printf("空气湿度：%.1f%%\n", wet);</code></td></tr>
+</table>
+<conwin src="lab_draft2" dir="project02"/>
+<figcaption><b>⟦图2-21⟧</b>第二稿 lab_draft2.c 的运行结果</figcaption>
 
 <h3>任务分析</h3>
-<p>程序虽然能运行了，但对照任务要求可以发现，有 5 项数据显示异常（见表2-17）。再加上第 21 行的编译错误，这份程序至少有 6 处问题需要诊断。</p>
-<p class="tcap"><b>表2-17</b>运行结果中的异常</p>
+<p>第二稿在本书环境中用默认编译选项编译，没有任何提示，但对照任务要求可以发现，仍有 3 项数据显示异常（见⟦表2-17⟧）。加上编译时发现的 3 处问题，这份程序共有 6 处问题需要诊断。</p>
+<p class="tcap"><b>⟦表2-17⟧</b>第二稿运行结果中的异常</p>
 <table class="center">
   <tr><th style="width:24%">数据</th><th style="width:30%">应该显示</th><th>实际显示</th></tr>
   <tr><td>室内温度</td><td>24.5 ℃</td><td>24 ℃（小数部分丢了）</td></tr>
-  <tr><td>空气湿度</td><td>56.2%</td><td>−1610612736%（毫无意义的数）</td></tr>
   <tr><td>供电电压</td><td>220 V</td><td>−36 V（变成了负数）</td></tr>
-  <tr><td>故障编码</td><td>g</td><td>空白（什么也没有显示）</td></tr>
   <tr><td>座位使用率</td><td>75.0%</td><td>0.0%</td></tr>
 </table>
 <p>完成本任务，既要找出问题、说清原因，还要改正数据字典和程序，得到一份规范、完整的数据档案：</p>
 <div class="ipo">
-  <div class="k">输入</div><div>实时在室人数、室内环境温度、故障编码（如 36、24.5、g），从键盘输入</div>
+  <div class="k">输入</div><div>在室人数 36、室内温度 24.5、故障编码 g 等数据先直接写在程序中；改为从键盘输入的写法作为选学，见任务实施</div>
   <div class="k">处理</div><div>计算空座位数、座位使用率，把故障编码加密（任务二的方法）</div>
   <div class="k">输出</div><div>完整的数据档案，小数按要求保留 1 位</div>
   <div class="k">诊断</div><div>对照编译器提示和运行结果，找出类型、范围、精度、格式等方面的问题并改正</div>
@@ -54,8 +60,8 @@
 
 <h3>相关知识</h3>
 <h4>1. 取值范围与溢出</h4>
-<p>每种数据类型占用的字节数是固定的，所以能存放的数值也有范围（见表2-18）。选择类型时，要先想清楚数据可能的最大值和最小值。</p>
-<p class="tcap"><b>表2-18</b>常用数据类型的取值范围（小熊猫C++）</p>
+<p>在同一个编译环境中，每种数据类型占用的字节数是固定的，所以能存放的数值也有范围（见⟦表2-18⟧，不同环境中 int 等类型的大小可能不同）。选择类型时，要先想清楚数据可能的最大值和最小值。</p>
+<p class="tcap"><b>⟦表2-18⟧</b>常用数据类型的取值范围（本书环境）</p>
 <table>
   <tr><th style="width:19%">类型</th><th style="width:10%" class="c">字节数</th><th style="width:44%">取值范围</th><th>适合存放</th></tr>
   <tr><td><code>char</code></td><td class="c">1</td><td>−128～127</td><td>一个字符</td></tr>
@@ -70,13 +76,14 @@
 <code-file src="overflow.c" title="overflow.c" ln/>
 <out src="overflow"/>
 <diag src="overflow"/>
-<p>char 型只有 8 位，最多表示 256 个不同的数。在小熊猫C++ 中，超出范围的数会“绕回来”：220 − 256 = −36，380 − 256 = 124，40000 − 65536 = −25536。这就像只有 3 位数字的计数器，999 再加 1 就变成了 000。注意，编译器只对 380 给出了警告，对 220 和 40000 却没有任何提示。所以，<b>不能完全依靠编译器发现溢出</b>，选类型时要先估计数据的范围。</p>
+<p>char 型只有 8 位，最多表示 256 个不同的数。把超出范围的整数存入 char 型或 short 型变量时，得到什么值由编译器决定，C 语言标准没有统一规定。本书使用的 GCC 编译器规定按“绕回来”的方式处理：220 − 256 = −36，380 − 256 = 124，40000 − 65536 = −25536。这就像只有 3 位数字的计数器，999 再加 1 就变成了 000。换一个编译器，结果可能不同。</p>
+<p>注意，在本书环境的默认编译选项下，编译器只对 380 给出了警告，对 220 和 40000 没有提示（加上 -Wconversion 选项后才会提示）。所以，<b>不能完全依靠编译器发现溢出</b>，选类型时要先估计数据的范围。另外，int 型数据在<b>运算</b>中超出范围（如两个很大的整数相乘）属于未定义行为，结果无法预料，更要提前避免。</p>
 
 <h4>2. 精度</h4>
 <p>精度是指数据能精确到什么程度。对于带小数的数据，要注意以下三点：</p>
 <ol class="paren">
   <li><b>整型变量不能保存小数。</b>把 24.5 存入 int 型变量，小数部分会被直接舍去，得到 24。</li>
-  <li><b>float 的有效数字较少。</b>float 只有 6～7 位有效数字，double 有 15～16 位（见例2-4），本书中的小数一律使用 double 型。</li>
+  <li><b>float 的有效数字较少。</b>float 只有 6～7 位有效数字，double 有 15～16 位（见⟦例2-4⟧），本书中的小数一律使用 double 型。</li>
   <li><b>显示的位数由格式说明符决定。</b>“温度保留 1 位小数”是对输出的要求，用 <code>%.1f</code> 实现；变量本身仍然用 double 型保存。</li>
 </ol>
 
@@ -97,48 +104,59 @@
 <p>写法 A：从左往右计算，先算整数除法 36 / 48 得 0，再乘 100.0，结果是 0.0。写法 B：括号里的整数除法已经得到 0，再转换为 double 型也只是 0.0。写法 C：先把 people 转换为 36.0，再除以 48 得 0.75，乘 100 得 75.0，结果正确。也可以写成 <code>people * 100.0 / seats</code>，让小数先参加运算。</p>
 
 <h4>5. 格式说明符要与类型一致</h4>
-<p>printf 和 scanf 中的格式说明符必须与数据的类型一致，否则编译器一般会给出警告，运行结果也会出错（见表2-19）。</p>
-<p class="tcap"><b>表2-19</b>格式说明符与数据类型</p>
+<p>printf 和 scanf 中的格式说明符必须与数据的类型一致（见⟦表2-19⟧）。用错时，本书环境的编译器一般会给出警告（默认编译选项中的 -Wall 会检查格式）。这样的程序属于未定义行为，运行结果没有意义，<b>要先按警告改正，再运行</b>。</p>
+<p class="tcap"><b>⟦表2-19⟧</b>格式说明符与数据类型</p>
 <table>
-  <tr><th style="width:13%">类型</th><th style="width:12%" class="c">printf</th><th style="width:12%" class="c">scanf</th><th>用错时的后果（小熊猫C++ 实测）</th></tr>
-  <tr><td><code>int</code></td><td class="c"><code>%d</code></td><td class="c"><code>%d</code></td><td>scanf 中漏写 <code>&amp;</code>，编译器给出警告，程序运行时可能出错</td></tr>
-  <tr><td><code>double</code></td><td class="c"><code>%f</code></td><td class="c"><code>%lf</code></td><td>用 <code>%d</code> 输出，得到 −1610612736 之类毫无意义的数；用 <code>%f</code> 输入，读不进正确的值</td></tr>
-  <tr><td><code>char</code></td><td class="c"><code>%c</code></td><td class="c"><code>%c</code></td><td>用 <code>%d</code> 输出，得到的是 ASCII 码，如 n 显示为 110</td></tr>
+  <tr><th style="width:10%">类型</th><th style="width:9%" class="c">printf</th><th style="width:9%" class="c">scanf</th><th style="width:31%">常见的用错写法</th><th>本书环境中编译器的提示</th></tr>
+  <tr><td><code>int</code></td><td class="c"><code>%d</code></td><td class="c"><code>%d</code></td><td><code>scanf("%d", people);</code>（漏写 <code>&amp;</code>）</td><td>警告：<code>%d</code> 需要 int * 型的参数，给的却是 int 型</td></tr>
+  <tr><td><code>double</code></td><td class="c"><code>%f</code></td><td class="c"><code>%lf</code></td><td><code>printf("%d", temp);</code><br><code>scanf("%f", &amp;temp);</code></td><td>警告：<code>%d</code> 需要 int 型的参数，给的却是 double 型；<code>%f</code> 需要 float * 型的参数，给的却是 double * 型</td></tr>
+  <tr><td><code>char</code></td><td class="c"><code>%c</code></td><td class="c"><code>%c</code></td><td><code>printf("%d", code);</code></td><td>没有提示。这是正确的写法，只是显示的是编码（如 n 显示为 110），不是字母本身</td></tr>
 </table>
-<p>用一个 scanf 输入多个不同类型的数据时，每个格式说明符都要与对应的变量一致。</p>
-<p class="exh"><b>例2-7</b>　从键盘输入在室人数、温度和故障编码，再把它们输出。</p>
-<code-file src="scanf_types.c" title="例2-7　scanf_types.c" ln/>
+<p>用一个 scanf 输入多个不同类型的数据时，每个格式说明符都要与对应的变量一致，还要检查是否都读入成功。</p>
+<p class="exh"><b>⟦例2-7⟧</b>　从键盘输入在室人数、温度和故障编码，检查是否都读入成功，再把它们输出。</p>
+<code-file src="scanf_types.c" title="⟦例2-7⟧　scanf_types.c" ln/>
 <conwin src="scanf_types" dir="project02" ins="请输入人数、温度和故障编码：|36 24.5 g"/>
-<figcaption><b>图2-22</b>例2-7 的运行结果</figcaption>
-<p>第 10 行格式控制字符串中 <code>%c</code> 前面的空格不能省略。<code>%c</code> 会把空格、回车也当作字符读入，前面加一个空格，表示先跳过输入中的空格和回车，再读入字符。如果省略这个空格，实测 code 读到的是 24.5 后面的空格，而不是 g。</p>
+<figcaption><b>⟦图2-22⟧</b>⟦例2-7⟧ 的运行结果（输入正确）</figcaption>
+<conwin src="scanf_types" dir="project02" run="2" ins="请输入人数、温度和故障编码：|三十六 24.5 g"/>
+<figcaption><b>⟦图:scanf_bad⟧</b>⟦例2-7⟧ 的运行结果（人数写成了汉字）</figcaption>
+<p>第 11 行把 scanf 的返回值存入变量 n。三个数据都读入成功时，n 为 3；把人数写成“三十六”时，第一个数据就读不进去，n 为 0，程序给出提示后结束，返回值为 1。</p>
+<p>第 11 行格式控制字符串中 <code>%c</code> 前面的空格不能省略。<code>%c</code> 会把空格、回车也当作字符读入，前面加一个空格，表示先跳过输入中的空格和回车，再读入字符。如果省略这个空格，code 读到的就是 24.5 后面的空格，而不是 g。</p>
 
 <h4>6. 字符与字符串不能混用</h4>
-<p>任务二中讲过，<code>'g'</code> 是字符，<code>"g"</code> 是字符串。写成 <code>char code = "g";</code> 时，存入 code 的不是字母 g，而是字符串 "g" 在内存中存放位置（地址）的一部分，结果无法预料。本例中得到的是空字符（ASCII 码为 0），所以故障编码显示为空白。</p>
+<p>任务二中讲过，<code>'g'</code> 是字符，<code>"g"</code> 是字符串。写成 <code>char code = "g";</code> 时，相当于要把字符串 "g" 在内存中的存放位置（地址）存入 char 型变量，这是类型不匹配的写法，编译器会给出警告（见⟦图2-20⟧ 中第 18 行的提示）。这样的程序要先改正，不要运行。</p>
 
 <h4>7. 错误与警告</h4>
-<p>编译器给出的提示分为<b>错误</b>和<b>警告</b>两类，它们的区别见表2-20。</p>
-<p class="tcap"><b>表2-20</b>错误与警告</p>
+<p>编译器给出的提示分为<b>错误</b>和<b>警告</b>两类，它们的区别见⟦表2-20⟧。</p>
+<p class="tcap"><b>⟦表2-20⟧</b>错误与警告</p>
 <table>
   <tr><th style="width:10%">类别</th><th style="width:23%">信息面板中的标记</th><th style="width:27%">能否生成 .exe</th><th>处理方法</th></tr>
   <tr><td>错误</td><td>[错误]，红色</td><td>不能，程序无法运行</td><td>必须改正</td></tr>
-  <tr><td>警告</td><td>[警告]，黄褐色</td><td>能，程序可以运行</td><td>说明程序很可能有问题，要逐条检查，一般都应改正</td></tr>
+  <tr><td>警告</td><td>[警告]，黄褐色</td><td>能，但程序可能有严重问题</td><td>逐条检查并改正；类型或格式不匹配的警告，改正之前不运行</td></tr>
 </table>
-<p>对照图2-20 中的三条提示：</p>
+<p>对照⟦图2-20⟧ 中的三条提示：</p>
 <ul>
   <li><b>第 18 行，警告。</b>“initialization of 'char' from 'char *' makes integer from pointer without a cast”，意思是“用 char * 型（字符串的地址）给 char 型变量赋初值”，原因是把 'g' 写成了 "g"。</li>
   <li><b>第 21 行，错误。</b>“assignment of read-only variable 'room'”，意思是“给只读变量 room 赋值”。room 用 const 定义，不能再赋值。</li>
   <li><b>第 27 行，警告。</b>“format '%d' expects argument of type 'int', but argument 2 has type 'double'”，意思是“%d 需要 int 型的数据，但第 2 个参数是 double 型”。wet 是 float 型，作为 printf 的参数时会自动转换为 double 型，所以提示中说的是 double。</li>
 </ul>
+<p>从这个例子可以看出，程序中的问题可以分为三类，发现的方法不同，处理的方法也不同（见⟦表:errkind⟧）。本书中验证程序或 AI 的建议时，都按这张表来做。</p>
+<p class="tcap"><b>⟦表:errkind⟧</b>三类问题的发现和处理方法</p>
+<table>
+  <tr><th style="width:17%">问题类别</th><th style="width:33%">举例</th><th style="width:17%">怎样发现</th><th>能否运行观察</th></tr>
+  <tr><td>语法错误</td><td>漏写分号、给 const 定义的变量赋值</td><td>编译出现[错误]</td><td>不能，没有生成可执行程序</td></tr>
+  <tr><td>类型或格式不匹配</td><td>用 <code>%d</code> 输出 double 型数据，用 <code>%f</code> 读入 double 型变量，<code>char code = "g";</code></td><td>编译出现[警告]</td><td>不运行：结果没有意义（未定义行为），先改正再编译</td></tr>
+  <tr><td>逻辑错误</td><td>整数除法、int 型保存小数、选错类型使数据存不下、漏写 <code>\n</code>、计算顺序不对</td><td>运行后与预期结果核对</td><td>可以运行，用几组测试数据核对</td></tr>
+</table>
 <div class="prompt"><div class="ph"><span>AI 助学 · 看懂编译器提示</span><span>DeepSeek / 豆包</span></div><div class="pbd">
 <p><span class="r">提问</span>我是 C 语言初学者。请把下面的 GCC 编译提示翻译成中文，并用我能听懂的话解释可能的原因：<span class="slot">（粘贴信息面板中的提示原文）</span></p>
 <div class="pnote">提示要粘贴原文，不要自己转述。AI 的解释要回到程序中对照行号核实。</div>
 </div></div>
 <div class="box warn"><div class="bt"><svg><use href="#i-warn"/></svg>注意：没有提示不等于没有问题</div>
-<p>表2-17 的 5 项异常中，温度丢了小数、电压溢出、座位使用率为 0，编译器都没有给出任何提示。编译器只能检查语法和明显的类型问题，数据选错类型、算法写错，只能靠我们认真核对运行结果才能发现。</p></div>
+<p>⟦表2-17⟧ 中的 3 项异常（温度丢了小数、电压溢出、座位使用率为 0），在本书环境的默认编译选项下都没有任何提示；加上 -Wconversion 选项后，前两项会出现警告，座位使用率仍然没有提示。编译器只能检查语法和一部分类型问题，数据选错类型、算法写错，要靠认真核对运行结果才能发现。</p></div>
 
 <div class="box"><div class="bt"><svg><use href="#i-think"/></svg>课堂练习</div>
 <ol>
-  <li>在小熊猫C++ 中，char 型变量能存放的整数范围是<span class="fill"></span>～<span class="fill"></span>。</li>
+  <li>在本书环境中，char 型变量能存放的整数范围是<span class="fill"></span>～<span class="fill"></span>。</li>
   <li>执行 <code>int n = 7.9;</code> 后，n 的值是<span class="fill"></span>。</li>
   <li>表达式 <code>5 / 2</code> 的值是<span class="fill"></span>，<code>5 / 2.0</code> 的值是<span class="fill"></span>。</li>
   <li>已定义 <code>int a = 3, b = 4;</code>，要得到 a 除以 b 的准确结果 0.75，正确的写法是（　　）。<div class="opts o4"><span>A. <code>a / b</code></span><span>B. <code>(double)(a / b)</code></span><span>C. <code>(double)a / b</code></span><span>D. <code>(int)a / b</code></span></div></li>
@@ -158,28 +176,28 @@ int main(void)
 {
     /* 第二步：定义变量 */
 
-    /* 第三步：输入、处理、输出 */
+    /* 第三步：处理、输出 */
 
     return 0;
 }</snip>
 
 <div class="step"><span class="no">第二步</span><span class="st">修改数据字典，定义变量</span></div>
-<p>根据相关知识逐项检查表2-16，修改后的数据字典见表2-21，底色加深的行是修改或新增的内容。</p>
-<p class="tcap"><b>表2-21</b>修改后的数据字典</p>
+<p>根据相关知识逐项检查⟦表2-16⟧，修改后的数据字典见⟦表2-21⟧，底色加深的行是修改或新增的内容。</p>
+<p class="tcap"><b>⟦表2-21⟧</b>修改后的数据字典</p>
 <table class="dict">
   <tr><th style="width:15%">变量名</th><th style="width:19%">含义</th><th style="width:19%">范围/精度</th><th style="width:15%">类型</th><th>选择理由</th></tr>
   <tr><td><code>BUILDING</code></td><td>楼栋号</td><td>6</td><td>符号常量</td><td>固定的配置值</td></tr>
   <tr><td><code>room</code></td><td>实训室编号</td><td>201～210</td><td><code>const int</code></td><td>整数，运行中不变</td></tr>
   <tr><td><code>seats</code></td><td>总座位数</td><td>48</td><td><code>const int</code></td><td>整数，运行中不变</td></tr>
   <tr><td><code>type</code></td><td>实训室类型</td><td>'A'～'Z'</td><td><code>char</code></td><td>一个字母</td></tr>
-  <tr><td><code>people</code></td><td>实时在室人数</td><td>0～48</td><td><code>int</code></td><td>整数，从键盘输入</td></tr>
+  <tr><td><code>people</code></td><td>实时在室人数</td><td>0～48</td><td><code>int</code></td><td>整数</td></tr>
   <tr><td><code>times</code></td><td>今日实训场次</td><td>0 及以上</td><td><code>int</code></td><td>整数</td></tr>
   <tr><td><code>faults</code></td><td>设备故障次数</td><td>0 及以上</td><td><code>int</code></td><td>整数</td></tr>
-  <tr class="hl-row"><td><code>temp</code></td><td>室内环境温度</td><td>1 位小数</td><td><code>double</code></td><td>有小数，int 会丢掉小数部分；从键盘输入</td></tr>
+  <tr class="hl-row"><td><code>temp</code></td><td>室内环境温度</td><td>1 位小数</td><td><code>double</code></td><td>有小数，int 会丢掉小数部分</td></tr>
   <tr class="hl-row"><td><code>wet</code></td><td>空气湿度</td><td>1 位小数</td><td><code>double</code></td><td>有小数，统一用 double，输出用 %.1f</td></tr>
   <tr class="hl-row"><td><code>volt</code></td><td>实际供电电压</td><td>0～380 V</td><td><code>double</code></td><td>380 超出 char 的范围，电压也可能有小数</td></tr>
   <tr><td><code>power</code></td><td>设备开关机状态</td><td>1 开机，0 关机</td><td><code>_Bool</code></td><td>只有两种状态</td></tr>
-  <tr><td><code>code</code></td><td>故障编码</td><td>'g'～'n'</td><td><code>char</code></td><td>一个字母，用单引号；从键盘输入</td></tr>
+  <tr><td><code>code</code></td><td>故障编码</td><td>'g'～'n'</td><td><code>char</code></td><td>一个字母，用单引号</td></tr>
   <tr class="hl-row"><td><code>empty</code></td><td>空座位数</td><td>0～48</td><td><code>int</code></td><td>新增：计算得出的整数</td></tr>
   <tr><td><code>rate</code></td><td>座位使用率</td><td>1 位小数（%）</td><td><code>double</code></td><td>有小数，计算时要避免整数除法</td></tr>
   <tr class="hl-row"><td><code>secret</code></td><td>加密报文</td><td>'H'～'O'</td><td><code>char</code></td><td>新增：由故障编码加密得到</td></tr>
@@ -187,49 +205,77 @@ int main(void)
 <snip title="第二步：定义变量">const int room = 203;               // 实训室编号：201～210
 const int seats = 48;               // 总座位数
 char type = 'C';                    // 实训室类型：'A'～'Z'
-int people;                         // 实时在室人数：0～48（输入）
+int people = 36;                    // 实时在室人数：0～48
 int times = 3;                      // 今日实训场次
 int faults = 1;                     // 设备故障次数
-double temp;                        // 室内环境温度（℃），1 位小数（输入）
+double temp = 24.5;                 // 室内环境温度（℃），1 位小数
 double wet = 56.2;                  // 空气湿度（%），1 位小数
 double volt = 220.0;                // 实际供电电压（V）：0～380
 _Bool power = 1;                    // 设备开关机状态：1 开机，0 关机
-char code;                          // 故障编码：'g'～'n'（输入）
+char code = 'g';                    // 故障编码：'g'～'n'
 int empty;                          // 空座位数
 double rate;                        // 座位使用率（%）
 char secret;                        // 故障编码的加密报文</snip>
 
-<div class="step"><span class="no">第三步</span><span class="st">输入、处理、输出</span></div>
-<p>用一个 scanf 输入三项实时数据，注意 double 型用 <code>%lf</code>，<code>%c</code> 前面加空格。处理时用强制类型转换避免整数除法。输出时整数用 <code>%d</code>，小数用 <code>%.1f</code>，字符用 <code>%c</code>。</p>
-<snip title="第三步：输入、处理、输出（节选）">printf("请输入在室人数、室内温度、故障编码：");
-scanf("%d %lf %c", &amp;people, &amp;temp, &amp;code);
-
-empty = seats - people;
+<div class="step"><span class="no">第三步</span><span class="st">处理、输出</span></div>
+<p>处理时用强制类型转换避免整数除法。输出时整数用 <code>%d</code>，小数用 <code>%.1f</code>，字符用 <code>%c</code>。</p>
+<snip title="第三步：处理、输出（节选）">empty = seats - people;
 rate = (double)people / seats * 100;
 secret = code - 32 + 1;
 
-printf("室内温度：%.1f ℃    空气湿度：%.1f%%\n", temp, wet);
-printf("故障编码：%c    加密报文：%c\n", code, secret);</snip>
+printf("室内温度：%.1f ℃  空气湿度：%.1f%%\n", temp, wet);
+printf("故障编码：%c  加密报文：%c\n", code, secret);</snip>
 
 <div class="step"><span class="no">完整程序</span><span class="st">203 实训室完整数据档案</span></div>
 <code-file src="lab_full.c" title="lab_full.c　203 实训室完整数据档案" ln/>
-<conwin src="lab_full" dir="project02" ins="请输入在室人数、室内温度、故障编码：|36 24.5 g"/>
-<figcaption><b>图2-23</b>203 实训室完整数据档案的运行结果</figcaption>
-<p>各项数据都按要求正确显示了。最后，把诊断过程整理成异常诊断记录（见表2-22），行号是指 bad_lab.c 中的行号。</p>
-<p class="tcap"><b>表2-22</b>异常诊断记录</p>
+<conwin src="lab_full" dir="project02"/>
+<figcaption><b>⟦图2-23⟧</b>203 实训室完整数据档案的运行结果</figcaption>
+<p>各项数据都按要求正确显示了。最后，把诊断过程整理成异常诊断记录（见⟦表2-22⟧），行号是指 bad_lab.c 中的行号。</p>
+<p class="tcap"><b>⟦表2-22⟧</b>异常诊断记录</p>
 <table>
-  <tr><th style="width:9%" class="c">行号</th><th style="width:27%">原来的写法</th><th style="width:15%">问题类型</th><th style="width:21%">原因</th><th>修改方法</th></tr>
-  <tr><td class="c">14</td><td><code>int temp = 24.5;</code></td><td>精度丢失</td><td>int 型不能保存小数</td><td>改为 double 型，用 <code>%.1f</code> 输出</td></tr>
-  <tr><td class="c">15、27</td><td><code>float wet</code> 用 <code>%d</code> 输出</td><td>格式不匹配</td><td><code>%d</code> 只能输出整数</td><td>改为 double 型，用 <code>%.1f</code> 输出</td></tr>
-  <tr><td class="c">16</td><td><code>char volt = 220;</code></td><td>溢出</td><td>char 型最大只能存放 127</td><td>改为 double 型</td></tr>
-  <tr><td class="c">18</td><td><code>char code = "g";</code></td><td>字符与字符串混用</td><td><code>"g"</code> 是字符串，不是字符</td><td>改为 <code>'g'</code></td></tr>
-  <tr><td class="c">21</td><td><code>room = 204;</code></td><td>修改只读变量</td><td>room 用 const 定义</td><td>删除；要改编号就修改定义处的初值</td></tr>
-  <tr><td class="c">22</td><td><code>people / seats * 100</code></td><td>整数除法</td><td>36 / 48 的结果是 0</td><td>改为 <code>(double)people / seats * 100</code></td></tr>
+  <tr><th style="width:8%" class="c">行号</th><th style="width:25%">原来的写法</th><th style="width:12%">发现方式</th><th style="width:27%">问题与原因</th><th>修改方法</th></tr>
+  <tr><td class="c">21</td><td><code>room = 204;</code></td><td>编译错误</td><td>修改只读变量：room 用 const 定义</td><td>删除；要改编号就修改定义处的初值</td></tr>
+  <tr><td class="c">18</td><td><code>char code = "g";</code></td><td>编译警告</td><td>字符与字符串混用：<code>"g"</code> 是字符串</td><td>改为 <code>'g'</code></td></tr>
+  <tr><td class="c">15、27</td><td><code>float wet</code> 用 <code>%d</code> 输出</td><td>编译警告</td><td>格式不匹配：<code>%d</code> 要求 int 型数据</td><td>用 <code>%.1f</code> 输出；按本书约定改为 double 型</td></tr>
+  <tr><td class="c">14</td><td><code>int temp = 24.5;</code></td><td>运行核对</td><td>精度丢失：int 型不能保存小数</td><td>改为 double 型，用 <code>%.1f</code> 输出</td></tr>
+  <tr><td class="c">16</td><td><code>char volt = 220;</code></td><td>运行核对</td><td>溢出：char 型最大只能存放 127</td><td>改为 double 型</td></tr>
+  <tr><td class="c">22</td><td><code>people / seats * 100</code></td><td>运行核对</td><td>整数除法：36 / 48 的结果是 0</td><td>改为 <code>(double)people / seats * 100</code></td></tr>
+</table>
+
+<div class="step"><span class="no">选学</span><span class="st">改为从键盘输入实时数据</span></div>
+<p>在室人数、室内温度和故障编码是实时变化的，实际使用时要从键盘输入。去掉 lab_full.c 中这三个变量的初值，再把下面的输入和检查部分加在处理部分之前，就得到 lab_input.c（见资源包）。三项检查分别检查“是否都读入成功”“人数是否在范围内”“编码是否在范围内”，缺一不可。</p>
+<snip title="lab_input.c　输入和检查部分（节选）">printf("请输入在室人数、室内温度、故障编码：");
+/* 检查 1：3 个数据是否都读入成功 */
+if (scanf("%d %lf %c", &amp;people, &amp;temp, &amp;code) != 3)
+{
+    printf("输入格式不对，程序结束。\n");
+    return 1;
+}
+/* 检查 2：人数是否在 0～48 之间 */
+if (people &lt; 0 || people &gt; seats)
+{
+    printf("在室人数应在 0～%d 之间，程序结束。\n", seats);
+    return 1;
+}
+/* 检查 3：故障编码是否是 g～n 中的字母 */
+if (code &lt; 'g' || code &gt; 'n')
+{
+    printf("故障编码应是 g～n 中的字母，程序结束。\n");
+    return 1;
+}</snip>
+<p>用正常数据和不合法的数据分别测试，结果见⟦表:labin⟧。</p>
+<p class="tcap"><b>⟦表:labin⟧</b>lab_input.c 测试记录</p>
+<table class="center">
+  <tr><th style="width:20%">输入</th><th style="width:22%">测试目的</th><th>程序的反应</th><th style="width:10%">返回值</th></tr>
+  <tr><td><code>36 24.5 g</code></td><td>正常数据</td><td>显示完整的数据档案，与⟦图2-23⟧ 相同</td><td>0</td></tr>
+  <tr><td><code>50 24.5 g</code></td><td>人数超出 0～48</td><td>提示“在室人数应在 0～48 之间”</td><td>1</td></tr>
+  <tr><td><code>36 24.5 G</code></td><td>编码不在 g～n 中</td><td>提示“故障编码应是 g～n 中的字母”</td><td>1</td></tr>
+  <tr><td><code>36 二十四 g</code></td><td>温度不是数</td><td>提示“输入格式不对”</td><td>1</td></tr>
 </table>
 
 <h3>技能训练</h3>
 <div class="ex">
-<p class="noind"><b>训练 1　205 实训室数据诊断。</b>205 实训室在室 35 人，温度 25.6 ℃，故障编码为 n。下面的程序编译时没有任何提示，但运行结果与预期不同。请找出问题并改正，填写诊断记录。</p>
+<p class="noind"><b>训练 1　205 实训室数据诊断。</b>205 实训室在室 35 人，温度 25.6 ℃，故障编码为 n。下面的程序在本书环境中用默认编译选项编译，没有任何提示，但运行结果与预期不同。请找出问题并改正，填写诊断记录。</p>
 <code-file src="fix205.c" title="fix205.c（待诊断）" ln/>
 <div class="two">
 <out src="fix205" title="当前的运行结果"/>
@@ -242,7 +288,7 @@ printf("故障编码：%c    加密报文：%c\n", code, secret);</snip>
   <tr><td class="blank"></td><td></td><td></td></tr>
 </table>
 
-<p class="noind" style="margin-top:0.8em"><b>训练 2　为光伏电站的数据选择类型。</b>某光伏电站的监控程序要保存下表中的数据，请参考表2-18，为每项数据选择合适的类型，并说明理由。</p>
+<p class="noind" style="margin-top:0.8em"><b>训练 2　为光伏电站的数据选择类型。</b>某光伏电站的监控程序要保存下表中的数据，请参考⟦表2-18⟧，为每项数据选择合适的类型，并说明理由。</p>
 <table>
   <tr><th style="width:24%">数据</th><th style="width:22%">示例值</th><th style="width:16%">类型</th><th>理由</th></tr>
   <tr><td>光伏板温度</td><td>45.3 ℃</td><td class="blank"></td><td></td></tr>
@@ -251,30 +297,50 @@ printf("故障编码：%c    加密报文：%c\n", code, secret);</snip>
   <tr><td>电站累计发电量</td><td>3200000000 度</td><td class="blank"></td><td></td></tr>
   <tr><td>是否已并网</td><td>是</td><td class="blank"></td><td></td></tr>
 </table>
+
+<p class="noind" style="margin-top:0.8em"><b>训练 3　独立完成：210 实训室数据档案。</b>210 实训室的数据如下：类型 B，总座位 40 个，在室 32 人，今日实训 2 场，设备故障 0 次，室内温度 26.3 ℃，空气湿度 61.5%，供电电压 219.6 V，设备开机，故障编码 k。请先为它写出数据字典，再独立编写 lab210.c，输出格式与⟦图2-23⟧ 相同（预期运行结果见⟦图:lab210⟧）。完成后，把在室人数分别改为 40 和 0，先算出座位使用率，再运行核对。</p>
+<conwin src="lab210" dir="project02" notrailer/>
+<figcaption><b>⟦图:lab210⟧</b>训练 3 的预期运行结果</figcaption>
 </div>
+
+<div class="accept"><div class="bt"><svg><use href="#i-check"/></svg>课堂验收（任务三）<small>由老师或同伴当场检查</small></div>
+<ul>
+  <li>对老师给出的一个新的待诊断程序，把每条编译提示归入⟦表:errkind⟧ 中的一类，并说明能不能运行。</li>
+  <li>把 lab_full.c 中的在室人数改为 48 和 0，先算出座位使用率，再运行核对。</li>
+  <li>从自己的源程序重新编译、运行，并解释其中一处修改为什么有效。</li>
+</ul></div>
 
 <!-- ======================================================= 项目小结 -->
 <h2 class="sec"><tocmark level="2" text="项目小结"/>项目小结</h2>
-<p>本项目从实训室的 AI 智能数据看板出发，学习了 C 语言的常量与变量、数据类型、字符和数据的输入，并诊断了数据处理中的常见异常。主要内容归纳如表2-23 所示。</p>
-<p class="tcap"><b>表2-23</b>项目二知识要点</p>
+<p>本项目从实训室的 AI 智能数据看板出发，学习了 C 语言的常量与变量、数据类型、字符和数据的输入，并诊断了数据处理中的常见异常。主要内容归纳如⟦表2-23⟧ 所示。</p>
+<p class="tcap"><b>⟦表2-23⟧</b>项目二知识要点</p>
 <table>
   <tr><th style="width:17%">知识点</th><th>要点</th></tr>
   <tr><td>常量与变量</td><td>直接常量；符号常量 <code>#define 名字 值</code>（不加分号）；只读变量 <code>const</code>。变量先定义后使用，三要素是变量名、类型、值；<code>=</code> 是赋值</td></tr>
   <tr><td>数据类型</td><td>int 存整数；double 存小数（输入用 <code>%lf</code>）；char 存一个字符；_Bool 存 1 或 0。各类型有固定的字节数和取值范围，可以用 sizeof 查看</td></tr>
   <tr><td>标识符</td><td>由字母、数字、下划线组成，不能以数字开头，区分大小写，不能用关键字；起名要见名知意</td></tr>
-  <tr><td>字符</td><td>字符以 ASCII 码存放：<code>'0'</code> 是 48，<code>'A'</code> 是 65，<code>'a'</code> 是 97，大小写相差 32；转义字符 <code>\n</code>、<code>\t</code>、<code>\\</code>、<code>\'</code>、<code>\"</code>、<code>\0</code>；<code>"g"</code> 比 <code>'g'</code> 多一个 <code>'\0'</code></td></tr>
-  <tr><td>数据的输入</td><td>getchar 读入一个字符；scanf 按格式读入，变量名前加 <code>&amp;</code>；int 用 <code>%d</code>，double 用 <code>%lf</code>，char 用 <code>%c</code></td></tr>
-  <tr><td>数据异常</td><td>超出范围会溢出；int 不能保存小数；两个整数相除结果是整数；格式说明符要与类型一致；错误必须改正，警告也要认真对待，没有提示不等于没有问题</td></tr>
+  <tr><td>字符</td><td>本书环境中字符以 ASCII 码存放：<code>'0'</code> 是 48，<code>'A'</code> 是 65，<code>'a'</code> 是 97，大小写相差 32；转义字符 <code>\n</code>、<code>\t</code>、<code>\\</code>、<code>\'</code>、<code>\"</code>、<code>\0</code>；char 型变量占 1 个字节，字符串 <code>"g"</code> 由 g 和 <code>'\0'</code> 组成，占 2 个字节</td></tr>
+  <tr><td>数据的输入</td><td>getchar 读入一个字符；scanf 按格式读入，变量名前加 <code>&amp;</code>；int 用 <code>%d</code>，double 用 <code>%lf</code>，char 用 <code>%c</code>；scanf 的返回值是成功读入的数据个数，使用输入的数据之前，先检查是否读入成功、是否在范围内</td></tr>
+  <tr><td>数据异常</td><td>超出范围会溢出；int 不能保存小数；两个整数相除结果是整数；格式说明符要与类型一致。错误必须改正；类型或格式不匹配的警告要先改正、不运行；没有提示不等于没有问题，要用测试数据核对运行结果</td></tr>
 </table>
 <p class="noind"><b>学完本项目，请检查自己是否做到：</b></p>
 <ul class="check">
   <li>能区分常量和变量，正确使用 #define 和 const</li>
   <li>能根据数据的特点选择 int、double、char、_Bool，并规范命名</li>
   <li>能利用 ASCII 码完成字母大小写转换等字符运算</li>
-  <li>能用 scanf、getchar 从键盘输入数据</li>
-  <li>能根据编译器提示和运行结果，诊断溢出、精度丢失、整数除法、格式不匹配等问题</li>
-  <li>能借助 AI 查找问题，并用运行结果检验 AI 的建议</li>
+  <li>能用 scanf、getchar 从键盘输入数据，并检查输入是否成功、是否在范围内</li>
+  <li>能根据编译器提示和运行结果，诊断溢出、精度丢失、整数除法、格式不匹配等问题，知道哪些问题只能编译诊断、不能运行观察</li>
+  <li>能借助 AI 查找问题，先判断改后的程序能否运行，再用编译提示和运行结果检验 AI 的建议</li>
 </ul>
+<p class="tcap"><b>⟦表:eval2⟧</b>项目二评价表</p>
+<table>
+  <tr><th style="width:24%">评价项</th><th style="width:9%" class="c">分值</th><th>验收证据</th></tr>
+  <tr><td>数据字典与选型</td><td class="c">25</td><td>字段齐全；每项数据的类型、单位、范围都有理由</td></tr>
+  <tr><td>程序与输出</td><td class="c">30</td><td>改正后能编译运行，输出与手算结果一致</td></tr>
+  <tr><td>调试与多组测试</td><td class="c">30</td><td>保留编译提示原文；至少 3 组测试数据，含边界值和不合法的数据；只能编译诊断的问题不运行</td></tr>
+  <tr><td>独立解释与协作</td><td class="c">15</td><td>能独立讲清一处修改；记录同伴互查或 AI 复核的过程</td></tr>
+</table>
+<p class="note">60 分及以上、且“程序与输出”不低于 18 分为达标参考。是否使用 AI 不单独决定分数，独立解释、真实验证和迁移能力才是评价的依据。</p>
 
 <!-- ======================================================= AI 升华 -->
 <h2 class="sec"><tocmark level="2" text="AI升华　借助AI完成程序纠错"/>AI升华　借助AI完成程序纠错</h2>
@@ -285,7 +351,7 @@ printf("故障编码：%c    加密报文：%c\n", code, secret);</snip>
 <div class="prompt"><div class="ph"><span>AI 助学 · 四要素纠错提问卡</span><span>DeepSeek / 豆包</span></div><div class="pbd">
 <p><span class="r">身份</span>我是高职一年级学生，刚学完 C 语言的数据类型。</p>
 <p><span class="r">背景</span>我在用小熊猫C++ 编写实训室数据档案程序（数据都是课堂模拟的），程序有错误。</p>
-<p><span class="r">材料</span>① 程序：<span class="slot">（粘贴 bad_lab.c 的全部代码）</span>；② 编译器提示：<span class="slot">（粘贴信息面板中的提示原文）</span>；③ 运行结果：<span class="slot">（粘贴图2-21 的结果，并写出每项应该显示什么）</span></p>
+<p><span class="r">材料</span>① 程序：<span class="slot">（粘贴 bad_lab.c 的全部代码）</span>；② 编译器提示：<span class="slot">（粘贴信息面板中的提示原文）</span>；③ 按编译提示改正 3 处后的运行结果：<span class="slot">（粘贴⟦图2-21⟧ 的结果，并写出每项应该显示什么）</span></p>
 <p><span class="r">要求</span>请按行号列出每个问题的原因和修改方法，用表格回答；只用我学过的知识。</p>
 <div class="pnote">只说“程序不对，帮我改”，AI 很难准确判断问题出在哪里。把期望结果写出来，AI 才知道什么是“对”的。</div>
 </div></div>
@@ -301,7 +367,7 @@ printf("故障编码：%c    加密报文：%c\n", code, secret);</snip>
   <p>⑤ 第 21 行：room 是只读变量，不能赋值，应删除这一行；如果要显示 204 实训室，就修改第 8 行的初值。</p>
   </div></div>
 </div></div>
-<p>AI 很快找出了问题，但它的建议不一定都对。下面逐条验证。</p>
+<p>AI 很快找出了问题，但它的建议不一定都对，要逐条验证。验证之前先按⟦表:errkind⟧ 判断：改后的程序如果出现类型或格式不匹配的警告，就只做编译诊断，不运行。</p>
 
 <h4>3. 逐条验证AI的建议</h4>
 <p><b>（1）建议①和⑤。</b>按建议修改后重新编译，第 18 行的警告和第 21 行的错误都消失了，故障编码正常显示为 g，说明这两条建议正确。</p>
@@ -309,27 +375,48 @@ printf("故障编码：%c    加密报文：%c\n", code, secret);</snip>
 <code-file src="volt_ai.c" title="volt_ai.c　验证建议③" ln/>
 <diag src="volt_ai"/>
 <out src="volt_ai"/>
-<p>编译器给出了溢出警告，380 V 显示成了 124 V。可见建议③是错误的：AI 只注意到 220 能放进 unsigned char，却忽略了电压最高可达 380 V。应该改用 double 型（或 int 型）。</p>
-<p><b>（3）建议②：检验输入格式。</b>把温度改为从键盘输入，按建议用 <code>%f</code> 读入 double 型变量：</p>
-<code-file src="scanf_f.c" title="scanf_f.c　验证建议②" ln/>
-<diag src="scanf_f"/>
-<conwin src="scanf_f" dir="project02" ins="请输入室内温度：|24.5"/>
-<figcaption><b>图2-24</b>用 %f 读入 double 型变量的运行结果</figcaption>
-<p>输入 24.5，显示的却是 0.0 ℃，编译器也提示“%f 需要 float * 型的参数，但第 2 个参数是 double * 型”。所以建议②只能部分采纳：温度和湿度改为 double 型是对的，但输入时要用 <code>%lf</code>。</p>
+<p>这条警告说的是数值存不下（溢出），不是格式不匹配。无符号类型存不下时按“绕回来”处理（C 语言标准有规定），可以运行观察：380 V 显示成了 124 V，少了 256。可见建议③是错的：AI 只考虑了 220 V，而电压最高可达 380 V，应改用 int 或 double 型。</p>
+<p><b>（3）建议②：先编译诊断，不急于运行。</b>把温度改为从键盘输入，按建议用 <code>%f</code> 读入 double 型变量，先只编译：</p>
+<code-file src="bad_scanf_f.c" title="bad_scanf_f.c　验证建议②（只编译，不运行）" ln bad/>
+<diag src="bad_scanf_f"/>
+<p>编译器提示“<code>%f</code> 需要 float * 型的参数，但第 2 个参数是 double * 型”。这是格式不匹配，属于未定义行为，不需要运行，也不能用它的运行结果下结论。改用 <code>%lf</code>，并像任务二那样检查是否读入成功（改动部分如下，完整程序 scanf_lf.c 在资源包中），再编译就没有任何提示了，这时才运行：</p>
+<snip title="scanf_lf.c　改用 %lf 读入（节选）">double temp;                        // 室内温度（℃）
+printf("请输入室内温度：");
+if (scanf("%lf", &amp;temp) != 1)       // 用 %lf 读入，并检查
+{
+    printf("输入的不是数，程序结束。\n");
+    return 1;
+}
+printf("室内温度：%.1f ℃\n", temp);</snip>
+<conwin src="scanf_lf" dir="project02" ins="请输入室内温度：|24.5"/>
+<figcaption><b>⟦图2-24⟧</b>改用 %lf 读入后的运行结果</figcaption>
+<p>输入 24.5，显示 24.5 ℃。所以建议②只能部分采纳：温度和湿度改为 double 型是对的，但输入时要用 <code>%lf</code>。</p>
 <p><b>（4）建议④。</b>这正是相关知识中 div_test.c 的写法 A，运行结果是 0.0%，因为乘 100.0 之前，整数除法已经得到 0。应该改为 <code>(double)people / seats * 100</code>。</p>
-<p>验证结果汇总见表2-24。</p>
-<p class="tcap"><b>表2-24</b>AI 建议验证表</p>
+<p>验证结果汇总见⟦表2-24⟧。</p>
+<p class="tcap"><b>⟦表2-24⟧</b>AI 建议验证表</p>
 <table>
   <tr><th style="width:9%" class="c">建议</th><th style="width:28%">验证方法</th><th style="width:31%">验证结果</th><th>结论</th></tr>
   <tr><td class="c">①</td><td>修改后编译、运行</td><td>警告消失，故障编码显示 g</td><td>采纳</td></tr>
-  <tr><td class="c">②</td><td>输入 24.5，观察输出</td><td>显示 0.0 ℃，并有警告</td><td>部分采纳：用 double，输入用 %lf</td></tr>
+  <tr><td class="c">②</td><td>先只编译 <code>%f</code> 版；改用 <code>%lf</code> 后再运行</td><td><code>%f</code> 版有格式不匹配警告；<code>%lf</code> 版没有提示，输入 24.5 显示 24.5 ℃</td><td>部分采纳：用 double，输入用 %lf</td></tr>
   <tr><td class="c">③</td><td>用边界值 380 测试</td><td>显示 124 V，并有溢出警告</td><td>不采纳：改用 double</td></tr>
   <tr><td class="c">④</td><td>运行 div_test.c 写法 A</td><td>显示 0.0%</td><td>不采纳：先强制转换再除</td></tr>
   <tr><td class="c">⑤</td><td>修改后编译</td><td>错误消失</td><td>采纳</td></tr>
 </table>
-<p>可以把验证结果作为“证据”反馈给 AI 继续追问，例如：“按你的建议③，电压 380 V 显示成了 124 V，编译器还提示溢出，应该怎么改？”最终改好的程序就是任务三中的 lab_full.c。</p>
+<p>可以把验证结果作为“证据”反馈给 AI 继续追问，例如：“按你的建议③，380 V 显示成了 124 V，还有溢出警告，怎么改？”最终改好的程序就是任务三中的 lab_full.c。</p>
 
 <div class="box"><div class="bt"><svg><use href="#i-ai"/></svg>AI 使用小结</div>
-<p>① 请 AI 纠错时，提供完整的材料：程序、编译器提示原文、运行结果和期望结果；② AI 的建议要逐条验证，特别要用边界值测试；③ 有证据才采纳，验证不通过就带着证据追问，或者自己修改；④ 不把真实的个人信息和单位内部数据发给 AI。</p></div>
+<p>① 请 AI 纠错时，提供完整的材料：程序、编译器提示原文、运行结果和期望结果；② AI 的建议要逐条验证：先编译，出现类型或格式不匹配的警告就只做编译诊断，不运行；能运行的再用测试数据核对，特别要用边界值测试；③ 有证据才采纳，验证不通过就带着证据追问，或者自己修改；④ 不把真实的个人信息和单位内部数据发给 AI。</p></div>
+
+<h4>4. 离开 AI 再做</h4>
+<p>请关闭 AI 对话窗口，独立诊断下面的程序 bad_204.c（在资源包中）。</p>
+<code-file src="bad_204.c" title="bad_204.c　204 实训室数据（待诊断）" ln bad/>
+<p>按以下步骤完成诊断，检验自己能不能不靠 AI 独立纠错：</p>
+<ol class="paren">
+  <li>编译 bad_204.c，把每条提示归入⟦表:errkind⟧ 中的一类，并说明这时能不能运行。</li>
+  <li>改正编译提示指出的问题，再编译，直到没有任何提示。</li>
+  <li>运行程序，与预期结果“实训室类型：B　室内温度：23.8 ℃　座位使用率：75.0%”逐项核对，找出并改正逻辑错误。</li>
+  <li>按⟦表2-22⟧ 的格式写出诊断记录（行号、原来的写法、发现方式、问题与原因、修改方法）。</li>
+</ol>
+
 
 </section>

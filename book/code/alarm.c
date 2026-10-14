@@ -11,7 +11,16 @@ int main(void)
     char secret;                          // 加密报文
 
     printf("请输入告警字母（g～n）：");
-    scanf("%c", &code);                   // 输入：从键盘读入一个字符
+    if (scanf("%c", &code) != 1)          // 检查 1：是否读入了一个字符
+    {
+        printf("没有读到告警字母，程序结束。\n");
+        return 1;
+    }
+    if (code < 'g' || code > 'n')         // 检查 2：是否是 g～n 中的字母
+    {
+        printf("输入的不是 g～n 中的告警字母，程序结束。\n");
+        return 1;
+    }
 
     upper = code - 32;                    // 处理 1：小写字母转为大写字母
     secret = upper + 1;                   // 处理 2：取相邻的下一个字母

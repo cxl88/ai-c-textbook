@@ -1,0 +1,6 @@
+bad_twomain.c:9:5: error: redefinition of 'main'
+    9 | int main(void)
+      |     ^~~~
+bad_twomain.c:3:5: note: previous definition of 'main' with type 'int(void)'
+    3 | int main(void)
+      |     ^~~~

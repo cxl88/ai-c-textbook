@@ -1,0 +1,4 @@
+wc_fix205.c: In function 'main':
+wc_fix205.c:9:16: warning: conversion from 'double' to 'int' changes value from '2.5600000000000001e+1' to '25' [-Wfloat-conversion]
+    9 |     int temp = 25.6;                    // 室内温度（℃），保留 1 位小数
+      |                ^~~~

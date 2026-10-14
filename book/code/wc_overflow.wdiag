@@ -1,0 +1,10 @@
+wc_overflow.c: In function 'main':
+wc_overflow.c:5:14: warning: conversion from 'int' to 'char' changes value from '220' to '-36' [-Wconversion]
+    5 |     char a = 220;                       // char 只能保存 -128～127
+      |              ^~~
+wc_overflow.c:6:14: warning: overflow in conversion from 'int' to 'char' changes value from '380' to '124' [-Woverflow]
+    6 |     char b = 380;                       // 超出得更多
+      |              ^~~
+wc_overflow.c:7:15: warning: conversion from 'int' to 'short int' changes value from '40000' to '-25536' [-Wconversion]
+    7 |     short c = 40000;                    // short 只能保存 -32768～32767
+      |               ^~~~~

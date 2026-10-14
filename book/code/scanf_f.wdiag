@@ -1,6 +1,0 @@
-scanf_f.c: In function 'main':
-scanf_f.c:7:11: warning: format '%f' expects argument of type 'float *', but argument 2 has type 'double *' [-Wformat=]
-    7 |     scanf("%f", &temp);                 // 按 AI 的建议：用 %f 读入 double 型变量
-      |           ^~~~  ~~~~~
-      |                 |
-      |                 double *

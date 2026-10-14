@@ -40,7 +40,7 @@
 <!-- ======================================================= 情境导入 -->
 <h2 class="sec first"><tocmark level="2" text="情境导入"/>情境导入</h2>
 
-<p>新学期开始了，学校启用了“校园 AI 迎新系统”。新生报到时，系统会为每位新生输出一张专属档案卡片，档案包含姓名、学号、性别、专业、年龄、身高、籍贯等信息（见图1-1）。AI 迎新系统是如何输出专属档案的呢？</p>
+<p>新学期开始了，学校启用了“校园 AI 迎新系统”。新生报到时，系统会为每位新生输出一张专属档案卡片，档案包含姓名、学号、性别、专业、年龄、身高、籍贯等信息（见⟦图1-1⟧）。AI 迎新系统是如何输出专属档案的呢？</p>
 
 <figure>
 <div class="ui">
@@ -62,7 +62,7 @@
     </div>
   </div>
 </div>
-<figcaption><b>图1-1</b>校园 AI 迎新系统中的新生专属档案卡片（示意图，资料为虚构）</figcaption>
+<figcaption><b>⟦图1-1⟧</b>校园 AI 迎新系统中的新生专属档案卡片（示意图，资料为虚构）</figcaption>
 </figure>
 
 <div class="talk">
@@ -72,6 +72,20 @@
 </div>
 
 <p>本项目依托 AI 辅助学习，认识 C 语言程序设计、C 语言程序结构和 C 语言程序的执行过程，编写第一个 C 语言程序，搭建属于自己的个人专属档案。</p>
+<p class="note">说明：⟦图1-1⟧ 是情境示意图。本项目编写的是在运行窗口中输出档案文字的程序，不实现图中的图形界面、照片显示和 AI 对话功能。</p>
+
+<div class="try"><div class="th"><span>5 分钟体验　先让程序跑起来</span><span>在已装好小熊猫C++ 的机房电脑上进行</span></div><div class="tbd">
+<p>学习之前，先动手运行一个现成的程序，体会一下“改代码—编译—运行—看结果”。</p>
+<ol>
+  <li>启动小熊猫C++，选择“文件”→“打开”，打开资源包 project01 文件夹中的 hello2.c（资源包的获取方法见本书使用说明）。</li>
+  <li>把第 7 行双引号里的“同学”改成你喜欢的称呼，如“小禾”。只改双引号<b>里面</b>的文字，引号、括号、分号都不要动。</li>
+  <li>按 <b>Ctrl+S</b> 保存，再按 <b>F9</b> 编译，看到信息面板中“错误数: 0”后，按 <b>F11</b> 运行。</li>
+  <li>查看运行窗口：第一行是不是变成了你改的文字？按任意键关闭窗口。</li>
+</ol>
+<conwin src="hello2_ok" title="D:\CStudy\project01\hello2.exe"/>
+<figcaption><b>⟦图:try⟧</b>把“同学”改成“小禾”后的运行结果</figcaption>
+<p class="note">如果编译出错，先检查是不是误删了引号、括号或分号。电脑上还没有安装小熊猫C++ 的，先看老师演示，学完任务三后再做一遍。</p>
+</div></div>
 
 <!-- ======================================================= 三维目标 -->
 <h2 class="sec"><tocmark level="2" text="三维目标"/>三维目标</h2>
@@ -125,7 +139,7 @@
   <circle cx="326" cy="101" r="1.8"/><circle cx="326" cy="121" r="1.8"/><circle cx="326" cy="141" r="1.8"/><circle cx="326" cy="161" r="1.8"/>
   <circle cx="326" cy="186" r="1.8"/><circle cx="326" cy="206" r="1.8"/><circle cx="326" cy="226" r="1.8"/><circle cx="326" cy="246" r="1.8"/></g>
 </svg>
-<figcaption><b>图1-2</b>项目一知识导图</figcaption>
+<figcaption><b>⟦图1-2⟧</b>项目一知识导图</figcaption>
 </figure>
 
 <!-- ======================================================= 任务一 -->
@@ -150,13 +164,13 @@
   <div class="cmp-mid">好比</div>
   <div><div class="cmp-h">程序：输出新生档案卡片</div><ol><li>输出卡片顶部的分隔线</li><li>输出标题“新生档案”</li><li>输出姓名、性别、年龄</li><li>输出学号、专业</li><li>输出底部分隔线，结束</li></ol></div>
 </div>
-<figcaption><b>图1-3</b>程序和菜谱一样：步骤明确，顺序重要</figcaption>
+<figcaption><b>⟦图1-3⟧</b>程序和菜谱一样：步骤明确，顺序重要</figcaption>
 </figure>
 
 <p>把一项任务分析清楚、设计出解决步骤、用计算机语言写成程序，再经过运行测试和修改，直到程序符合要求，这个完整的过程就叫<b>程序设计</b>。写程序只是其中的一环，想清楚“要做什么、分几步做”往往更重要。</p>
 
 <h5>2）计算机语言</h5>
-<p>人和人交流用汉语、英语等自然语言，人和计算机“交流”则要用计算机语言。计算机语言的发展大致经历了三个阶段（见图1-4）：</p>
+<p>人和人交流用汉语、英语等自然语言，人和计算机“交流”则要用计算机语言。计算机语言的发展大致经历了三个阶段（见⟦图1-4⟧）：</p>
 <ul class="dash">
   <li><b>机器语言</b>：由 0 和 1 组成的指令，计算机能直接执行，但人很难读懂和记忆。</li>
   <li><b>汇编语言</b>：用 <code>MOV</code>、<code>ADD</code> 等英文缩写（助记符）代替 0 和 1，比机器语言好读一些，但仍与具体的硬件紧密相关。</li>
@@ -183,7 +197,7 @@
   <text x="10" y="8" font-size="8.8" fill="#4D4D4D">越来越接近人的语言</text>
   <text x="4" y="130" font-size="8.6" fill="#858585">注：左边两条指令的作用相同，都是把数 61h 放进寄存器 AL。</text>
 </svg>
-<figcaption><b>图1-4</b>计算机语言的发展</figcaption>
+<figcaption><b>⟦图1-4⟧</b>计算机语言的发展</figcaption>
 </figure>
 
 <p>用高级语言写出的程序叫<b>源程序</b>（源代码），计算机不能直接执行。C 语言源程序要先由<b>编译器</b>“翻译”成机器语言，生成可执行程序，才能运行。这个过程在任务三中详细介绍。</p>
@@ -205,7 +219,7 @@
 </ol>
 
 <h4>3. 应用领域</h4>
-<p>C 语言的应用范围非常广，从电脑、手机的操作系统，到家电、汽车、工厂设备里的控制芯片，都有 C 程序在运行。下面重点看看它在工科领域中的应用（见图1-5）。</p>
+<p>C 语言的应用范围非常广，从电脑、手机的操作系统，到家电、汽车、工厂设备里的控制芯片，都有 C 程序在运行。下面重点看看它在工科领域中的应用（见⟦图1-5⟧）。</p>
 
 <figure>
 <div class="apps">
@@ -222,7 +236,7 @@
   <div><svg viewBox="0 0 32 32"><rect x="4" y="6" width="24" height="16" rx="1.5" fill="none" stroke="#1D4F91" stroke-width="2"/><path d="M12 27h8M16 22v5" stroke="#1D4F91" stroke-width="2"/><path d="M10 12l3 2-3 2M16 17h5" stroke="#1D4F91" stroke-width="1.6" fill="none"/></svg>
     <b>系统软件</b>Linux 操作系统内核、SQLite 数据库、Python 语言的官方解释器 CPython 等，主要都是用 C 语言编写的。</div>
 </div>
-<figcaption><b>图1-5</b>C 语言在工科领域中的应用</figcaption>
+<figcaption><b>⟦图1-5⟧</b>C 语言在工科领域中的应用</figcaption>
 </figure>
 
 <h4>4. 借助AI工具学习</h4>
@@ -256,7 +270,7 @@
 <p>本任务借助 AI 工具，围绕“C 语言程序设计是什么、为什么学、学了能做什么”三个问题拓展认识，并整理成个人学习认知笔记。</p>
 
 <div class="step"><span class="no">第一步</span><span class="st">选择 AI 工具，做好准备</span></div>
-<p>打开 DeepSeek 或豆包（网页版或手机 App 均可），新建一个对话。准备好笔记本，或翻到本书<pref to="p1-note"/>的表1-1（个人学习认知笔记），边问边记。</p>
+<p>打开 DeepSeek 或豆包（网页版或手机 App 均可），新建一个对话。准备好笔记本，或翻到本书<pref to="p1-note"/>的⟦表1-1⟧（个人学习认知笔记），边问边记。</p>
 
 <div class="step"><span class="no">第二步</span><span class="st">按提问卡提问，并学会追问</span></div>
 <p>依次使用上面的四条搜索话术提问。如果回答里有看不懂的词，就接着追问，例如：</p>
@@ -270,8 +284,8 @@
 <p>把 AI 的回答和本书“相关知识”逐条对照：一致的，打“√”；不一致或拿不准的，标出来，课上请教老师或同学。记住，<b>AI 的回答只是线索，不是结论</b>。</p>
 
 <div class="step"><span class="no">第四步</span><span class="st">完成个人学习认知笔记</span></div>
-<p>结合教材和 AI 的回答，用自己的话填写下表。下表最后一行“我的学习思路”可以参考图1-6。</p>
-<p class="tcap"><anchor id="p1-note"/><b>表1-1</b>个人学习认知笔记</p>
+<p>结合教材和 AI 的回答，用自己的话填写下表。下表最后一行“我的学习思路”可以参考⟦图1-6⟧。</p>
+<p class="tcap"><anchor id="p1-note"/><b>⟦表1-1⟧</b>个人学习认知笔记</p>
 <table>
   <tr><th style="width:24%">问题</th><th>我的理解（用自己的话写）</th><th style="width:22%">AI 补充 / 待核实</th></tr>
   <tr><td>C 语言程序设计是什么？</td><td class="blank2"></td><td></td></tr>
@@ -292,8 +306,14 @@
   <g stroke="#4A75AE" stroke-width="1.2"><path d="M93 31h15" marker-end="url(#arr)"/><path d="M199 31h15" marker-end="url(#arr)"/><path d="M305 31h15" marker-end="url(#arr)"/><path d="M411 31h15" marker-end="url(#arr)"/></g>
   <text x="260" y="68" font-size="9" fill="#4D4D4D" text-anchor="middle">每一步都可以请 AI 帮忙解释，但代码要自己敲、结果要自己验证</text>
 </svg>
-<figcaption><b>图1-6</b>C 语言的学习思路</figcaption>
+<figcaption><b>⟦图1-6⟧</b>C 语言的学习思路</figcaption>
 </figure>
+
+<div class="accept"><div class="bt"><svg><use href="#i-check"/></svg>课堂验收（任务一）<small>由老师或同伴当场检查</small></div>
+<ul>
+  <li>合上书，用一两句话说出什么是程序、什么是程序设计。</li>
+  <li>从自己的 AI 对话中找出一处需要核实的说法，说明你是怎样核实的、结论是什么。</li>
+</ul></div>
 
 <!-- ======================================================= 任务二 -->
 <h2 class="task"><tocmark level="2" text="任务二　第一个C语言程序"/><span class="tag">任务二</span>第一个C语言程序</h2>
@@ -303,7 +323,7 @@
 
 <h3>任务分析</h3>
 <p>结合 AI 迎新系统和 C 语言案例，读懂 C 语言程序结构，仿写代码并掌握基础编码规范。具体来说：先读懂三个典型的示例程序，再归纳出 C 程序的“固定结构”和书写规则，然后学会用 <code>printf</code> 输出文字和数字，最后仿照示例写出个人专属档案卡片。</p>
-<p class="tcap"><b>表1-2</b>个人专属档案卡片的内容（资料为虚构）</p>
+<p class="tcap"><b>⟦表1-2⟧</b>个人专属档案卡片的内容（资料为虚构）</p>
 <table class="center">
   <tr><th>项目</th><th>姓名</th><th>性别</th><th>年龄</th><th>学号</th><th>专业</th></tr>
   <tr><td>内容</td><td>林小禾</td><td>女</td><td>18 岁</td><td>2026150218</td><td>人工智能技术应用</td></tr>
@@ -311,75 +331,51 @@
 </table>
 
 <h3>相关知识</h3>
+<div class="box"><div class="bt"><svg><use href="#i-goal"/></svg>学习分层：本任务先会什么，后会什么</div>
+<table class="lvtab">
+  <tr><td><span class="lv must">必会</span></td><td>保存、编译、运行程序；用 printf 输出文字，用 <code>\n</code> 换行，用 <code>%d</code> 输出整数；根据提示改正漏写分号、用了中文标点等简单错误</td></tr>
+  <tr><td><span class="lv use">跟着用</span></td><td>照着示例使用给定的变量（如 <code>int age = 18;</code>）和 <code>%f</code>、<code>%.2f</code>、<code>%c</code>、<code>%s</code> 等格式说明符，项目二再系统学习</td></tr>
+  <tr><td><span class="lv">选学</span></td><td>自己编写函数（⟦例1-3⟧）；<code>\t</code>、<code>\"</code>、<code>\\</code>、<code>%%</code> 等写法先作速查，用到时再查，不要求第一遍全部记住</td></tr>
+</table></div>
 <h4>1. C语言程序示例</h4>
-<p>先来看三个典型的小程序。每个程序都给出了逐行注释（<code>//</code> 后面的文字）和运行结果，程序后面紧跟“读程序”，逐行解释它的含义。现在不必记住所有细节，重点是对 C 程序“长什么样”“怎么运行”先有个整体印象。</p>
+<p>先来看两个典型的小程序。每个程序都给出了逐行注释（<code>//</code> 后面的文字）和运行结果，程序后面紧跟“读程序”，逐行解释它的含义。现在不必记住所有细节，重点是对 C 程序“长什么样”“怎么运行”先有个整体印象。</p>
 
-<p class="exh"><b>例1-1</b>　输出一行欢迎语。这是最简单的 C 程序：在屏幕上输出一行文字。</p>
-<code-file src="hello.c" title="例1-1　hello.c" ln/>
+<p class="exh"><b>⟦例1-1⟧</b>　<span class="lv must">必会</span>输出一行欢迎语。这是最简单的 C 程序：在屏幕上输出一行文字。</p>
+<code-file src="hello.c" title="⟦例1-1⟧　hello.c" ln/>
 <conwin src="hello"/>
-<figcaption><b>图1-7</b>例1-1 的运行结果</figcaption>
+<figcaption><b>⟦图1-7⟧</b>⟦例1-1⟧ 的运行结果</figcaption>
 <p class="note" style="margin-top:3pt">说明：运行窗口中分隔线以上是程序的输出；分隔线以下是小熊猫C++ 附加显示的运行信息（耗时、返回值等，每次运行的数值略有不同），不是程序输出的内容。</p>
 
-<p class="tcap"><b>表1-3</b>读程序：例1-1</p>
+<p class="tcap"><b>⟦表1-3⟧</b>读程序：⟦例1-1⟧</p>
 <table class="read">
   <tr><th style="width:9%" class="c">行号</th><th style="width:36%">代码</th><th>含义</th></tr>
   <tr><td class="c">1</td><td><code>#include &lt;stdio.h&gt;</code></td><td><b>预处理指令</b>：把标准输入输出头文件 stdio.h 包含到程序中。程序要用 <code>printf</code> 输出，就要写这一行。末尾不加分号</td></tr>
   <tr><td class="c">2</td><td>（空行）</td><td>空行不影响程序运行，用来把不同部分隔开，让程序更清楚</td></tr>
   <tr><td class="c">3</td><td><code>int main(void)</code></td><td><b>主函数</b>的开头。每个 C 程序有且只有一个 main 函数，程序从这里开始执行</td></tr>
   <tr><td class="c">4</td><td><code>{</code></td><td>左花括号，表示<b>函数体</b>开始</td></tr>
-  <tr><td class="c">5</td><td><code>printf("欢迎…！\n");</code></td><td>调用 <code>printf</code> 函数，把双引号中的文字原样输出；<code>\n</code> 表示换行。语句以英文分号 <code>;</code> 结束</td></tr>
+  <tr><td class="c">5</td><td><code>printf("欢迎…！\n");</code></td><td>调用 <code>printf</code> 函数，把双引号中的文字原样输出；<code>\n</code> 表示换行。这条语句以英文分号 <code>;</code> 结束</td></tr>
   <tr><td class="c">6</td><td><code>return 0;</code></td><td>结束 main 函数，向操作系统返回 0，表示程序正常结束（运行窗口中的“返回值: 0”就是它）</td></tr>
   <tr><td class="c">7</td><td><code>}</code></td><td>右花括号，表示函数体结束，与第 4 行的左花括号配对</td></tr>
 </table>
 
-<p class="exh"><b>例1-2</b>　输出报到人数。迎新系统统计了某天上午和下午的报到人数，要求输出这两个整数和当天合计。</p>
-<code-file src="count.c" title="例1-2　count.c" ln/>
+<p class="exh"><b>⟦例1-2⟧</b>　<span class="lv must">必会</span>输出报到人数。迎新系统统计了某天上午和下午的报到人数，要求输出这两个整数和当天合计。</p>
+<code-file src="count.c" title="⟦例1-2⟧　count.c" ln/>
 <conwin src="count"/>
-<figcaption><b>图1-8</b>例1-2 的运行结果</figcaption>
+<figcaption><b>⟦图1-8⟧</b>⟦例1-2⟧ 的运行结果</figcaption>
 
-<p class="tcap"><b>表1-4</b>读程序：例1-2</p>
+<p class="tcap"><b>⟦表1-4⟧</b>读程序：⟦例1-2⟧</p>
 <table class="read">
   <tr><th style="width:9%" class="c">行号</th><th style="width:40%">代码</th><th>含义</th></tr>
-  <tr><td class="c">1～4</td><td colspan="2">与例1-1 相同：预处理指令、主函数开头、函数体开始</td></tr>
+  <tr><td class="c">1～4</td><td colspan="2">与⟦例1-1⟧ 相同：预处理指令、主函数开头、函数体开始</td></tr>
   <tr><td class="c">5</td><td><code>printf("上午报到：%d 人\n", 1268);</code></td><td>双引号中的 <code>%d</code> 是<b>格式说明符</b>（占位符），表示“这里输出一个十进制整数”。输出时，逗号后面的 1268 会填到 <code>%d</code> 的位置，其余文字原样输出</td></tr>
   <tr><td class="c">6</td><td><code>printf("下午报到：%d 人\n", 532);</code></td><td>同上，在 <code>%d</code> 处输出 532</td></tr>
   <tr><td class="c">7</td><td><code>printf("今日合计：%d 人\n", 1268 + 532);</code></td><td>输出项可以是一个<b>算式</b>（表达式）：先算出 1268+532=1800，再把结果填到 <code>%d</code> 处</td></tr>
   <tr><td class="c">8～9</td><td colspan="2">返回 0，函数体结束</td></tr>
 </table>
 
-<p class="exh"><b>例1-3</b>　用子函数输出分隔线。档案卡片的上下都有分隔线，可以把“输出分隔线”写成一个单独的<b>函数</b>，需要时调用它。</p>
-<code-file src="line.c" title="例1-3　line.c" ln/>
-<conwin src="line"/>
-<figcaption><b>图1-9</b>例1-3 的运行结果</figcaption>
-
-<p class="tcap"><b>表1-5</b>读程序：例1-3</p>
-<table class="read">
-  <tr><th style="width:9%" class="c">行号</th><th style="width:34%">代码</th><th>含义</th></tr>
-  <tr><td class="c">3</td><td><code>void show_line(void)</code></td><td>定义一个名为 show_line 的<b>子函数</b>（自己编写的函数）。第一个 <code>void</code> 表示函数不返回值，括号中的 <code>void</code> 表示不需要参数</td></tr>
-  <tr><td class="c">4～6</td><td><code>{ printf("====…\n"); }</code></td><td>子函数的函数体：输出一条分隔线</td></tr>
-  <tr><td class="c">8</td><td><code>int main(void)</code></td><td>主函数。注意：虽然子函数写在前面，程序仍然<b>从 main 开始执行</b></td></tr>
-  <tr><td class="c">10</td><td><code>show_line();</code></td><td><b>调用</b>子函数：转去执行第 4～6 行，输出分隔线，执行完再回到这里继续往下</td></tr>
-  <tr><td class="c">11</td><td><code>printf("      校园AI迎新系统\n");</code></td><td>输出系统名称，前面的空格用来让文字居中一些</td></tr>
-  <tr><td class="c">12</td><td><code>show_line();</code></td><td>再次调用子函数，又输出一条分隔线。同一个函数可以多次调用</td></tr>
-</table>
-
-<figure>
-<svg viewBox="0 0 520 112" width="100%" font-family="BSans">
-  <rect x="8" y="8" width="214" height="96" rx="3" fill="#F4F7FB" stroke="#9DB3D3" stroke-width="0.8"/>
-  <text x="18" y="24" font-size="9.5" font-weight="700" fill="#153A6B">main 函数（从这里开始）</text>
-  <g font-family="BMono, BSans" font-size="9" fill="#1F1F1F"><text x="22" y="44">① show_line();</text><text x="22" y="66">② printf("校园AI迎新系统");</text><text x="22" y="88">③ show_line();</text></g>
-  <rect x="330" y="30" width="182" height="52" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/>
-  <text x="340" y="47" font-size="9.5" font-weight="700" fill="#153A6B">show_line 函数</text>
-  <text x="340" y="68" font-family="BMono, BSans" font-size="9" fill="#1F1F1F">printf("=====…");</text>
-  <g stroke="#1D4F91" stroke-width="1" fill="none"><path d="M140 40 C230 30 270 40 328 48" marker-end="url(#arrD)"/><path d="M328 64 C270 70 230 62 160 64" marker-end="url(#arrD)" stroke-dasharray="3 2"/><path d="M128 85 C240 96 280 84 328 74" marker-end="url(#arrD)"/></g>
-  <text x="246" y="28" font-size="8.5" fill="#4D4D4D">调用</text><text x="240" y="78" font-size="8.5" fill="#4D4D4D">返回</text>
-</svg>
-<figcaption><b>图1-10</b>例1-3 的执行顺序：主函数两次调用子函数</figcaption>
-</figure>
-
 <h4>2. C语言程序结构</h4>
 <h5>1）基本结构</h5>
-<p>对比三个示例可以发现，C 程序有一个“固定结构”：<b>预处理指令 + 主函数</b>，主函数由<b>函数头</b>和<b>函数体</b>组成，程序中还可以有<b>注释</b>。下面以一个输出年龄的小程序为例（见图1-11）。</p>
+<p>对比这两个示例可以发现，C 程序有一个“固定结构”：<b>预处理指令 + 主函数</b>，主函数由<b>函数头</b>和<b>函数体</b>组成，程序中还可以有<b>注释</b>。下面以一个输出年龄的小程序为例（见⟦图1-11⟧）。</p>
 
 <figure>
 <anno src="age.c" title="age.c">
@@ -390,7 +386,7 @@
 8-9|a|<b>执行部分</b>：执行语句
 6-10|b|<b>函数体</b>
 </anno>
-<figcaption><b>图1-11</b>C 程序的基本结构</figcaption>
+<figcaption><b>⟦图1-11⟧</b>C 程序的基本结构</figcaption>
 </figure>
 
 <p><b>（1）预处理指令。</b>以 <code>#</code> 开头的行是预处理指令，在正式编译之前处理。<code>#include &lt;stdio.h&gt;</code> 的作用是把“标准输入输出头文件”包含进来，<code>printf</code> 等输入输出函数的说明都在这个文件里。本书还会用到数学函数头文件 <code>math.h</code> 和字符串函数头文件 <code>string.h</code>，用到时再介绍。预处理指令末尾<b>不加分号</b>。</p>
@@ -400,16 +396,16 @@
 
 <h5>2）规则与规范</h5>
 <p>写程序和写作文一样，有必须遵守的“语法规则”，也有让程序更好读的“书写规范”。违反规则，程序<b>编译不通过</b>；不遵守规范，程序虽然能运行，但难读、难改、容易出错。</p>
-<p class="tcap"><b>表1-6</b>C 程序必须遵守的规则</p>
+<p class="tcap"><b>⟦表1-6⟧</b>C 程序必须遵守的规则</p>
 <table>
   <tr><th style="width:25%">规则</th><th style="width:37%">错误示例</th><th>编译器提示（节选）</th></tr>
-  <tr><td>① 每条语句以英文分号 <code>;</code> 结束</td><td><code>printf("姓名：%s\n", "林小禾")</code><br>（第 5 行末尾漏了分号）</td><td><code>error: expected ';' before 'printf'</code><br>（在下一行的 printf 之前缺少 ;）</td></tr>
+  <tr><td>① 变量定义、printf 语句、return 语句的末尾都要加英文分号 <code>;</code></td><td><code>printf("姓名：%s\n", "林小禾")</code><br>（第 5 行末尾漏了分号）</td><td><code>error: expected ';' before 'printf'</code><br>（在下一行的 printf 之前缺少 ;）</td></tr>
   <tr><td>② 代码中的标点必须是英文半角符号</td><td><code>printf("姓名：%s\n", "林小禾")；</code><br>（用了中文分号）</td><td><code>error: expected ';' before '\U0000ff1b'</code><br>（\U0000ff1b 就是中文分号“；”）</td></tr>
-  <tr><td>③ 严格区分大小写</td><td><code>Printf("姓名：%s\n", "林小禾");</code><br>（P 写成了大写）</td><td><code>undefined reference to `Printf'</code><br>（找不到名为 Printf 的函数）</td></tr>
-  <tr><td>④ 括号、引号必须成对出现</td><td><code>printf("姓名：%s\n", "林小禾";</code></td><td>编译器提示缺少右括号 <code>)</code></td></tr>
-  <tr><td>⑤ 有且只有一个 main 函数</td><td>main 写成 mian，或写了两个 main</td><td>连接时出错，提示找不到或重复定义 main</td></tr>
+  <tr><td>③ 严格区分大小写</td><td><code>Printf("姓名：%s\n", "林小禾");</code><br>（P 写成了大写）</td><td><code>warning: implicit declaration of function 'Printf'; did you mean 'printf'?</code><br><code>undefined reference to `Printf'</code><br>（先警告“是不是想写 printf”，连接时再报错：找不到名为 Printf 的函数）</td></tr>
+  <tr><td>④ 括号、引号必须成对出现</td><td><code>printf("姓名：%s\n", "林小禾";</code><br>（少了右括号）</td><td><code>error: expected ')' before ';' token</code><br>（在分号之前缺少右括号）</td></tr>
+  <tr><td>⑤ 有且只有一个 main 函数</td><td><code>int mian(void)</code>（main 写成了 mian）<br>同一个文件中写了两个 main 函数</td><td><code>undefined reference to `WinMain'</code><br>（连接时出错：找不到程序的入口）<br><code>error: redefinition of 'main'</code><br>（编译时出错：main 重复定义）</td></tr>
 </table>
-<p class="note">注：表中提示取自小熊猫C++ 自带的 GCC 11.5 编译器。双引号<b>里面</b>的中文和中文标点（如“姓名：”）是要输出的内容，不受规则②限制。</p>
+<p class="note">注：表中提示取自本书环境（小熊猫C++ 3.4 自带的 MinGW-w64 GCC 11.5.0，默认编译选项），其他编译器的提示文字可能不同。双引号<b>里面</b>的中文和中文标点（如“姓名：”）是要输出的内容，不受规则②限制。</p>
 
 <p>书写规范没有强制要求，但能大大提高程序的可读性。请比较下面两段代码，它们的运行结果完全一样：</p>
 <div class="two">
@@ -437,8 +433,8 @@ int main(void)
 <h4><anchor id="p1-printf"/>3. 数据的输出——printf函数</h4>
 <p><code>printf</code> 是 C 语言中最常用的输出函数，名字来自 print format（按格式输出）。它的一般形式是：</p>
 <div class="fmt"><code>printf("格式控制字符串", 输出项1, 输出项2, …);</code></div>
-<p>格式控制字符串中的<b>普通字符</b>原样输出；以 <code>%</code> 开头的<b>格式说明符</b>是占位符，按顺序用后面的输出项替换；以 <code>\</code> 开头的<b>转义字符</b>表示特殊的控制作用，如 <code>\n</code> 换行。常用的格式说明符见表1-7。</p>
-<p class="tcap"><b>表1-7</b>printf 常用的格式说明符</p>
+<p>格式控制字符串中的<b>普通字符</b>原样输出；以 <code>%</code> 开头的<b>格式说明符</b>是占位符，按顺序用后面的输出项替换；以 <code>\</code> 开头的<b>转义字符</b>表示特殊的控制作用，如 <code>\n</code> 换行。常用的格式说明符见⟦表1-7⟧，其中 <code>%d</code> 是必会内容，<code>%f</code>、<code>%.2f</code>、<code>%c</code>、<code>%s</code> 先跟着示例使用，<code>%%</code> 作为速查。</p>
+<p class="tcap"><b>⟦表1-7⟧</b>printf 常用的格式说明符</p>
 <table>
   <tr><th style="width:15%">格式说明符</th><th style="width:25%">输出的数据</th><th style="width:36%">示例</th><th>输出结果</th></tr>
   <tr><td><code>%d</code></td><td>十进制整数</td><td><code>printf("%d", 18);</code></td><td>18</td></tr>
@@ -453,8 +449,8 @@ int main(void)
 <out src="types"/>
 <p>注意，字符要用<b>单引号</b>括起来，如 <code>'A'</code>；字符串要用<b>双引号</b>括起来，如 <code>"林小禾"</code>。这些数据类型的详细知识将在项目二中学习。</p>
 
-<p>常用的转义字符见表1-8，用法见下面的程序。</p>
-<p class="tcap"><b>表1-8</b>常用的转义字符</p>
+<p>常用的转义字符见⟦表1-8⟧，用法见下面的程序。其中 <code>\n</code> 是必会内容，其余三个先作速查。</p>
+<p class="tcap"><b>⟦表1-8⟧</b>常用的转义字符</p>
 <table class="center">
   <tr><th>转义字符</th><th>含义</th><th>转义字符</th><th>含义</th></tr>
   <tr><td><code>\n</code></td><td>换行，光标移到下一行开头</td><td><code>\"</code></td><td>输出一个双引号</td></tr>
@@ -477,6 +473,37 @@ int main(void)
     return 0
 }</snip></li>
 </ol></div>
+
+<h4>4. 拓展阅读：自己编写函数（选学）</h4>
+<p class="exh"><b>⟦例1-3⟧</b>　<span class="lv">选学</span>用子函数输出分隔线。档案卡片的上下都有分隔线，可以把“输出分隔线”写成一个单独的<b>函数</b>，需要时调用它。</p>
+<code-file src="line.c" title="⟦例1-3⟧　line.c" ln/>
+<conwin src="line"/>
+<figcaption><b>⟦图1-9⟧</b>⟦例1-3⟧ 的运行结果</figcaption>
+
+<p class="tcap"><b>⟦表1-5⟧</b>读程序：⟦例1-3⟧（选学）</p>
+<table class="read">
+  <tr><th style="width:9%" class="c">行号</th><th style="width:34%">代码</th><th>含义</th></tr>
+  <tr><td class="c">3</td><td><code>void show_line(void)</code></td><td>定义一个名为 show_line 的<b>子函数</b>（自己编写的函数）。第一个 <code>void</code> 表示函数不返回值，括号中的 <code>void</code> 表示不需要参数</td></tr>
+  <tr><td class="c">4～6</td><td><code>{ printf("====…\n"); }</code></td><td>子函数的函数体：输出一条分隔线</td></tr>
+  <tr><td class="c">8</td><td><code>int main(void)</code></td><td>主函数。注意：虽然子函数写在前面，程序仍然<b>从 main 开始执行</b></td></tr>
+  <tr><td class="c">10</td><td><code>show_line();</code></td><td><b>调用</b>子函数：转去执行第 4～6 行，输出分隔线，执行完再回到这里继续往下</td></tr>
+  <tr><td class="c">11</td><td><code>printf("      校园AI迎新系统\n");</code></td><td>输出系统名称，前面的空格用来让文字居中一些</td></tr>
+  <tr><td class="c">12</td><td><code>show_line();</code></td><td>再次调用子函数，又输出一条分隔线。同一个函数可以多次调用</td></tr>
+</table>
+
+<figure>
+<svg viewBox="0 0 520 112" width="100%" font-family="BSans">
+  <rect x="8" y="8" width="214" height="96" rx="3" fill="#F4F7FB" stroke="#9DB3D3" stroke-width="0.8"/>
+  <text x="18" y="24" font-size="9.5" font-weight="700" fill="#153A6B">main 函数（从这里开始）</text>
+  <g font-family="BMono, BSans" font-size="9" fill="#1F1F1F"><text x="22" y="44">① show_line();</text><text x="22" y="66">② printf("校园AI迎新系统");</text><text x="22" y="88">③ show_line();</text></g>
+  <rect x="330" y="30" width="182" height="52" rx="3" fill="#E8EEF7" stroke="#1D4F91" stroke-width="0.8"/>
+  <text x="340" y="47" font-size="9.5" font-weight="700" fill="#153A6B">show_line 函数</text>
+  <text x="340" y="68" font-family="BMono, BSans" font-size="9" fill="#1F1F1F">printf("=====…");</text>
+  <g stroke="#1D4F91" stroke-width="1" fill="none"><path d="M140 40 C230 30 270 40 328 48" marker-end="url(#arrD)"/><path d="M328 64 C270 70 230 62 160 64" marker-end="url(#arrD)" stroke-dasharray="3 2"/><path d="M128 85 C240 96 280 84 328 74" marker-end="url(#arrD)"/></g>
+  <text x="246" y="28" font-size="8.5" fill="#4D4D4D">调用</text><text x="240" y="78" font-size="8.5" fill="#4D4D4D">返回</text>
+</svg>
+<figcaption><b>⟦图1-10⟧</b>⟦例1-3⟧ 的执行顺序：主函数两次调用子函数（选学）</figcaption>
+</figure>
 
 <h3>任务实施</h3>
 <p>编写程序时，可以按照 C 程序的结构“从上到下”来写：<b>先写程序框架，再定义变量，最后写输入、处理和输出</b>。这是今后编写每一个程序都可以遵循的步骤。</p>
@@ -501,12 +528,16 @@ printf("年龄：%d 岁\n", age);              // 在 %d 处输出变量 age 的
 <div class="step"><span class="no"><anchor id="p1-profile"/>完整程序</span><span class="st">个人专属档案卡片</span></div>
 <code-file src="profile.c" title="profile.c　个人专属档案卡片" ln/>
 <conwin src="profile"/>
-<figcaption><b>图1-12</b>个人专属档案卡片的运行结果</figcaption>
+<figcaption><b>⟦图1-12⟧</b>个人专属档案卡片的运行结果</figcaption>
 <p class="note" style="margin-top:3pt">如何在小熊猫C++ 中输入、编译和运行这个程序，将在任务三中详细介绍。</p>
 
 <h3>技能训练</h3>
 <div class="ex">
-<p class="noind"><b>训练　新生报到凭条。</b>新生报到后，迎新系统会打印一张报到凭条（资料为虚构）：姓名林小禾，宿舍为 6 号楼 302 室 2 号床，校园卡余额 100 元（保留 2 位小数），报到时间 9 月 1 日 9:30。请把下面的程序补充完整，使其输出图1-13 所示的凭条。</p>
+<p class="noind"><b>训练 1　补充完整：新生报到凭条。</b>新生报到后，迎新系统会打印一张报到凭条（资料为虚构）：姓名林小禾，宿舍为 6 号楼 302 室 2 号床，校园卡余额 100 元（保留 2 位小数），报到时间 9 月 1 日 9:30。请把下面的程序补充完整，使其输出⟦图1-13⟧ 所示的凭条。</p>
+<figure class="fl">
+<out src="slip" title="预期运行结果"/>
+<figcaption><b>⟦图1-13⟧</b>报到凭条的预期运行结果</figcaption>
+</figure>
 <snip title="slip.c（待补充）" ln>/* 程序名：slip.c
    功能：输出新生报到凭条（资料为虚构） */
 #include &lt;stdio.h&gt;
@@ -525,13 +556,22 @@ int main(void)
     printf("--------------------------\n");
     ④________
 }</snip>
-<figure class="fl">
-<out src="slip" title="预期运行结果"/>
-<figcaption><b>图1-13</b>报到凭条的预期运行结果</figcaption>
-</figure>
 <p class="noind left">填写：①<span class="fill w2"></span>　②<span class="fill w2"></span>　③<span class="fill"></span>　④<span class="fill w2"></span></p>
 <p class="noind">完成后，把程序保存为 slip.c，在任务三中上机运行验证。</p>
+
+<p class="noind" style="margin-top:0.8em"><b>训练 2　改一项需求。</b>完成训练 1 后，不看答案，把凭条改为：宿舍是 7 号楼 415 室 3 号床，校园卡余额 86.5 元，余额只保留 1 位小数。先写出你预测的凭条内容，再在任务三中上机核对。</p>
+
+<p class="noind" style="margin-top:0.8em"><b>训练 3　独立完成：社团活动通知。</b>不看示例程序，只根据⟦图:club⟧ 的要求，独立编写 club.c，输出机器人社团的活动通知，其中名额 30 用 <code>%d</code> 输出。完成后，再换成另一项校园活动（资料自拟）。</p>
+<out src="club" title="预期运行结果"/>
+<figcaption><b>⟦图:club⟧</b>社团活动通知的预期运行结果</figcaption>
 </div>
+
+<div class="accept"><div class="bt"><svg><use href="#i-check"/></svg>课堂验收（任务二）<small>由老师或同伴当场检查</small></div>
+<ul>
+  <li>不看示例，把档案中的专业改成另一个专业名称，并说出改的是哪一行。</li>
+  <li>把年龄改为 19 之前，先说出运行结果会怎样变化，再运行核对。</li>
+  <li>同伴在你的程序中删去一个分号或写错一个字母，你能找出错误并说明原因。</li>
+</ul></div>
 
 <!-- ======================================================= 任务三 -->
 <h2 class="task"><tocmark level="2" text="任务三　开发环境搭建与程序执行流程"/><span class="tag">任务三</span>开发环境搭建与程序执行流程</h2>
@@ -545,8 +585,8 @@ int main(void)
 <h3>相关知识</h3>
 <h4>1. 集成开发环境的安装与配置</h4>
 <h5>1）集成开发环境</h5>
-<p>编写、运行一个 C 程序，需要编辑器（写代码）、编译器（把源程序翻译成可执行程序）、调试器（查找错误）等多种工具。把这些工具集成在一个软件里、用菜单和快捷键就能完成全部操作的软件，叫作<b>集成开发环境</b>（Integrated Development Environment，简称 IDE）。常用的 C 语言集成开发环境见表1-9。</p>
-<p class="tcap"><b>表1-9</b>常用的 C 语言集成开发环境</p>
+<p>编写、运行一个 C 程序，需要编辑器（写代码）、编译器（把源程序翻译成可执行程序）、调试器（查找错误）等多种工具。把这些工具集成在一个软件里、用菜单和快捷键就能完成全部操作的软件，叫作<b>集成开发环境</b>（Integrated Development Environment，简称 IDE）。常用的 C 语言集成开发环境见⟦表1-9⟧。</p>
+<p class="tcap"><b>⟦表1-9⟧</b>常用的 C 语言集成开发环境</p>
 <table>
   <tr><th style="width:20%">名称</th><th>主要特点</th><th style="width:20%">适合人群</th></tr>
   <tr><td>Dev-C++</td><td>小巧免费，操作简单，曾是许多学校和程序设计竞赛的常用环境</td><td>初学者</td></tr>
@@ -558,11 +598,13 @@ int main(void)
 <p>本书选用<b>小熊猫C++</b>（Red Panda C++），它是由国内开发者在 Dev-C++ 基础上发展而来的开源软件，全中文界面，下载一个安装包就能完成全部配置，非常适合初学者。本书使用的版本为 3.4（64 位，自带 MinGW-w64 GCC 11.5.0 编译器）。</p>
 
 <h5>2）安装与配置</h5>
-<p class="noind"><b>（1）下载安装包。</b>小熊猫C++ 的安装包可以从其开源项目的发布页面下载（地址：https://sourceforge.net/projects/redpanda-cpp/files/，进入 v3.4 文件夹）。64 位 Windows 系统请选择带编译器的安装版：</p>
+<div class="box"><div class="bt"><svg><use href="#i-tip"/></svg>机房已经安装好时</div>
+<p>学校机房的计算机一般已经按统一要求安装、配置好小熊猫C++。这时可以跳过下面的（1）（2）两步，从（3）认识主界面开始，在（4）中设置自己的工作文件夹，并检查编译器配置是否正确即可。</p></div>
+<p class="noind"><b>（1）下载安装包。</b>小熊猫C++ 的安装包可以从其开源项目的发布页面下载（地址：<a href="https://sourceforge.net/projects/redpanda-cpp/files/">https://sourceforge.net/projects/redpanda-cpp/files/</a>，进入 v3.4 文件夹）。64 位 Windows 系统请选择带编译器的安装版：</p>
 <div class="fmt"><code>RedPanda.C++.3.4.win64.MinGW64_11.5.0.Setup.exe</code></div>
 <p>文件名中的 win64 表示适用于 64 位 Windows，MinGW64_11.5.0 表示自带 GCC 11.5.0 编译器，Setup 表示安装版。也可以请 AI 帮忙：“小熊猫C++ 的官方下载地址是什么？安装包有哪几种，我该选哪一个？”但下载前一定要确认是官方地址。</p>
 
-<p class="noind"><b>（2）安装。</b>双击安装包，按图1-14 的顺序完成安装，一般保持默认选项即可。</p>
+<p class="noind"><b>（2）安装。</b>双击安装包，按⟦图1-14⟧ 的顺序完成安装，一般保持默认选项即可。</p>
 <div class="grid3 steps">
   <figure><img class="frame" src="../img/inst0.png" style="width:84%"><figcaption>① 选择安装语言“中文(简体)”，单击 OK</figcaption></figure>
   <figure><img class="frame" src="../img/inst1.png"><figcaption>② 阅读许可证协议，单击“我接受”</figcaption></figure>
@@ -573,31 +615,44 @@ int main(void)
   <figure><img class="frame" src="../img/inst6.png"><figcaption>⑦ 勾选“运行 小熊猫C++”，单击“完成”</figcaption></figure>
   <figure><img class="frame" src="../img/inst7.png"><figcaption>⑧ 首次运行：选择“浅色主题”，默认语言选 C，单击“确定”</figcaption></figure>
 </div>
-<div class="figcap"><b>图1-14</b>小熊猫C++ 的安装步骤</div>
+<div class="zoomrow">
+  <figure style="flex:3"><img class="frame" src="../img/inst3_z.png"><figcaption>④ 局部放大：安装类型保持“完整”，“MinGW-w64 X86_64 GCC 11.5.0 编译器”前面要打勾</figcaption></figure>
+  <figure style="flex:1"><img class="frame" src="../img/inst7_z.png"><figcaption>⑧ 局部放大：默认语言选 C</figcaption></figure>
+</div>
+<div class="figcap"><b>⟦图1-14⟧</b>小熊猫C++ 的安装步骤（下排是关键选项的局部放大）</div>
 
 <div class="box"><div class="bt"><svg><use href="#i-tip"/></svg>小智提示：绿色版</div>
 <p>小熊猫C++ 还提供不需要安装的“绿色版”（文件名中带 Portable，扩展名为 .7z），解压后双击其中的 RedPandaIDE.exe 即可使用，适合在机房或 U 盘中使用。两种版本的界面和用法完全相同。安装路径和保存程序的文件夹最好不要包含中文和空格。</p></div>
 
-<p class="noind"><b>（3）认识主界面。</b>小熊猫C++ 的主界面如图1-15 所示。</p>
+<p class="noind"><b>（3）认识主界面。</b>小熊猫C++ 的主界面如⟦图1-15⟧ 所示。</p>
 <figure>
 <div class="shot" style="width:100%"><img src="../img/ide_tour.png">
   <i class="pin" style="left:37.5%; top:4.6%">1</i><i class="pin" style="left:58.6%; top:7.7%">2</i><i class="pin" style="left:11.7%; top:47%">3</i>
   <i class="pin" style="left:66%; top:37%">4</i><i class="pin" style="left:74%; top:84%">5</i><i class="pin" style="left:58.6%; top:98.2%">6</i>
 </div>
 <div class="legend"><span><i>1</i>菜单栏</span><span><i>2</i>工具栏（右侧是编译器配置下拉框）</span><span><i>3</i>管理器（文件面板）</span><span><i>4</i>编辑区</span><span><i>5</i>信息面板（编译器、工具输出等）</span><span><i>6</i>状态栏</span></div>
-<figcaption><b>图1-15</b>小熊猫C++ 的主界面</figcaption>
+<figcaption><b>⟦图1-15⟧</b>小熊猫C++ 的主界面</figcaption>
 </figure>
 
 <p class="noind"><b>（4）基本配置。</b>安装完成后，建议做好以下三项配置：</p>
 <ol>
   <li><b>设置工作文件夹。</b>先在 D 盘新建文件夹 <code>D:\CStudy\project01</code>，用来保存项目一的程序；再选择“文件”→“选择工作文件夹”，选中这个文件夹。左侧的管理器中会列出文件夹中的文件，双击即可打开。</li>
-  <li><b>调整编辑器字号。</b>选择“工具”→“选项”，在左侧选择“编辑器”→“字体”，在“大小”中设置合适的字号（如 12～14），单击“确定”（见图1-16）。</li>
-  <li><b>检查编译器配置。</b>在“选项”对话框左侧选择“编译器”→“编译器配置集”，确认编译器配置方案为“MinGW-w64 GCC 11.5.0 64-bit Debug”，并勾选“将可执行文件中的字符串转码为 系统默认(gbk)”（见图1-17）。这一项保证程序输出的中文在运行窗口中正常显示，不出现乱码。</li>
+  <li><b>调整编辑器字号。</b>选择“工具”→“选项”，在左侧选择“编辑器”→“字体”，在“大小”中设置合适的字号（如 12～14），单击“确定”（见⟦图1-16⟧）。</li>
+  <li><b>检查编译器配置。</b>在“选项”对话框左侧选择“编译器”→“编译器配置集”，确认编译器配置方案为“MinGW-w64 GCC 11.5.0 64-bit Debug”，并勾选“将可执行文件中的字符串转码为 系统默认(gbk)”（见⟦图1-17⟧）。这是本书采用的配置方案，建议机房统一按此设置：源程序用 UTF-8 编码保存，程序输出的中文转为 GBK 显示。在这一配置下，书中程序输出的中文都能正常显示；换用其他环境出现乱码时，见⟦表:setupfaq⟧。</li>
 </ol>
 <div class="two">
-<figure><img class="frame" src="../img/ide_opt_font.png"><figcaption><b>图1-16</b>设置编辑器字体大小</figcaption></figure>
-<figure><img class="frame" src="../img/ide_opt_set.png"><figcaption><b>图1-17</b>检查编译器配置方案</figcaption></figure>
+<figure><img class="frame" src="../img/ide_opt_font_z.png"><figcaption><b>⟦图1-16⟧</b>设置编辑器字号（局部）</figcaption></figure>
+<figure><img class="frame" src="../img/ide_opt_set_z.png"><figcaption><b>⟦图1-17⟧</b>检查编译器配置（局部）</figcaption></figure>
 </div>
+
+<p class="tcap"><b>⟦表:setupfaq⟧</b>安装和配置中的常见问题</p>
+<table>
+  <tr><th style="width:30%">遇到的问题</th><th>解决办法</th></tr>
+  <tr><td>电脑上没有 D 盘</td><td>在其他非系统盘（如 E 盘）新建 CStudy 文件夹；只有 C 盘时，可以建在 <code>C:\CStudy</code>。文件夹的路径中不要有中文和空格</td></tr>
+  <tr><td>安装时提示需要管理员权限</td><td>机房的计算机请联系任课教师或机房管理员，不要自行改动系统设置；自己的计算机可以改用绿色版（见上面的小智提示）</td></tr>
+  <tr><td>运行窗口中的中文显示为乱码</td><td>检查编译器配置集中是否勾选了“将可执行文件中的字符串转码为 系统默认(gbk)”，改好后重新编译、运行</td></tr>
+  <tr><td>按 F9 后提示找不到编译器</td><td>安装时没有选中 GCC 编译器，或下载的是不带编译器的版本，重新安装文件名中带 MinGW64 的安装包</td></tr>
+</table>
 
 <div class="prompt"><div class="ph"><span>AI 助学 · 安装遇到问题怎么问</span><span>DeepSeek / 豆包</span></div><div class="pbd">
 <p><span class="r">身份</span>我是 C 语言初学者，<span class="r">背景</span>在 Windows 11 上安装了小熊猫C++ 3.4（自带 GCC 11.5），<span class="r">材料</span>编译时信息面板提示：<span class="slot">（粘贴提示的原文）</span>，<span class="r">要求</span>请告诉我可能的原因和检查步骤，一步一步说。</p>
@@ -605,7 +660,7 @@ int main(void)
 </div></div>
 
 <h4>2. C程序的执行流程</h4>
-<p>用 C 语言编写的源程序，要经过<b>编辑、编译、连接、运行</b>四个步骤才能得到运行结果（见图1-18）。任何一步出了问题，都要回到编辑步骤修改源程序，再重新编译、连接、运行。</p>
+<p>用 C 语言编写的源程序，要经过<b>编辑、编译、连接、运行</b>四个步骤才能得到运行结果（见⟦图1-18⟧）。任何一步出了问题，都要回到编辑步骤修改源程序，再重新编译、连接、运行。</p>
 <figure>
 <svg viewBox="0 0 520 150" width="100%" font-family="BSans">
   <g text-anchor="middle">
@@ -623,29 +678,29 @@ int main(void)
   <g font-size="8.4" fill="#4D4D4D"><text x="196" y="104">有语法错误</text><text x="334" y="116">连接出错</text><text x="472" y="128">结果不对</text></g>
   <text x="66" y="146" font-size="8.4" fill="#4D4D4D">返回编辑，修改源程序</text>
 </svg>
-<figcaption><b>图1-18</b>C 程序的执行流程</figcaption>
+<figcaption><b>⟦图1-18⟧</b>C 程序的执行流程</figcaption>
 </figure>
 
-<p class="noind"><b>（1）编辑。</b>编辑就是在编辑区输入、修改源程序，并保存为扩展名为 <code>.c</code> 的源文件。在小熊猫C++ 中选择“文件”→“新建”→“新建C/C++文件”（快捷键 <b>Ctrl+N</b>）新建文件（见图1-19），输入代码后按 <b>Ctrl+S</b> 保存，第一次保存时要选择保存位置并输入文件名，如 <code>profile.c</code>。</p>
-<figure><img class="frame" src="../img/ide_menu_new.png" style="width:66%"><figcaption><b>图1-19</b>新建 C 源文件</figcaption></figure>
+<p class="noind"><b>（1）编辑。</b>编辑就是在编辑区输入、修改源程序，并保存为扩展名为 <code>.c</code> 的源文件。在小熊猫C++ 中选择“文件”→“新建”→“新建C/C++文件”（快捷键 <b>Ctrl+N</b>）新建文件（见⟦图1-19⟧），输入代码后按 <b>Ctrl+S</b> 保存，第一次保存时要选择保存位置并输入文件名，如 <code>profile.c</code>。</p>
+<figure><img class="frame" src="../img/ide_menu_new.png" style="width:60%"><figcaption><b>⟦图1-19⟧</b>新建 C 源文件</figcaption></figure>
 
-<p class="noind"><b>（2）编译。</b>编译就是由编译器检查源程序有没有语法错误，并把它翻译成计算机能识别的机器指令，生成<b>目标程序</b>。如果源程序有语法错误，编译器会停止翻译，在信息面板的“编译器”标签页中列出错误所在的行号、列号和描述，编辑区中出错的行也会用红色标记（见图1-20）。双击信息面板中的错误，光标会自动跳到出错的位置。</p>
-<figure><img class="frame" src="../img/ide_err_semi.png" style="width:86%"><figcaption><b>图1-20</b>编译错误：第 5 行末尾漏写了分号</figcaption></figure>
-<p>图1-20 中的提示“expected ';' before 'printf'”的意思是：“在 printf 之前应该有一个分号”。注意，编译器报告的是第 5 行第 35 列，也就是第 5 行的末尾——漏写分号时，编译器往往到下一行才“发现”问题，所以要同时检查出错行和它的上一行。</p>
+<p class="noind"><b>（2）编译。</b>编译就是由编译器检查源程序有没有语法错误，并把它翻译成计算机能识别的机器指令，生成<b>目标程序</b>。如果源程序有语法错误，编译器会停止翻译，在信息面板的“编译器”标签页中列出错误所在的行号、列号和描述，编辑区中出错的行也会用红色标记（见⟦图1-20⟧）。双击信息面板中的错误，光标会自动跳到出错的位置。</p>
+<figure><img class="frame" src="../img/ide_err_semi.png" style="width:86%"><figcaption><b>⟦图1-20⟧</b>编译错误：第 5 行末尾漏写了分号</figcaption></figure>
+<p>⟦图1-20⟧ 中的提示“expected ';' before 'printf'”的意思是：“在 printf 之前应该有一个分号”。注意，编译器报告的是第 5 行第 35 列，也就是第 5 行的末尾——漏写分号时，编译器往往到下一行才“发现”问题，所以要同时检查出错行和它的上一行。</p>
 
-<p class="noind"><b>（3）连接。</b>连接（也叫链接）就是把目标程序和程序中用到的库函数（如 <code>printf</code>）组装在一起，生成可以直接运行的<b>可执行程序</b>（Windows 中扩展名为 <code>.exe</code>）。如果程序调用了一个不存在的函数，编译能通过，连接时却会出错。例如，把 <code>printf</code> 误写成 <code>Printf</code>，信息面板会给出图1-21 所示的提示。</p>
-<figure><img class="frame" src="../img/ide_err_case.png" style="width:90%"><figcaption><b>图1-21</b>连接错误：找不到名为 Printf 的函数</figcaption></figure>
+<p class="noind"><b>（3）连接。</b>连接（也叫链接）就是把目标程序和程序中用到的库函数（如 <code>printf</code>）组装在一起，生成可以直接运行的<b>可执行程序</b>（Windows 中扩展名为 <code>.exe</code>）。如果程序调用了一个不存在的函数，编译能通过，连接时却会出错。例如，把 <code>printf</code> 误写成 <code>Printf</code>，信息面板会给出⟦图1-21⟧ 所示的提示。</p>
+<figure><img class="frame" src="../img/ide_err_case.png" style="width:90%"><figcaption><b>⟦图1-21⟧</b>连接错误：找不到名为 Printf 的函数</figcaption></figure>
 <p>第一条是<b>警告</b>（[警告]）：函数 Printf 没有声明，你是不是想写 printf？第二、三条是连接器 ld 报告的<b>错误</b>：“undefined reference to `Printf'”，即找不到 Printf 的定义，因此无法生成可执行程序。可见，读懂提示信息，就能很快找到错误。</p>
 
-<p>在小熊猫C++ 中，选择“运行”→“编译”（快捷键 <b>F9</b>），会<b>一次完成编译和连接</b>，并在信息面板的“工具输出”标签页中显示编译日志（见图1-22）。日志中“错误数: 0”说明编译、连接都成功了，“输出文件名”就是生成的可执行程序。</p>
-<figure><img class="frame" src="../img/ide_log_profile.png"><figcaption><b>图1-22</b>编译成功的日志：生成了 profile.exe</figcaption></figure>
+<p>在小熊猫C++ 中，选择“运行”→“编译”（快捷键 <b>F9</b>），会<b>一次完成编译和连接</b>，并在信息面板的“工具输出”标签页中显示编译日志（见⟦图1-22⟧）。日志中“错误数: 0”说明编译、连接都成功了，“输出文件名”就是生成的可执行程序。</p>
+<figure><img class="frame" src="../img/ide_log_profile.png"><figcaption><b>⟦图1-22⟧</b>编译成功的日志：生成了 profile.exe</figcaption></figure>
 
-<p class="noind"><b>（4）运行。</b>运行就是执行生成的可执行程序，得到运行结果。选择“运行”→“运行”（快捷键 <b>F11</b>），小熊猫C++ 会打开一个运行窗口显示程序的输出（如图1-12 所示），按任意键可关闭运行窗口。如果源程序修改后还没有重新编译，按 F11 时小熊猫C++ 会<b>自动保存并重新编译</b>，然后再运行。“运行”菜单中的常用命令见图1-23。</p>
-<figure><img class="frame" src="../img/ide_menu_run.png" style="width:52%"><figcaption><b>图1-23</b>“运行”菜单：编译（F9）、运行（F11）</figcaption></figure>
+<p class="noind"><b>（4）运行。</b>运行就是执行生成的可执行程序，得到运行结果。选择“运行”→“运行”（快捷键 <b>F11</b>），小熊猫C++ 会打开一个运行窗口显示程序的输出（如⟦图1-12⟧ 所示），按任意键可关闭运行窗口。如果源程序修改后还没有重新编译，按 F11 时小熊猫C++ 会<b>自动保存并重新编译</b>，然后再运行。“运行”菜单中的常用命令见⟦图1-23⟧。</p>
+<figure><img class="frame" src="../img/ide_menu_run.png" style="width:52%"><figcaption><b>⟦图1-23⟧</b>“运行”菜单：编译（F9）、运行（F11）</figcaption></figure>
 <div class="box warn"><div class="bt"><svg><use href="#i-warn"/></svg>注意：编译通过不等于程序正确</div>
-<p>编译、连接成功，只说明程序没有语法错误。程序的运行结果是否符合要求，还要仔细核对：文字有没有错、格式是否整齐、数值是否正确。这类错误叫<b>逻辑错误</b>，编译器发现不了，只能靠我们自己检查。</p></div>
+<p>编译、连接成功，只说明程序中没有编译器能查出的错误。程序的运行结果是否符合要求，还要仔细核对：文字有没有错、格式是否整齐、数值是否正确。这类错误叫<b>逻辑错误</b>，编译器一般发现不了，要靠我们自己检查。编译时如果出现了[警告]，也要先看懂、改正，再运行（项目二中详细介绍）。</p></div>
 
-<p class="tcap"><b>表1-10</b>C 程序执行流程小结</p>
+<p class="tcap"><b>⟦表1-10⟧</b>C 程序执行流程小结</p>
 <table>
   <tr><th style="width:9%">步骤</th><th style="width:24%">做什么</th><th style="width:19%">得到的文件</th><th style="width:24%">小熊猫C++ 中的操作</th><th>可能出现的问题</th></tr>
   <tr><td>编辑</td><td>输入、修改、保存源程序</td><td>源程序 <code>.c</code></td><td>Ctrl+N 新建，Ctrl+S 保存</td><td>文件没保存、扩展名不是 .c</td></tr>
@@ -663,30 +718,30 @@ int main(void)
 </ol></div>
 
 <h3>任务实施</h3>
-<p>在小熊猫C++ 中，按“编辑→编译→连接→运行”的流程，完成个人专属档案程序。每完成一步，在表1-11 中做好记录。</p>
+<p>在小熊猫C++ 中，按“编辑→编译→连接→运行”的流程，完成个人专属档案程序。每完成一步，在⟦表1-11⟧ 中做好记录。</p>
 
 <div class="step"><span class="no">第一步</span><span class="st">编辑：新建并保存源程序</span></div>
 <ol class="paren">
   <li>启动小熊猫C++，确认工作文件夹是 <code>D:\CStudy\project01</code>。</li>
   <li>按 Ctrl+N 新建文件，输入任务二中的个人专属档案程序（profile.c），注意使用英文标点。</li>
-  <li>按 Ctrl+S 保存，文件名为 <code>profile.c</code>，保存到 <code>D:\CStudy\project01</code> 中。输入完成后的编辑区如图1-24 所示。</li>
+  <li>按 Ctrl+S 保存，文件名为 <code>profile.c</code>，保存到 <code>D:\CStudy\project01</code> 中。输入完成后的编辑区如⟦图1-24⟧ 所示。</li>
 </ol>
-<figure><img class="frame" src="../img/ide_edit_profile.png" style="width:92%"><figcaption><b>图1-24</b>在编辑区中输入完整的 profile.c</figcaption></figure>
+<figure><img class="frame" src="../img/ide_edit_profile.png" style="width:92%"><figcaption><b>⟦图1-24⟧</b>在编辑区中输入完整的 profile.c</figcaption></figure>
 
 <div class="step"><span class="no">第二步</span><span class="st">编译和连接：生成可执行程序</span></div>
 <ol class="paren">
   <li>按 F9 编译。查看信息面板“工具输出”中的编译日志，记录错误数、警告数和输出文件名。</li>
-  <li>如果有错误，切换到“编译器”标签页，双击错误信息跳到出错位置，对照表1-6 修改后再按 F9，直到“错误数: 0”。</li>
+  <li>如果有错误，切换到“编译器”标签页，双击错误信息跳到出错位置，对照⟦表1-6⟧ 修改后再按 F9，直到“错误数: 0”。</li>
 </ol>
 
 <div class="step"><span class="no">第三步</span><span class="st">运行：查看运行结果</span></div>
 <ol class="paren">
-  <li>按 F11 运行，在运行窗口中查看档案卡片（如图1-12 所示）。</li>
+  <li>按 F11 运行，在运行窗口中查看档案卡片（如⟦图1-12⟧ 所示）。</li>
   <li>逐行核对输出内容：文字、标点、空格、分隔线是否与要求一致。发现问题就回到编辑步骤修改。</li>
   <li>按任意键关闭运行窗口。</li>
 </ol>
 
-<p class="tcap"><b>表1-11</b>个人专属档案程序运行记录</p>
+<p class="tcap"><b>⟦表1-11⟧</b>个人专属档案程序运行记录</p>
 <table>
   <tr><th style="width:14%">步骤</th><th style="width:28%">操作</th><th>记录内容</th></tr>
   <tr><td>编辑</td><td>Ctrl+N 新建，Ctrl+S 保存</td><td>文件保存位置：</td></tr>
@@ -696,12 +751,12 @@ int main(void)
 </table>
 
 <div class="step"><span class="no">完整程序</span><span class="st">在小熊猫C++ 中运行的个人专属档案程序</span></div>
-<p>完整程序见任务二的 profile.c（<pref to="p1-profile"/>），编辑区中的程序见图1-24，运行结果见图1-12。</p>
+<p>完整程序见任务二的 profile.c（<pref to="p1-profile"/>），编辑区中的程序见⟦图1-24⟧，运行结果见⟦图1-12⟧。</p>
 
 <h3>技能训练</h3>
 <div class="ex">
-<p class="noind"><b>训练　上机运行报到凭条程序。</b>把任务二技能训练中补充完整的 slip.c 输入小熊猫C++，编译并运行，将过程记录在表1-12 中。</p>
-<p class="tcap"><b>表1-12</b>报到凭条程序运行记录</p>
+<p class="noind"><b>训练　上机运行报到凭条程序。</b>把任务二技能训练中补充完整的 slip.c 输入小熊猫C++，编译并运行，将过程记录在⟦表1-12⟧ 中。</p>
+<p class="tcap"><b>⟦表1-12⟧</b>报到凭条程序运行记录</p>
 <table>
   <tr><th style="width:26%">记录项目</th><th>记录内容</th></tr>
   <tr><td>文件保存位置和文件名</td><td class="blank"></td></tr>
@@ -709,20 +764,27 @@ int main(void)
   <tr><td>遇到的错误（抄写提示原文）</td><td class="blank2"></td></tr>
   <tr><td>错误原因及修改方法</td><td class="blank2"></td></tr>
   <tr><td>运行结果（抄写或截图粘贴）</td><td style="height:36mm"></td></tr>
-  <tr><td>运行结果与图1-13 是否一致</td><td class="blank"></td></tr>
+  <tr><td>运行结果与⟦图1-13⟧ 是否一致</td><td class="blank"></td></tr>
 </table>
-<p class="noind"><b>拓展：</b>故意制造一个错误（如删掉一个分号、把 printf 写成 Printf），编译后观察并记录提示信息，再把它改正。</p>
+<p class="noind"><b>拓展：</b>故意制造一个错误（如删掉一个分号、把 printf 写成 Printf），编译后观察并记录提示信息，再把它改正。把任务二技能训练中的训练 2、训练 3 也上机运行，核对预测的结果。</p>
 </div>
+
+<div class="accept"><div class="bt"><svg><use href="#i-check"/></svg>课堂验收（任务三）<small>由老师或同伴当场检查</small></div>
+<ul>
+  <li>从自己保存的 .c 文件重新编译、运行，不用截图或以前生成的 .exe 代替。</li>
+  <li>删去 profile.c 中一条 printf 语句末尾的分号，读出编译提示中的行号，说明提示为什么出现在下一行之前。</li>
+  <li>改正后重新编译运行，在⟦表1-11⟧ 中记下首次提示、修改方法和复测结果。</li>
+</ul></div>
 
 <!-- ======================================================= 项目小结 -->
 <h2 class="sec"><tocmark level="2" text="项目小结"/>项目小结</h2>
-<p>本项目从校园 AI 迎新系统的档案卡片出发，认识了 C 语言程序设计，编写并运行了第一个 C 程序。主要内容归纳如表1-13 所示。</p>
-<p class="tcap"><b>表1-13</b>项目一知识要点</p>
+<p>本项目从校园 AI 迎新系统的档案卡片出发，认识了 C 语言程序设计，编写并运行了第一个 C 程序。主要内容归纳如⟦表1-13⟧ 所示。</p>
+<p class="tcap"><b>⟦表1-13⟧</b>项目一知识要点</p>
 <table>
   <tr><th style="width:18%">知识点</th><th>要点</th></tr>
   <tr><td>程序与语言</td><td>程序是让计算机完成任务的指令集合；计算机语言经历了机器语言、汇编语言、高级语言三个阶段；C 语言贴近硬件、高效，广泛用于控制、光伏、机器人、无人机、装备制造等领域</td></tr>
   <tr><td>程序结构</td><td>预处理指令 + 主函数；主函数 = 函数头 + 函数体（声明部分 + 执行部分）；程序从 main 开始执行；注释写给人看，编译器忽略</td></tr>
-  <tr><td>规则与规范</td><td>语句以英文分号结束；代码中用英文标点；区分大小写；括号、引号成对；只有一个 main。一行一句、缩进 4 格、花括号对齐、适当注释</td></tr>
+  <tr><td>规则与规范</td><td>变量定义、printf 语句、return 语句以英文分号结束；代码中用英文标点；区分大小写；括号、引号成对；只有一个 main。一行一句、缩进 4 格、花括号对齐、适当注释</td></tr>
   <tr><td>printf 输出</td><td><code>%d</code> 整数、<code>%f</code>/<code>%.2f</code> 小数、<code>%c</code> 字符、<code>%s</code> 字符串、<code>%%</code> 百分号；<code>\n</code> 换行、<code>\t</code> 制表、<code>\"</code> 双引号、<code>\\</code> 反斜杠</td></tr>
   <tr><td>执行流程</td><td>编辑（.c）→ 编译（.o）→ 连接（.exe）→ 运行；小熊猫C++ 中 F9 编译、F11 运行；编译通过不等于结果正确</td></tr>
 </table>
@@ -733,6 +795,16 @@ int main(void)
   <li>能用 printf 输出文字、整数和保留指定位数的小数</li>
   <li>能在小熊猫C++ 中独立完成编辑、编译、运行，并能根据提示改正漏分号等简单错误</li>
 </ul>
+<p class="tcap"><b>⟦表:eval1⟧</b>项目一评价表</p>
+<table>
+  <tr><th style="width:27%">评价项</th><th style="width:9%" class="c">分值</th><th>验收证据</th></tr>
+  <tr><td>成功编译并运行</td><td class="c">25</td><td>从提交的 .c 文件当场重新编译、运行，不以截图代替</td></tr>
+  <tr><td>档案内容、顺序和换行正确</td><td class="c">25</td><td>姓名、性别、年龄、学号、专业五项，每项正确得 5 分</td></tr>
+  <tr><td>独立修改与解释</td><td class="c">20</td><td>当场改一项内容得 10 分，说清对应的语句得 10 分</td></tr>
+  <tr><td>纠错记录与复测</td><td class="c">20</td><td>首次提示原文 5 分，修改理由 5 分，复测结果 10 分</td></tr>
+  <tr><td>隐私与规范</td><td class="c">10</td><td>使用虚构资料 5 分，命名、缩进和注释清楚 5 分</td></tr>
+</table>
+<p class="note">60 分为基础达标参考，同时必须能从源程序重新编译运行，并能独立修改一项。选学内容（如自己编写函数）不作为达标门槛。</p>
 
 <!-- ======================================================= AI 升华 -->
 <h2 class="sec"><tocmark level="2" text="AI升华　用四要素提问法补全档案"/>AI升华　用四要素提问法补全档案</h2>
@@ -740,7 +812,7 @@ int main(void)
 
 <h4>1. 四要素提问法</h4>
 <p>向 AI 提问时，说清楚下面四个要素，AI 的回答会更准确、更适合自己：</p>
-<p class="tcap"><b>表1-14</b>四要素提问法</p>
+<p class="tcap"><b>⟦表1-14⟧</b>四要素提问法</p>
 <table>
   <tr><th style="width:12%">要素</th><th style="width:36%">说明</th><th>示例</th></tr>
   <tr><td>身份</td><td>我是谁、什么水平</td><td>我是高职一年级学生，刚学完 printf 输出</td></tr>
@@ -767,11 +839,11 @@ int main(void)
 </div></div>
 
 <h4>3. 检验AI的回答</h4>
-<p>AI 的建议看起来没有问题，但一定要<b>运行验证</b>。按 AI 的写法，身高一行的运行结果是：</p>
+<p>AI 的建议看起来没有问题，但一定要<b>编译、运行来验证</b>。按 AI 的写法，身高一行的运行结果是：</p>
 <code-file src="height_f.c" title="按 AI 的建议验证身高的输出"/>
 <out src="height_f"/>
 <p>输出的是“1.680000 米”，而档案卡片要求的是“1.68 米”。原因是 <code>%f</code> 默认输出 6 位小数，应改为 <code>%.2f</code>。这说明：<b>AI 的回答要用运行结果来检验，发现问题后再向 AI 追问或自己修改。</b>可以继续追问：“身高输出成了 1.680000，我希望显示 1.68，应该怎么改？”</p>
-<p class="tcap"><b>表1-15</b>AI 建议检验表</p>
+<p class="tcap"><b>⟦表1-15⟧</b>AI 建议检验表</p>
 <table>
   <tr><th style="width:30%">AI 的建议</th><th style="width:30%">检验方法</th><th style="width:22%">检验结果</th><th>是否采纳</th></tr>
   <tr><td>增加 <code>double height = 1.68;</code></td><td>编译，看是否报错</td><td>编译通过</td><td>采纳</td></tr>
@@ -782,9 +854,17 @@ int main(void)
 <h4>4. 完整的七项档案卡片</h4>
 <code-file src="profile7.c" title="profile7.c　七项信息的个人专属档案卡片" ln/>
 <conwin src="profile7" notrailer/>
-<figcaption><b>图1-25</b>七项信息的个人专属档案卡片</figcaption>
+<figcaption><b>⟦图1-25⟧</b>七项信息的个人专属档案卡片</figcaption>
 
 <div class="box"><div class="bt"><svg><use href="#i-ai"/></svg>AI 使用小结</div>
 <p>① 提问前先想清楚：我是谁、在做什么、有什么材料、要什么结果；② 不把真实的个人信息发给 AI；③ AI 给出的代码先读懂再使用，用编译和运行结果检验；④ 发现问题时，把运行结果作为“证据”告诉 AI，继续追问。</p></div>
+
+<h4>5. 离开 AI 再做</h4>
+<p>借助 AI 学会的写法，要能自己独立使用。请关闭 AI 对话窗口，也不看 profile7.c，只参照⟦图1-25⟧ 的格式独立完成：</p>
+<ol class="paren">
+  <li>新建 profile8.c，为另一位同学输出档案卡片（资料为虚构）：姓名陈一鸣，学号 2026150307，性别男，专业物联网应用技术，年龄 19 岁，身高 1.7 米，籍贯江苏苏州，爱好篮球。“爱好”一行放在“籍贯”的后面，身高要显示为“1.70 米”。</li>
+  <li>运行之前，先写出预测的输出；运行之后逐字核对，不一致时说明原因。</li>
+  <li>向同伴说明：年龄、身高、爱好分别用了哪个格式说明符，为什么这样选。</li>
+</ol>
 
 </section>

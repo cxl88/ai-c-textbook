@@ -1,0 +1,15 @@
+bad_204.c: In function 'main':
+bad_204.c:10:17: warning: initialization of 'char' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+   10 |     char type = "B";                    // 实训室类型
+      |                 ^~~
+bad_204.c:15:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
+   15 |     printf("室内温度：%d ℃\n", temp);
+      |            ^~~~~~~~~~~~~~~~~~  ~~~~
+      |                                |
+      |                                double
+bad_204.c:16:41: error: expected ';' before 'return'
+   16 |     printf("座位使用率：%.1f%%\n", rate)
+      |                                         ^
+      |                                         ;
+   17 |     return 0;
+      |     ~~~~~~                               

@@ -6,7 +6,7 @@ int main(void)
 {
     int people = 35;                    // 在室人数
     const int seats = 48;               // 总座位数
-    int temp = 25.6;                    // 室内温度（℃），保留 1 位小数
+    int temp = 25.6;                    // 温度（℃），1 位小数
     char code = 'n';                    // 故障编码
     double rate = people / seats * 100.0;   // 座位使用率（%）
 

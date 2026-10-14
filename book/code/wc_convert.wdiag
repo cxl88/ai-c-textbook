@@ -1,0 +1,4 @@
+wc_convert.c: In function 'main':
+wc_convert.c:5:13: warning: conversion from 'double' to 'int' changes value from '2.4899999999999999e+1' to '24' [-Wfloat-conversion]
+    5 |     int a = 24.9;                       // 小数存入 int：小数部分被直接舍去
+      |             ^~~~

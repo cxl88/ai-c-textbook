@@ -1,5 +1,4 @@
-let chromium;
-try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node22/lib/node_modules/playwright')); }
+const { chromium } = require('/opt/node22/lib/node_modules/playwright');
 (async () => {
   const [, , src, dst] = process.argv;
   const browser = await chromium.launch();

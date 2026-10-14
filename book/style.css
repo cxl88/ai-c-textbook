@@ -109,9 +109,9 @@ p { margin: 0 0 0.25em; text-indent: 2em; orphans: 2; widows: 2; }
 .noind, .box p, .talk p, td p, li p, figcaption, .prompt p, .msg p, .goals p { text-indent: 0; }
 b, strong { font-family: "BSans"; font-weight: 700; }
 em { font-style: normal; font-family: "BSans"; color: var(--c-dk); }
-code { font-family: "BMonoH", "BSans"; font-size: 0.95em; color: var(--c-dk); background: var(--c-bg); padding: 0 2pt; border-radius: 1.5pt; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+code { font-family: "BMonoH", "BSans"; font-size: 1em; color: var(--c-dk); background: var(--c-bg); padding: 0 2pt; border-radius: 1.5pt; white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 a { color: inherit; text-decoration: none; }
-.pref { font-family: "BSans"; color: var(--c-dk); }
+.pref { font-family: "BSans"; color: var(--c-dk); white-space: nowrap; }
 .pref::before { content: "第 "; }
 .pref::after { content: " 页"; }
 sup { line-height: 0; }
@@ -153,6 +153,7 @@ table { border-collapse: collapse; width: 100%; margin: 0.4em 0 0.9em; font-size
 th { font-family: "BSans"; font-weight: 700; background: var(--c-bg); color: var(--c-dk); }
 th, td { border: 0.5pt solid #AFBBCC; padding: 3pt 6pt; text-align: left; vertical-align: top; }
 td code { white-space: normal; }
+td code, th code { font-size: 1.1em; }
 table.center td, table.center th { text-align: center; vertical-align: middle; }
 td.c, th.c { text-align: center; }
 .tcap { font-family: "BSans"; font-size: 9pt; color: var(--ink2); text-align: center; margin: 0.6em 0 0.2em; text-indent: 0; break-after: avoid; }
@@ -165,17 +166,18 @@ td.blank2 { height: 15mm; }
 
 /* ---------------------------------------------------------------- 代码 */
 .code {
-  font-family: "BMonoH", "BSans"; font-size: 9pt; line-height: 1.55; color: #1A1A1A;
+  /* 10.8pt：英文等宽字按 83.34% 缩放后实际为 9pt（小五号） */
+  font-family: "BMonoH", "BSans"; font-size: 10.8pt; line-height: 1.45; color: #1A1A1A;
   background: var(--code-bg); border: 0.5pt solid #D3DAE5; border-left: 2.4pt solid var(--c);
-  padding: 6pt 9pt; margin: 0.45em 0 0.8em; white-space: pre-wrap; break-inside: avoid; text-align: left;
+  padding: 6pt 7pt; margin: 0.35em 0 0.75em; white-space: pre-wrap; break-inside: avoid; text-align: left;
 }
 .code .fn {
   display: block; font-family: "BSans"; font-size: 8pt; font-weight: 700; color: var(--c-dk); background: var(--c-bg);
-  margin: -6pt -9pt 5pt; padding: 1.5pt 9pt; border-bottom: 0.5pt solid #D3DAE5;
+  margin: -6pt -7pt 5pt; padding: 1.5pt 7pt; border-bottom: 0.5pt solid #D3DAE5;
 }
 .code.bad { border-left-color: #7A7A7A; background: #F6F6F6; }
 .code.bad .fn { background: #E9E9E9; color: #333; }
-.code .ln { display: inline-block; width: 1.7em; color: #98A3B3; text-align: right; margin-right: 1.1em; }
+.code .ln { display: inline-block; width: 1.1em; color: #98A3B3; text-align: right; margin-right: 1em; }
 .code .mkl { text-decoration: underline wavy var(--c); text-decoration-thickness: 0.6pt; text-underline-offset: 2.5pt; }
 .hl-k { color: var(--c); font-weight: 700; }
 .hl-p { color: var(--c); }
@@ -186,7 +188,7 @@ td.blank2 { height: 15mm; }
 
 /* 普通运行结果、编译器提示 */
 .console {
-  font-family: "BMonoH", "BSans"; font-size: 9pt; line-height: 1.5; color: #1A1A1A; background: #fff;
+  font-family: "BMonoH", "BSans"; font-size: 10pt; line-height: 1.5; color: #1A1A1A; background: #fff;
   border: 0.6pt solid var(--rule); padding: 5pt 9pt 6pt; margin: 0.45em 0 0.8em; white-space: pre-wrap; break-inside: avoid; text-align: left;
 }
 .console .bar {
@@ -194,17 +196,17 @@ td.blank2 { height: 15mm; }
   border-bottom: 0.5pt dashed var(--rule2);
 }
 .console .kin { font-weight: 700; text-decoration: underline; text-underline-offset: 2pt; }
-.console.diag { background: #F6F6F6; font-size: 8.4pt; }
+.console.diag { background: #F6F6F6; font-size: 9.6pt; }
 
 /* 运行窗口（Windows 控制台） */
-.conwin { width: 84%; margin: 0.5em auto 0.4em; border: 0.6pt solid #7F7F7F; break-inside: avoid; text-align: left; }
+.conwin { width: 96%; margin: 0.5em auto 0.4em; border: 0.6pt solid #7F7F7F; break-inside: avoid; text-align: left; }
 .conwin.full { width: 100%; }
 .cw-bar { display: flex; align-items: center; height: 15pt; padding: 0 0 0 5pt; background: #fff; border-bottom: 0.4pt solid #C8C8C8; font-family: "BSans"; font-size: 7.5pt; color: #222; }
 .cw-ico { width: 9pt; height: 9pt; margin-right: 5pt; flex: none; }
 .cw-t { flex: 1; white-space: nowrap; overflow: hidden; }
 .cw-btn { width: 54pt; height: 9pt; flex: none; }
 .cw-body {
-  margin: 0; background: #0C0C0C; color: #CCCCCC; font-family: "BMonoH", "BSans"; font-size: 8.6pt; line-height: 1.42;
+  margin: 0; background: #0C0C0C; color: #CCCCCC; font-family: "BMonoH", "BSans"; font-size: 10pt; line-height: 1.38;
   padding: 5pt 7pt 7pt; white-space: pre; text-align: left; overflow: hidden;
 }
 .cw-body .kin { color: #fff; text-decoration: underline; text-underline-offset: 1.6pt; }
@@ -308,6 +310,7 @@ figcaption { font-family: "BSans"; font-size: 9pt; color: var(--ink2); margin-to
 
 /* 两栏 */
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10pt; align-items: start; }
+.two .code { font-size: 10pt; }
 .two > * { margin-top: 0 !important; }
 .small { font-size: 9pt; }
 .center { text-align: center; text-indent: 0; }
@@ -360,6 +363,11 @@ h2.task { margin-top: 1.5em; }
 .steps { margin: 0.5em 0 0; }
 .steps > figure { break-inside: avoid; }
 .steps figcaption { text-align: left; font-size: 8.2pt; line-height: 1.45; }
+/* 关键选项的局部放大（第三版） */
+.zoomrow { display: flex; gap: 9pt; align-items: flex-start; margin: 8pt 0 0; padding-top: 7pt; border-top: 0.5pt dashed var(--rule2); break-inside: avoid; }
+.zoomrow figure { margin: 0; min-width: 0; flex-basis: 0; }
+.zoomrow img { width: 100%; }
+.zoomrow figcaption { text-align: left; font-size: 8.2pt; line-height: 1.45; }
 .left { text-align: left; }
 figure.fl { text-align: left; }
 figure.fl figcaption { text-align: center; }
@@ -404,9 +412,9 @@ figure .ui svg { max-width: none; }
 .apps b { display: block; font-size: 9.6pt; color: var(--c-dk); margin-bottom: 1.5pt; }
 
 /* 代码旁注（左：代码；右：两列括号说明） */
-.anno { display: grid; grid-template-columns: 1fr 32mm 15mm; text-align: left; font-family: "BMonoH", "BSans"; font-size: 9pt; line-height: 1.55; }
-.anno > .fn, .anno > .cl, .anno > .cpad { grid-column: 1; background: var(--code-bg); border-left: 2.4pt solid var(--c); border-right: 0.5pt solid #D3DAE5; padding: 0 9pt; }
-.anno > .fn { font-family: "BSans"; font-size: 8pt; font-weight: 700; color: var(--c-dk); background: var(--c-bg); border-top: 0.5pt solid #D3DAE5; border-bottom: 0.5pt solid #D3DAE5; padding: 1.5pt 9pt; }
+.anno { display: grid; grid-template-columns: 1fr 30mm 13mm; text-align: left; font-family: "BMonoH", "BSans"; font-size: 10pt; line-height: 1.5; }
+.anno > .fn, .anno > .cl, .anno > .cpad { grid-column: 1; background: var(--code-bg); border-left: 2.4pt solid var(--c); border-right: 0.5pt solid #D3DAE5; padding: 0 7pt; }
+.anno > .fn { font-family: "BSans"; font-size: 8pt; font-weight: 700; color: var(--c-dk); background: var(--c-bg); border-top: 0.5pt solid #D3DAE5; border-bottom: 0.5pt solid #D3DAE5; padding: 1.5pt 7pt; }
 .anno > .cl { white-space: pre; color: #1A1A1A; }
 .anno > .cpad { height: 5pt; }
 .anno > .cpad.end { border-bottom: 0.5pt solid #D3DAE5; }
@@ -416,7 +424,7 @@ figure .ui svg { max-width: none; }
 
 /* 一般形式 */
 .fmt { break-before: avoid;  margin: 0.35em 0 0.7em; padding: 4pt 10pt; text-align: center; background: var(--c-bg2); border-top: 0.6pt solid var(--c-lt); border-bottom: 0.6pt solid var(--c-lt); text-indent: 0; }
-.fmt code { background: none; padding: 0; font-size: 9.6pt; color: var(--c-dk); }
+.fmt code { background: none; padding: 0; font-size: 10.5pt; color: var(--c-dk); }
 
 /* 读程序表 */
 table.read td:nth-child(2) code { background: none; padding: 0; }
@@ -481,10 +489,49 @@ table.ascii tr > :last-child { border-right: 0.5pt solid #AFBBCC; }
 table.long { break-inside: auto; }
 table.long tr { break-inside: avoid; }
 table.long thead { display: table-header-group; }
-.code.long { break-inside: auto; orphans: 3; widows: 3; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.code.long { break-inside: auto; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.code .ck { break-inside: avoid; }
 .code .fn { break-after: avoid; }
 .box.long { break-inside: auto; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 .box.long .bt { break-after: avoid; }
 .box.long li { break-inside: avoid; }
 /* 跨页表格：首页至少保留表头和 2 行 */
 table.long tbody tr:first-child { break-after: avoid; }
+table.long tbody tr:last-child { break-before: avoid; }
+
+/* ---------------------------------------------------------------- 组件（v3 补充） */
+/* 学习层级标签：必会 / 跟着用 / 选学（默认样式即“选学”） */
+.lv { display: inline-block; font-family: "BSans"; font-weight: 700; font-size: 7.6pt; line-height: 1.5; padding: 0 3.5pt; border-radius: 1.5pt;
+  vertical-align: 1.2pt; margin-right: 5pt; text-indent: 0; letter-spacing: 0.4pt; white-space: nowrap;
+  background: #fff; color: var(--ink2); border: 0.6pt solid var(--ink3); }
+.lv.must { background: var(--c); color: #fff; border-color: var(--c); }
+.lv.use { background: var(--c-bg); color: var(--c-dk); border-color: var(--c-lt); }
+.box .bt .lv { margin-right: 0; }
+.lvtab { width: 100%; margin: 0.25em 0 0.15em; font-size: 9pt; }
+.lvtab td { border: none; border-bottom: 0.5pt dashed var(--c-lt); padding: 2.5pt 4pt; vertical-align: top; text-align: left; }
+.lvtab tr:last-child td { border-bottom: none; }
+.lvtab td:first-child { width: 13%; white-space: nowrap; }
+
+/* 5 分钟体验 */
+.try { border: 0.8pt solid var(--c-dk); margin: 0.8em 0 0.9em; break-inside: avoid; }
+.try .th { background: var(--c-dk); color: #fff; font-family: "BSans"; font-weight: 700; font-size: 9.4pt; padding: 2.5pt 10pt;
+  display: flex; justify-content: space-between; align-items: center; }
+.try .th span:last-child { font-weight: 400; font-size: 8pt; opacity: 0.9; }
+.try .tbd { padding: 5pt 10pt 4pt; font-size: 9.6pt; line-height: 1.68; background: #fff; }
+.try .tbd p { margin-bottom: 0.2em; }
+.try ol { margin: 0.1em 0 0.3em; padding-left: 1.7em; }
+.try li { text-align: left; }
+.try .conwin { width: 100%; }
+
+/* 课堂验收 */
+.accept { border: 0.6pt solid var(--c-lt); border-top: 2.4pt solid var(--c); background: #fff; padding: 4pt 10pt 4pt; margin: 0.9em 0 0.9em;
+  break-inside: avoid; font-size: 9.4pt; line-height: 1.65; }
+.accept .bt { font-family: "BSans"; font-weight: 700; font-size: 9.8pt; color: var(--c); display: flex; align-items: center; gap: 5pt; margin-bottom: 1pt; }
+.accept .bt svg { width: 12.5pt; height: 12.5pt; flex: none; }
+.accept .bt small { font-weight: 400; font-size: 8pt; color: var(--ink3); margin-left: auto; }
+.accept ul { list-style: none; margin: 0.1em 0 0.15em; padding-left: 0.2em; }
+.accept li { text-align: left; margin: 0.12em 0; padding-left: 1.2em; text-indent: -1.2em; }
+.accept li::before { content: "□ "; color: var(--c); font-family: "BSans"; }
+
+/* 资源入口中的待填地址 */
+.todo { color: var(--c-dk); background: var(--c-bg); border-bottom: 0.6pt dashed var(--c); padding: 0 3pt; font-family: "BSans"; }

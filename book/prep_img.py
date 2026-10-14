@@ -16,7 +16,12 @@ CROPS = {
     "ide_menu_new":    ("F_filenew.png", (0, 40, 1140, 640)),
     "ide_edit_profile":("F_edit_profile.png", (600, 150, 2300, 1180)),
     "ide_log_profile": ("F_profile_compiled.png", (0, 925, 2540, 1470)),
-    "ide_badlab":      ("H_badlab.png", (0, 150, 2290, 1210)),
+    "ide_badlab":      ("v3_badlab_raw2.png", (0, 145, 1900, 1232)),   # 第三版：收起管理器面板后重拍，截图文字放大约 20%
+    # 第三版：关键选项的局部放大图（截图文字放大约 50%）
+    "ide_opt_font_z":  ("F_opt_font.png", (1025, 390, 1912, 920)),
+    "ide_opt_set_z":   ("F_opt_compilerset_dd.png", (1025, 390, 1912, 780)),
+    "inst3_z":         ("inst3.png", (20, 370, 1340, 720)),
+    "inst7_z":         ("inst7_theme.png", (0, 955, 430, 1065)),
     "inst0":           ("inst0_lang.png", None),
     "inst1":           ("inst1.png", None),
     "inst2":           ("inst2.png", None),

@@ -97,8 +97,30 @@ def code_block(src, title=None, ln=False, bad=False, mark=None):
                       + (f'<span class="mkl">{r}</span>' if i + 1 in marks else r)
                       for i, r in enumerate(rows))
     fn = f'<span class="fn">{html.escape(title)}</span>' if title else ""
-    long = " long" if src.count("\n") + 1 >= LONG_CODE else ""     # 长程序允许跨页
-    return f'<pre class="code{" bad" if bad else ""}{" withln" if ln else ""}{long}">{fn}{h}</pre>'
+    cls = f'code{" bad" if bad else ""}{" withln" if ln else ""}'
+    lines = src.split("\n")
+    exercise = title and any(k in title for k in ("待补充", "待诊断"))
+    if len(lines) >= LONG_CODE and not exercise:
+        # 长程序允许跨页，但只在空行处分页（各段整段排）：按空行分段，过短的段并入相邻段
+        rows = hl_lines(src)
+        rows = [(f'<span class="ln">{i + 1}</span>' if ln else "") + (f'<span class="mkl">{r}</span>' if i + 1 in marks else r)
+                for i, r in enumerate(rows)]
+        chunks, cur = [], []
+        for i, r in enumerate(rows):
+            cur.append(r)
+            if not lines[i].strip():
+                chunks.append(cur); cur = []
+        if cur:
+            chunks.append(cur)
+        merged = []
+        for c in chunks:
+            if merged and (len(c) < MIN_CHUNK or len(merged[-1]) < MIN_CHUNK):
+                merged[-1] += c
+            else:
+                merged.append(c)
+        body = "".join(f'<div class="ck">{chr(10).join(c)}</div>' for c in merged)
+        return f'<div class="{cls} long">{fn}{body}</div>'
+    return f'<pre class="{cls}">{fn}{h}</pre>'
 
 
 def hl_lines(src):
@@ -164,10 +186,14 @@ def stats(seed):
     return t, cpu, mem
 
 
-def conwin(src, folder="project01", ins="", ret="0", trailer=True, text=None, title=None):
-    """小熊猫C++ 运行窗口（Windows 控制台）：内容取自 Windows 版 GCC 的实际运行输出 *.wout。"""
+def conwin(src, folder="project01", ins="", ret=None, trailer=True, text=None, title=None, run=""):
+    """小熊猫C++ 运行窗口（Windows 控制台）：内容取自 Windows 版 GCC 的实际运行输出 *.wout（第 2 次运行为 *.wout2 ……），
+    返回值取自 *.wret。"""
     if text is None:
-        text = (CODE / f"{src}.wout").read_text(encoding="utf-8").replace("\r", "").replace("\x00", " ")   # 控制台把 NUL 显示为空格
+        text = (CODE / f"{src}.wout{run}").read_text(encoding="utf-8").replace("\r", "").replace("\x00", " ")   # 控制台把 NUL 显示为空格
+    if ret is None:
+        rf = CODE / f"{src}.wret{run}"
+        ret = rf.read_text(encoding="utf-8").strip() if rf.exists() else "0"
     marks = []                      # 键盘输入回显的插入位置
     if ins:
         pos = 0
@@ -220,15 +246,17 @@ def attrs(s):
     return a
 
 
-LONG_CODE = 10       # 不少于 10 行的代码允许跨页
-LONG_TABLE = 5       # 不少于 5 行的表格允许跨页（表头行在下一页重复）
+BODY_PARTS = ["10_ch1.html", "20_ch2a.html", "20_ch2b.html", "20_ch2c.html", "90_appx.html"]
+LONG_CODE = 13       # 13 行及以上的程序才允许跨页，且只在空行处（程序的段落之间）分页；12 行以内的短程序和待补充、待诊断的练习整段排在同一页
+MIN_CHUNK = 5        # 分页后每一段至少 5 行，过短的段并入相邻段
+LONG_TABLE = 5       # 不少于 5 行的表格允许跨页（表头行在下一页重复，两边各至少 2 行）；短表格和供填写的表格整表排在同一页
 
 
 def split_tables(s):
     def tb(m):
         attr, body = m.group(1), m.group(2)
         rows = re.findall(r"<tr[\s>]", body)
-        if len(rows) < LONG_TABLE or "nosplit" in attr:
+        if len(rows) < LONG_TABLE or "nosplit" in attr or "pred" in attr or 'class="fill' in body:
             return m.group(0)
         first = re.match(r"\s*(<tr[^>]*>.*?</tr>)", body, flags=re.S)
         if first and "<th" in first.group(1):
@@ -239,6 +267,35 @@ def split_tables(s):
             attr += ' class="long"'
         return f"<table{attr}>{body}</table>"
     return re.sub(r"<table([^>]*)>(.*?)</table>", tb, s, flags=re.S)
+
+
+def number_items(s):
+    """图、表、例按出现顺序自动编号：源文件中写 ⟦图1-7⟧、⟦表:dict⟧ 等标签，
+    出现在 <b>…</b> 中的是定义（图题、表题、例题），其余都是引用。"""
+    chap, cnt, num = "1", {}, {}
+    for m in re.finditer(r'<section class="(ch\d|appx)"|<b>⟦([图表例])([^⟧]*)⟧</b>', s):
+        if m.group(1):
+            chap = "A" if m.group(1) == "appx" else m.group(1)[2:]
+            continue
+        kind, key = m.group(2), m.group(2) + m.group(3)
+        if key in num:
+            raise SystemExit(f"重复定义的编号标签：{key}")
+        cnt[(chap, kind)] = cnt.get((chap, kind), 0) + 1
+        num[key] = f"{kind}{chap}-{cnt[(chap, kind)]}"
+    missing = sorted(set(re.findall(r"⟦([^⟧]*)⟧", s)) - set(num))
+    if missing:
+        raise SystemExit(f"引用了未定义的编号标签：{missing}")
+    return re.sub(r"⟦([^⟧]*)⟧", lambda m: num[m.group(1)], s)
+
+
+def keep_together(s):
+    """正文中数字与单位（380 V、24.5 ℃）、“第 5 行”这类序数、简短算式（380 − 256 = 124）之间改用不换行空格，避免拆在两行"""
+    parts = re.split(r'(<snip.*?</snip>|<con[ >].*?</con>|<pre.*?</pre>|<code>.*?</code>|<[^>]+>)', s, flags=re.S)
+    for i in range(0, len(parts), 2):
+        t = re.sub(r'(\d) (?=(?:V|℃|mm|cm|m|kg|Hz|KB|MB|GB|%)(?![A-Za-z]))', '\\1\u00a0', parts[i])
+        t = re.sub(r'第 (\d+) (?=[行列页个区项步次位条种])', '第\u00a0\\1\u00a0', t)          # “第 5 行”“第 35 列”不拆开
+        parts[i] = re.sub(r'(\d) ([=+−×÷/]) (?=[\d−(])', '\\1\u00a0\\2\u00a0', t)
+    return "".join(parts)
 
 
 def preprocess(s):
@@ -254,12 +311,13 @@ def preprocess(s):
 
     def conw(m):
         a = attrs(m.group(1))
-        return conwin(a["src"], a.get("dir", "project01"), a.get("ins", ""), a.get("ret", "0"), "notrailer" not in a, title=a.get("title"))
+        return conwin(a["src"], a.get("dir", "project01"), a.get("ins", ""), a.get("ret"), "notrailer" not in a, title=a.get("title"),
+                      run=a.get("run", ""))
     s = re.sub(r'<conwin([^>]*)/>', conw, s)
 
     def outf(m):
         a = attrs(m.group(1))
-        txt = (CODE / (a["src"].replace(".c", "") + ".wout")).read_text(encoding="utf-8")
+        txt = (CODE / (a["src"].replace(".c", "") + ".wout" + a.get("run", ""))).read_text(encoding="utf-8")
         return console(txt, a.get("title", "运行结果"))
     s = re.sub(r'<out([^>]*)/>', outf, s)
 
@@ -343,8 +401,8 @@ def with_blanks(b, blanks):
 
 
 def build_body(defs):
-    src = "\n".join((ROOT / "parts" / p).read_text(encoding="utf-8") for p in ["10_ch1.html", "20_ch2a.html", "20_ch2b.html", "20_ch2c.html", "90_appx.html"])
-    src = preprocess(src)
+    src = "\n".join((ROOT / "parts" / p).read_text(encoding="utf-8") for p in BODY_PARTS)
+    src = preprocess(number_items(keep_together(src)))
     src, toc, odd, refs = add_markers(src)
     blanks, pages, refpages = set(), {}, {}
     for rnd in range(8):
@@ -413,7 +471,7 @@ def squash(t):
 
 def build_front(defs, toc, pages):
     src = (ROOT / "parts" / "00_front.html").read_text(encoding="utf-8").replace("<!--TOC-->", toc_html(toc, pages))
-    src = preprocess(src)
+    src = preprocess(keep_together(src))
     blanks = set()
     for rnd in range(3):
         doc = head(BOOK) + defs + with_blanks(src, blanks) + "</body></html>"
@@ -466,6 +524,8 @@ def assemble(toc, pages):
         w = PdfWriter()
         for p in seq:
             w.add_page(set_boxes(p))
+        for p in w.pages:                    # 调整页面尺寸后内容流是未压缩的，重新压缩（无损），文件约小一半
+            p.compress_content_streams(level=9)
         for start, end, style, prefix, first in labels:
             w.set_page_label(start, len(seq) - 1 if end is None else end, style=style, prefix=prefix, start=first)
         parents = []
@@ -507,11 +567,117 @@ def assemble(toc, pages):
     write(OUT / "cover_print.pdf", [PdfReader(OUT / "cover.pdf").pages[0]], [], [])
 
 
+
+# ---------------------------------------------------------------- 电子阅读版
+def pdf_lines(pdf):
+    """用 pdftotext -bbox-layout 读出每页的文字行：[(页宽, 页高, [(x0, y0, x1, y1, [(x0, y0, x1, y1, 词), …]), …]), …]，坐标原点在左上角"""
+    x = subprocess.run(["pdftotext", "-bbox-layout", str(pdf), "-"], capture_output=True, text=True).stdout
+    res = []
+    for pm in re.finditer(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', x, flags=re.S):
+        lines = []
+        for lm in re.finditer(r'<line xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</line>', pm.group(3), flags=re.S):
+            words = [(float(a), float(b), float(c), float(d), html.unescape(t)) for a, b, c, d, t in
+                     re.findall(r'<word xMin="([\d.]+)" yMin="([\d.]+)" xMax="([\d.]+)" yMax="([\d.]+)">(.*?)</word>', lm.group(5))]
+            lines.append((*map(float, lm.groups()[:4]), words))
+        res.append((float(pm.group(1)), float(pm.group(2)), lines))
+    return res
+
+
+def ebook(toc, pages, refpages):
+    """电子阅读版：裁去出血、去掉空白页；目录各行和正文中的“第×页”可点击跳转；保留书签；页码标签与印刷版页码一致。"""
+    from pypdf.annotations import Link
+    cover, front, body = PdfReader(OUT / "cover.pdf"), PdfReader(OUT / "front.pdf"), PdfReader(OUT / "body.pdf")
+    ftext, btext = page_texts(OUT / "front.pdf"), page_texts(OUT / "body.pdf")
+    keep_f = [i for i in range(len(front.pages)) if ftext[i].strip()]
+    keep_b = [i for i in range(len(body.pages)) if btext[i].strip()]
+    fidx = {i: 1 + k for k, i in enumerate(keep_f)}                    # front.pdf 页序（0 起）→ 电子版页序
+    bidx = {i: 1 + len(keep_f) + k for k, i in enumerate(keep_b)}      # body.pdf 页序（0 起）→ 电子版页序
+    w = PdfWriter()
+    trim = RectangleObject([BLEED, BLEED, PAGE_W - BLEED, PAGE_H - BLEED])
+    for p in [cover.pages[0]] + [front.pages[i] for i in keep_f] + [body.pages[i] for i in keep_b]:
+        p = set_boxes(p)
+        p.mediabox = p.cropbox = p.bleedbox = p.trimbox = p.artbox = trim
+        w.add_page(p)
+
+    def rect(pw, ph, x0, y0, x1, y1):
+        sx, sy = PAGE_W / pw, PAGE_H / ph
+        return (x0 * sx, (ph - y1) * sy - 1, x1 * sx, (ph - y0) * sy + 1)
+    links = []
+    # 目录：整行可点击（按目录顺序逐条匹配，同名的“情境导入”等不会配错）
+    plain = lambda t: re.sub(r"<[^>]+>", "", t).replace("　", " ")
+    todo = [(i, squash(plain(t))) for i, (lvl, t) in enumerate(toc) if i in pages]
+    flines = pdf_lines(OUT / "front.pdf")
+    for fi in keep_f:
+        pw, ph, lines = flines[fi]
+        right = max((l[2] for l in lines), default=pw)
+        for x0, y0, x1, y1, words in lines:
+            if todo and squash("".join(wd[4] for wd in words)).startswith(todo[0][1]):
+                i = todo.pop(0)[0]
+                links.append((fidx[fi], rect(pw, ph, x0, y0, right, y1), bidx[pages[i] - 1]))
+    if todo:
+        print("WARN ebook: 目录中未找到", [t for i, t in todo])
+    # 正文中的“第×页”
+    targets = {str(v) for v in refpages.values() if v}
+    blines, nref = pdf_lines(OUT / "body.pdf"), 0
+    for bi in keep_b:
+        pw, ph, lines = blines[bi]
+        for x0, y0, x1, y1, words in lines:
+            for j, wd in enumerate(words):
+                if (wd[4] in targets and 0 < j < len(words) - 1 and words[j - 1][4].endswith("第")
+                        and words[j + 1][4].startswith("页") and int(wd[4]) - 1 in bidx):
+                    ch = wd[3] - wd[1]
+                    links.append((bidx[bi], rect(pw, ph, wd[0] - 1.4 * ch, wd[1], wd[2] + 1.4 * ch, wd[3]), bidx[int(wd[4]) - 1]))
+                    nref += 1
+    for pi, r, ti in links:
+        w.add_annotation(page_number=pi, annotation=Link(rect=r, target_page_index=ti, border=[0, 0, 0]))
+    # 书签
+    outline = [("封面", 0, 1)]
+    ftexts = [squash(t)[:60] for t in ftext]
+    for name in ("前言", "本书使用说明", "目录"):
+        i = next((i for i, t in enumerate(ftexts) if name in t), None)
+        if i is not None and i in fidx:
+            outline.append((name, fidx[i], 1))
+    outline += [(plain(t), bidx[pages[i] - 1], lvl) for i, (lvl, t) in enumerate(toc) if i in pages]
+    parents = []
+    for title, idx, lvl in outline:
+        lvl = int(lvl)
+        parent = parents[lvl - 2] if lvl >= 2 and len(parents) >= lvl - 1 else None
+        item = w.add_outline_item(title, idx, parent=parent)
+        parents = parents[:lvl - 1] + [item]
+
+    # 页码标签：与印刷版一致（前置部分用罗马数字，正文用阿拉伯数字），去掉空白页处另起一段
+    def runs(m):
+        out = []
+        for orig, e in sorted(m.items()):
+            if out and e == out[-1][1] + 1 and orig == out[-1][3] + 1:
+                out[-1][1], out[-1][3] = e, orig
+            else:
+                out.append([e, e, orig, orig])
+        return out
+    w.set_page_label(0, 0, prefix="封面")
+    for e0, e1, o0, _ in runs(fidx):
+        w.set_page_label(e0, e1, style="/r", start=o0 + 1)
+    for e0, e1, o0, _ in runs(bidx):
+        w.set_page_label(e0, e1, style="/D", start=o0 + 1)
+    w.add_metadata({"/Title": f"{BOOK}（项目一～项目二）电子阅读版", "/Author": "冯丽娜", "/Subject": "高职高专C语言程序设计教材",
+                    "/Keywords": "C语言; 人工智能; 任务驱动; 小熊猫C++", "/Creator": "HTML/CSS + Chromium; 后处理 pypdf"})
+    w.page_mode = "/UseOutlines"
+    w.page_layout = "/OneColumn"
+    vp = w.create_viewer_preferences()
+    vp.display_doctitle = True
+    for p in w.pages:
+        p.compress_content_streams(level=9)
+    w.compress_identical_objects()
+    with open(OUT / "ebook.pdf", "wb") as f:
+        w.write(f)
+    print(f"ebook: {len(w.pages)} 页，目录链接 {len(links) - nref} 个，页码引用链接 {nref} 个")
+
+
 def test(parts):
     """快速试排：只排指定的正文部分（不回填目录与页码），输出 out/test.pdf。"""
     defs = (ROOT / "parts" / "defs.html").read_text(encoding="utf-8")
     src = "\n".join((ROOT / "parts" / p).read_text(encoding="utf-8") for p in parts)
-    src, toc, odd, refs = add_markers(preprocess(src))
+    src, toc, odd, refs = add_markers(preprocess(number_items(keep_together(src))))
     doc = head(BOOK) + defs + strip_markers(fill_prefs(with_blanks(src, set()), {})) + "</body></html>"
     (OUT / "test.html").write_text(doc, encoding="utf-8")
     render(OUT / "test.html", OUT / "test.pdf")
@@ -524,6 +690,7 @@ def main():
     build_front(defs, toc, pages)
     render(ROOT / "parts" / "cover.html", OUT / "cover.pdf")
     assemble(toc, pages)
+    ebook(toc, pages, refpages)
     print("toc:", [(t, pages.get(i)) for i, (l, t) in enumerate(toc)])
     print("refs:", refpages)
     print("done", OUT / "book.pdf")

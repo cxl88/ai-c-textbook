@@ -1,0 +1,11 @@
+bad_paren.c: In function 'main':
+bad_paren.c:5:34: error: expected ')' before ';' token
+    5 |     printf("姓名：%s\n", "林小禾";
+      |           ~                      ^
+      |                                  )
+bad_paren.c:6:14: error: expected ';' before '}' token
+    6 |     return 0;
+      |              ^
+      |              ;
+    7 | }
+      | ~             

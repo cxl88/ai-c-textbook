@@ -1,0 +1,9 @@
+bad_noamp.c: In function 'main':
+bad_noamp.c:7:11: warning: format '%d' expects argument of type 'int *', but argument 2 has type 'int' [-Wformat=]
+    7 |     scanf("%d", people);                // 错误：变量名前漏写了 &
+      |           ^~~~  ~~~~~~
+      |                 |
+      |                 int
+bad_noamp.c:7:5: warning: 'people' is used uninitialized [-Wuninitialized]
+    7 |     scanf("%d", people);                // 错误：变量名前漏写了 &
+      |     ^~~~~~~~~~~~~~~~~~~
