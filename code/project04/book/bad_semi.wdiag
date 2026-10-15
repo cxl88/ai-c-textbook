@@ -1,0 +1,10 @@
+bad_semi.c: In function 'main':
+bad_semi.c:7:10: error: expected ';' before 'printf'
+    7 |     a = 3
+      |          ^
+      |          ;
+    8 |     printf("%d\n", a);
+      |     ~~~~~~
+bad_semi.c:5:9: warning: variable 'a' set but not used [-Wunused-but-set-variable]
+    5 |     int a;
+      |         ^

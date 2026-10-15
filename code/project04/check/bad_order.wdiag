@@ -1,0 +1,13 @@
+bad_order.c: In function 'main':
+bad_order.c:7:20: warning: 'minutes' is used uninitialized [-Wuninitialized]
+    7 |     pace = minutes / km;
+      |            ~~~~~~~~^~~~
+bad_order.c:5:15: note: 'minutes' declared here
+    5 |     float km, minutes, pace;
+      |               ^~~~~~~
+bad_order.c:7:20: warning: 'km' is used uninitialized [-Wuninitialized]
+    7 |     pace = minutes / km;
+      |            ~~~~~~~~^~~~
+bad_order.c:5:11: note: 'km' declared here
+    5 |     float km, minutes, pace;
+      |           ^~

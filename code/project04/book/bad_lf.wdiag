@@ -1,0 +1,6 @@
+bad_lf.c: In function 'main':
+bad_lf.c:7:11: warning: format '%f' expects argument of type 'float *', but argument 2 has type 'double *' [-Wformat=]
+    7 |     scanf("%f", &t);
+      |           ^~~~  ~~
+      |                 |
+      |                 double *
