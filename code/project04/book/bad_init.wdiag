@@ -1,0 +1,8 @@
+bad_init.c: In function 'main':
+bad_init.c:5:13: error: 'b' undeclared (first use in this function)
+    5 |     int a = b = c = 5;
+      |             ^
+bad_init.c:5:13: note: each undeclared identifier is reported only once for each function it appears in
+bad_init.c:5:17: error: 'c' undeclared (first use in this function)
+    5 |     int a = b = c = 5;
+      |                 ^

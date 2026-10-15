@@ -1,0 +1,8 @@
+bad_expr.c: In function 'main':
+bad_expr.c:7:7: warning: statement with no effect [-Wunused-value]
+    7 |     a + b;
+      |     ~~^~~
+bad_expr.c:8:13: error: 'Y' undeclared (first use in this function)
+    8 |     putchar(Y);
+      |             ^
+bad_expr.c:8:13: note: each undeclared identifier is reported only once for each function it appears in

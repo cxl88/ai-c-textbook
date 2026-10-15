@@ -1,0 +1,5 @@
+bad_upper.c: In function 'main':
+bad_upper.c:9:12: warning: unknown conversion type character '\x0a' in format [-Wformat=]
+    9 |     printf("%D\n", n);
+      |            ^~~~~~
+bad_upper.c:9:12: warning: too many arguments for format [-Wformat-extra-args]

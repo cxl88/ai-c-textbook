@@ -1,0 +1,5 @@
+bad_prec.c: In function 'main':
+bad_prec.c:7:11: warning: unknown conversion type character '.' in format [-Wformat=]
+    7 |     scanf("%.2f", &r);
+      |           ^~~~~~
+bad_prec.c:7:11: warning: too many arguments for format [-Wformat-extra-args]

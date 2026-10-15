@@ -1,0 +1,9 @@
+bad_ledger_amp.c: In function 'main':
+bad_ledger_amp.c:11:11: warning: format '%f' expects argument of type 'float *', but argument 4 has type 'double' [-Wformat=]
+   11 |     scanf("%f%f%f%f%f", &r1, &r2, r3, &r4, &r5);
+      |           ^~~~~~~~~~~~            ~~
+      |                                   |
+      |                                   double
+bad_ledger_amp.c:11:5: warning: 'r3' is used uninitialized [-Wuninitialized]
+   11 |     scanf("%f%f%f%f%f", &r1, &r2, r3, &r4, &r5);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
