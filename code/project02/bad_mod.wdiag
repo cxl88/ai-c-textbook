@@ -1,0 +1,4 @@
+bad_mod.c: In function 'main':
+bad_mod.c:6:22: error: invalid operands to binary % (have 'double' and 'int')
+    6 |     printf("%d\n", t % 2);      // 错误：% 的两边必须是整数
+      |                      ^
