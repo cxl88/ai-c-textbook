@@ -1,5 +1,3 @@
-/* 程序名：measure.c
-   功能：同一个电阻测量 5 次，求平均阻值（循环结构） */
 #include <stdio.h>
 
 int main(void)

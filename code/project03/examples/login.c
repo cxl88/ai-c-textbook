@@ -1,5 +1,3 @@
-/* 程序名：login.c
-   功能：账号和密码都正确才能登录（选择结构） */
 #include <stdio.h>
 
 int main(void)
