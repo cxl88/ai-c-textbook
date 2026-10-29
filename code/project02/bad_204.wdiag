@@ -1,0 +1,10 @@
+bad_204.c: In function 'main':
+bad_204.c:13:23: error: expected ';' before 'printf'
+   13 |     power = volt * amp
+      |                       ^
+      |                       ;
+   14 |     printf("座位利用率：%.1f%\n", rate);
+      |     ~~~~~~             
+bad_204.c:8:12: warning: variable 'rate' set but not used [-Wunused-but-set-variable]
+    8 |     double rate;                        // 座位利用率（%）
+      |            ^~~~

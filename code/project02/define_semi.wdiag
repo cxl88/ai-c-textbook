@@ -1,0 +1,4 @@
+define_semi.c: In function 'main':
+define_semi.c:7:23: warning: statement with no effect [-Wunused-value]
+    7 |     int empty = SEATS - people;
+      |                       ^~~~~~~~

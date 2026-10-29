@@ -1,0 +1,4 @@
+bad_strchar.c: In function 'main':
+bad_strchar.c:5:17: warning: initialization of 'char' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+    5 |     char code = "g";            // 错误：把字符写成了字符串
+      |                 ^~~
