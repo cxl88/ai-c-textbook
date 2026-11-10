@@ -1,0 +1,13 @@
+bad_q12.c: In function 'main':
+bad_q12.c:11:11: warning: unknown conversion type character '.' in format [-Wformat=]
+   11 |     scanf("%.1f%d\n", &temp, rate);
+      |           ^~~~~~~~~~
+bad_q12.c:11:11: warning: format '%d' expects argument of type 'int *', but argument 2 has type 'double *' [-Wformat=]
+   11 |     scanf("%.1f%d\n", &temp, rate);
+      |           ^~~~~~~~~~  ~~~~~
+      |                       |
+      |                       double *
+bad_q12.c:11:11: warning: too many arguments for format [-Wformat-extra-args]
+bad_q12.c:11:5: warning: 'rate' is used uninitialized [-Wuninitialized]
+   11 |     scanf("%.1f%d\n", &temp, rate);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

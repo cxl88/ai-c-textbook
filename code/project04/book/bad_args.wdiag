@@ -1,0 +1,7 @@
+bad_args.c: In function 'main':
+bad_args.c:7:12: warning: format '%d' expects a matching 'int' argument [-Wformat=]
+    7 |     printf("%d %d\n", a);
+      |            ^~~~~~~~~
+bad_args.c:8:12: warning: too many arguments for format [-Wformat-extra-args]
+    8 |     printf("%d\n", a, b);
+      |            ^~~~~~
