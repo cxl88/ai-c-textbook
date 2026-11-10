@@ -1,0 +1,7 @@
+bad_lvalue.c: In function 'main':
+bad_lvalue.c:6:6: error: lvalue required as increment operand
+    6 |     5++;                        // 错误：自增运算只能用于变量
+      |      ^~
+bad_lvalue.c:7:11: error: lvalue required as left operand of assignment
+    7 |     a + 1 = 7;                  // 错误：赋值号左边必须是变量
+      |           ^

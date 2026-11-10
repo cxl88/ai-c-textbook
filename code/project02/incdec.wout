@@ -1,0 +1,4 @@
+进来 1 人后：people = 37
+离开 1 人后：people = 36
+n = people++ 后：n = 36，people = 37
+n = ++people 后：n = 38，people = 38
