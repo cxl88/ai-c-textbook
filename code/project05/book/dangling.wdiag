@@ -1,0 +1,4 @@
+dangling.c: In function 'main':
+dangling.c:11:8: warning: suggest explicit braces to avoid ambiguous 'else' [-Wdangling-else]
+   11 |     if (v > 21)
+      |        ^

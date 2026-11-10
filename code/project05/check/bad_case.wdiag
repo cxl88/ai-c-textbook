@@ -1,0 +1,10 @@
+bad_case.c: In function 'main':
+bad_case.c:10:13: error: switch quantity not an integer
+   10 |     switch (v)
+      |             ^
+bad_case.c:12:5: error: case label does not reduce to an integer constant
+   12 |     case 18.0:
+      |     ^~~~
+bad_case.c:17:5: error: case label does not reduce to an integer constant
+   17 |     case n > 0:
+      |     ^~~~

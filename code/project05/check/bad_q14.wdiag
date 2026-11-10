@@ -1,0 +1,6 @@
+bad_q14.c: In function 'main':
+bad_q14.c:11:8: error: expected '(' before 't'
+   11 |     if t > 26
+      |        ^
+      |        (
+bad_q14.c:11:8: warning: statement with no effect [-Wunused-value]

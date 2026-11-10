@@ -1,0 +1,4 @@
+cp_rel.c: In function 'main':
+cp_rel.c:10:34: warning: comparisons like 'X<=Y<=Z' do not have their mathematical meaning [-Wparentheses]
+   10 |     printf("第2题：%d\n", 10 > 5 > 2);
+      |                                  ^

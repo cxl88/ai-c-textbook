@@ -1,0 +1,10 @@
+bad_else.c: In function 'main':
+bad_else.c:11:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |     if (score >= 60);
+      |     ^~
+bad_else.c:12:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   12 |     {
+      |     ^
+bad_else.c:15:5: error: 'else' without a previous 'if'
+   15 |     else
+      |     ^~~~

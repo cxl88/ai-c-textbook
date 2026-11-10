@@ -1,0 +1,14 @@
+bad_q14b.c: In function 'main':
+bad_q14b.c:15:17: error: expected expression before '<' token
+   15 |     else if (t =< 18)
+      |                 ^
+bad_q14b.c:19:5: error: 'elseif' undeclared (first use in this function)
+   19 |     elseif
+      |     ^~~~~~
+bad_q14b.c:19:5: note: each undeclared identifier is reported only once for each function it appears in
+bad_q14b.c:19:11: error: expected ';' before '{' token
+   19 |     elseif
+      |           ^
+      |           ;
+   20 |     {
+      |     ~      

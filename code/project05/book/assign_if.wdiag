@@ -1,0 +1,4 @@
+assign_if.c: In function 'main':
+assign_if.c:11:9: warning: suggest parentheses around assignment used as truth value [-Wparentheses]
+   11 |     if (n = 0)                         // 本想判断 n 是否等于 0
+      |         ^

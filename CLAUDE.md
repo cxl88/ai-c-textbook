@@ -16,12 +16,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | 项目二 | 修订稿 Word（v4 HTML 印刷版为旧稿） | `tools/project2-build/content2.py` | `book/code/`（v4）、`code/project02/` |
 | 项目三 | 第三稿 Word | `tools/project3-build3/content3.py`（`project3-build/` 是第二稿，保留不改） | `code/project03/{examples,answers}/` |
 | 项目四 | 初稿 Word | `tools/project4-build/content4.py` | `code/project04/{book,check}/` |
+| 项目五 | 初稿 Word | `tools/project5-build/content5.py`（`build5.sh` 一键生成） | `code/project05/{book,check}/` |
 | 附录A | v4 HTML | `book/parts/90_appx.html` | — |
 
 两类流水线：
 
 1. **HTML → 印刷 PDF（`book/`，v4）**：`parts/*.html` 用自定义标签写正文，`build.py` 预处理（代码高亮、运行窗口、自动编号 `⟦图…⟧`、不换行空格）→ Playwright/Chromium 打印 → `pdftotext` 读回页码回填目录和“第×页”、保证项目首页在奇数页 → pypdf 写 TrimBox/BleedBox、书签、合封面，另出电子阅读版。新增部分要加进 `build.py` 的 `BODY_PARTS`。`tools/word-export/` 从它的输出反向生成可编辑 Word（只是副本）。v5 起的 Word 稿都还没有并回 `book/parts/`。
-2. **docx 模板拼装（项目二～四）**：以项目一 v5 清洁版 docx 为版式模板，`p3lib.py` 复制模板里的版式块（标题、代码框、AI 卡片、课堂验收、趣味小站等）换上新内容。各项目目录结构相同：
+2. **docx 模板拼装（项目二～五）**：以项目一 v5 清洁版 docx 为版式模板，`p3lib.py` 复制模板里的版式块（标题、代码框、AI 卡片、课堂验收、趣味小站等）换上新内容。各项目目录结构相同：
    - `contentN.py` 正文；图/表/例题编号由 `FIGS`/`TABS`/`EXS` 列表按出现顺序生成，正文用 `fg()`/`tb()`/`ex()` 引用，**不要手写编号**；写出 `fig/nums.json` 供说明文档使用。`A(批注号, 段落)` 标作者批注锚点。
    - `figs*.py`（HTML/SVG）+ `shot.js` 截图；`consN.py` 由 `.wout` 拼出运行结果截图，键盘输入加下划线。
    - `repliesN.py`（有作者批注的稿子才有）放回作者原批注（`author_comments.xml`）并逐条回复；`notesN.py` 修改意见/编写说明（含参考答案），`auditN.py` 师生体验审计，`resN.py` 配套资源 zip。
@@ -51,6 +52,8 @@ bash build3.sh /tmp/p3code           # 项目三，先把 examples/ 和 answers/
 bash build.sh <code/project04/book 的绝对路径>   # 项目四
 python3 tools/cmtchk.py build/pN.pdf # 行尾注释对齐，应输出 groups off by >2.5pt: 0
 ```
+
+**生成环境**：局域网测试服务器 home-server 上有 Docker 镜像 `ai-c-textbook-build`（定义在 `tools/build-env/`），以 root 运行，脚本中写死的路径在容器内都有效：`tools/build-env/run.sh bash -c '命令'`（仓库挂载为 `/work`，v5 模板挂载在 `/mnt/project-files`）。服务器不能访问 GitHub，仓库用 git bundle 或 tar 同步。docx 技能的 `comment.py`、`office/validate.py` 不在其中，带批注回复版暂时无法生成。
 
 **环境限制**：脚本写死了 Linux 沙箱路径：`/opt/node22/lib/node_modules/playwright`、Wine 工作目录 `/root/cstudy/wb` 和 `/root/.wine64b`、v5 模板 `/mnt/project-files/textbook/v5/…（清洁版）.docx`、docx 技能脚本 `/mnt/skills/public/docx/scripts`。`wrun.sh` 需要 Wine 和小熊猫C++ 3.4。在本机 Windows 上通常跑不起来；改路径前先确认用户要在哪里运行，无法重跑时要明说。依赖：Python 3（pypdf、Pillow、lxml、python-docx、pdfplumber）、Node + Playwright、poppler-utils、LibreOffice Writer、Noto 字体。
 

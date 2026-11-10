@@ -1,0 +1,7 @@
+range_trap.c: In function 'main':
+range_trap.c:11:17: warning: comparison of constant '21' with boolean expression is always true [-Wbool-compare]
+   11 |     if (15 <= v <= 21)                 // 想表示“v 在 15～21 之间”
+      |                 ^~
+range_trap.c:11:12: warning: comparisons like 'X<=Y<=Z' do not have their mathematical meaning [-Wparentheses]
+   11 |     if (15 <= v <= 21)                 // 想表示“v 在 15～21 之间”
+      |         ~~~^~~~
