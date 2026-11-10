@@ -1,0 +1,16 @@
+bad_usage.c: In function 'main':
+bad_usage.c:13:17: error: expected ';' before 'amp'
+   13 |     power = volt amp;
+      |                 ^~~~
+      |                 ;
+bad_usage.c:14:12: warning: unknown conversion type character '\x0a' in format [-Wformat=]
+   14 |     printf("座位利用率：%d%\n", rate);
+      |            ^~~~~~~~~~~~~~~~~~~
+bad_usage.c:15:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
+   15 |     printf("计算机功率：%d W\n", power);
+      |            ^~~~~~~~~~~~~~~~~~~~  ~~~~~
+      |                                  |
+      |                                  double
+bad_usage.c:9:26: warning: unused variable 'amp' [-Wunused-variable]
+    9 |     double volt = 218.6, amp = 1.25;    // 工作电压（V）、工作电流（A）
+      |                          ^~~

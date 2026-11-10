@@ -1,0 +1,9 @@
+bad_amp.c: In function 'main':
+bad_amp.c:7:11: warning: format '%d' expects argument of type 'int *', but argument 2 has type 'int' [-Wformat=]
+    7 |     scanf("%d", n);
+      |           ^~~~  ~
+      |                 |
+      |                 int
+bad_amp.c:7:5: warning: 'n' is used uninitialized [-Wuninitialized]
+    7 |     scanf("%d", n);
+      |     ^~~~~~~~~~~~~~

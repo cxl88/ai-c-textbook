@@ -1,0 +1,4 @@
+bad_multi.c: In function 'main':
+bad_multi.c:5:13: warning: multi-character character constant [-Wmultichar]
+    5 |     putchar('OK');
+      |             ^~~~

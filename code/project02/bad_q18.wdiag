@@ -1,0 +1,9 @@
+bad_q18.c: In function 'main':
+bad_q18.c:9:17: warning: initialization of 'char' from 'char *' makes integer from pointer without a cast [-Wint-conversion]
+    9 |     char unit = "C";                    // 温度单位
+      |                 ^~~
+bad_q18.c:12:12: warning: format '%d' expects argument of type 'int', but argument 2 has type 'double' [-Wformat=]
+   12 |     printf("平均温度：%d °%c\n", avg, unit);
+      |            ^~~~~~~~~~~~~~~~~~~~  ~~~
+      |                                  |
+      |                                  double

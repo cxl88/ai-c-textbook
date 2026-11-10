@@ -5,3 +5,5 @@ fig/：mkfigs.py 生成新图 HTML，shot.js 用 Playwright 截图；anim.py 生
 harn/：在 Linux 下按预设按键运行 snake.c 的绘图代码，截取图1-6 的画面。
 依赖：docx 技能脚本（merge_runs、comment、validate）、book4/style.css 与 fonts/、Playwright、ffmpeg、python-docx。
 图1-5 照片（2026-10-12 第二次修订）：edit.py 第三个参数 ph/ 是照片目录（p_auto/p_pv/p_robot/p_uav/p_cnc/p_sys.jpg），来源与许可见配套资源包“图1-5实物照片/图片来源与许可.txt”；term.sh 在 Xvfb 下用 xterm 截取系统软件一格的终端截图。
+
+p1fix.py（2026-10-19，v5.1）：按作者在项目二批注 3 中的要求统一知识点层级序号（一级 1. 2. 3.，二级（1）（2）（3），三级 ①②③），只改 11 处序号。用法：把 v5 的清洁版、带批注回复版分别解包，各运行一次 python3 p1fix.py <解包目录>，再打包。

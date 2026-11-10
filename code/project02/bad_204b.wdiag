@@ -1,0 +1,4 @@
+bad_204b.c: In function 'main':
+bad_204b.c:14:12: warning: unknown conversion type character '\x0a' in format [-Wformat=]
+   14 |     printf("座位利用率：%.1f%\n", rate);
+      |            ^~~~~~~~~~~~~~~~~~~~~
