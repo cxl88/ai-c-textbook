@@ -1,0 +1,7 @@
+semi_if.c: In function 'main':
+semi_if.c:11:5: warning: this 'if' clause does not guard... [-Wmisleading-indentation]
+   11 |     if (v > 21);                       // 多写了一个分号
+      |     ^~
+semi_if.c:12:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'if'
+   12 |     {
+      |     ^

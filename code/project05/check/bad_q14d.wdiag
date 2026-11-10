@@ -1,0 +1,7 @@
+bad_q14d.c: In function 'main':
+bad_q14d.c:21:31: error: expected ';' before '}' token
+   21 |         printf("空调：待机\n")
+      |                               ^
+      |                               ;
+   22 |     }
+      |     ~                          

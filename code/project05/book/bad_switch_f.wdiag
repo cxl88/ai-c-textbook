@@ -1,0 +1,4 @@
+bad_switch_f.c: In function 'main':
+bad_switch_f.c:11:13: error: switch quantity not an integer
+   11 |     switch (v)
+      |             ^
