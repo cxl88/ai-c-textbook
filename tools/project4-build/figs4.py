@@ -412,7 +412,8 @@ def f_scanf():
     for k, ch in enumerate(chars):
         x = X + k * 20
         sp = ch == ' '
-        o.append(f'<rect x="{x}" y="60" width="18" height="22" rx="2" fill="{"#fff" if sp else BG}" stroke="{M}" stroke-width="0.8"{" stroke-dasharray=\"2 2\"" if sp else ""}/>' + mtext(x + 9, 71, '' if sp else ch, 11, D, 700, mono=True))
+        dash = ' stroke-dasharray="2 2"' if sp else ''   # 不在 f-string 表达式中写反斜杠（Python 3.11 不支持）
+        o.append(f'<rect x="{x}" y="60" width="18" height="22" rx="2" fill="{"#fff" if sp else BG}" stroke="{M}" stroke-width="0.8"{dash}/>' + mtext(x + 9, 71, '' if sp else ch, 11, D, 700, mono=True))
     o.append(f'<path d="M{X},88 h58" stroke="{C}" stroke-width="2"/>' + mtext(X + 29, 98, '%d 读入 203', 8.4, C, 700))
     o.append(f'<path d="M{X + 80},88 h78" stroke="{C}" stroke-width="2"/>' + mtext(X + 119, 98, '%f 读入 86.5', 8.4, C, 700))
     o.append(arrow([(X + 29, 104), (X + 29, 124)], C, 1.4))
