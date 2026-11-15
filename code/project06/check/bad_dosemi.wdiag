@@ -1,0 +1,7 @@
+bad_dosemi.c: In function 'main':
+bad_dosemi.c:13:23: error: expected ';' before 'printf'
+   13 |     } while (i <= 100)
+      |                       ^
+      |                       ;
+   14 |     printf("1+2+…+100 = %d\n", sum);
+      |     ~~~~~~             

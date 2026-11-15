@@ -1,0 +1,4 @@
+bad_cont.c: In function 'main':
+bad_cont.c:15:9: error: continue statement not within a loop
+   15 |         continue;
+      |         ^~~~~~~~

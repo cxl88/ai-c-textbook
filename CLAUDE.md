@@ -17,6 +17,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | 项目三 | 第三稿 Word | `tools/project3-build3/content3.py`（`project3-build/` 是第二稿，保留不改） | `code/project03/{examples,answers}/` |
 | 项目四 | 初稿 Word | `tools/project4-build/content4.py` | `code/project04/{book,check}/` |
 | 项目五 | 初稿 Word | `tools/project5-build/content5.py`（`build5.sh` 一键生成） | `code/project05/{book,check}/` |
+| 项目六 | 初稿 Word | `tools/project6-build/content6.py`（`build6.sh` 一键生成） | `code/project06/{book,check}/` |
 | 附录A | v4 HTML | `book/parts/90_appx.html` | — |
 
 两类流水线：
@@ -27,7 +28,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
    - `figs*.py`（HTML/SVG）+ `shot.js` 截图；`consN.py` 由 `.wout` 拼出运行结果截图，键盘输入加下划线。
    - `repliesN.py`（有作者批注的稿子才有）放回作者原批注（`author_comments.xml`）并逐条回复；`notesN.py` 修改意见/编写说明（含参考答案），`auditN.py` 师生体验审计，`resN.py` 配套资源 zip。
    - 预览 PDF 用另一份 docx 渲染，只按 LibreOffice 替代字体重算代码注释前的空格（`CODE_LATIN_EM`），其余与清洁版相同。
-   - **`p3lib.py` 在各目录各有一份副本，版本不同**（project2-build 与 project3-build3 相同，project4-build、project3-build 较旧）。改版式块只改当前项目那份，别顺手同步到别的项目。
+   - **`p3lib.py` 在各目录各有一份副本，版本不同**（project2-build 与 project3-build3 相同，project4-build、project3-build 较旧；project5-build 加了 switch/case/break/default 高亮，project6-build 又加了 continue）。改版式块只改当前项目那份，别顺手同步到别的项目。
 
 ## 常用命令
 
@@ -62,6 +63,8 @@ python3 tools/cmtchk.py build/pN.pdf # 行尾注释对齐，应输出 groups off
 - 每个 `x.c` 配实测结果：`x.wout`/`x.wret`（输出、返回值）、`x.wdiag`（编译器提示，空文件=无提示）；`x.in`、`x.in2`… 是键盘输入，对应 `.wout2`/`.wret2`…。书中运行窗口、结果框都取自这些文件，**不要手写或手改结果文件**，必须由 `wrun.sh` 实测生成。
 - 编译选项与小熊猫C++ 默认“MinGW-w64 GCC 11.5.0 64-bit Debug”一致（`-fexec-charset=gbk`，输出再转回 UTF-8）。
 - `bad_` 开头：含编译错误或未定义行为，只编译不运行；`wc_` 开头：加 `-Wconversion` 的补充验证结果。
+- 死循环（项目六起）：先用 `wrun.sh` 编译，再在**同一个容器中**用 `tools/project6-build/wcap.sh` 限时运行（默认 5 秒），得到 `x.wcap`（开头的输出）和 `x.wcapret`（`timeout 5s lines=N bytes=M`），键盘输入放 `x.cin`。
+- 程序名不要以 `if_`、`for_` 等 cmd 内部命令开头：`wrun.sh` 生成的批处理会把它们当作命令解析出错。
 - 核对参考答案用的改动版程序：v4 在 `book/check/`，项目四在 `code/project04/check/`。配套资源包里的分组和改名由各项目的 `res*.py` / `prep_pack.py` 生成，仓库里不按资源包结构存放。
 - 示例头文件尽量只用 `stdio.h`、`math.h`、`string.h`（`code/project01-v5/snake.c` 仅 Windows，展示用）。
 - `<conwin ins="…">` 中多个输入用 `;;` 分隔，提示文字必须能在输出中找到。
@@ -71,6 +74,7 @@ python3 tools/cmtchk.py build/pN.pdf # 行尾注释对齐，应输出 groups off
 - 成品 185×260 mm，四边出血 3 mm（PDF 191×266 mm）；主色 #1D4F91，2026-10-14 起确定四色印刷，彩色图标和插画可用；PDF 为 RGB，由印厂转 CMYK。
 - 代码跨页：20 行以内的程序和“待补充”“待诊断”练习整段不跨页；21 行以上只在空行处分页、每段至少 8 行，续页加“文件名（续）”；**排不下就移页，不缩小字号**。HTML 版参数在 `build.py` 的 `LONG_CODE`/`MIN_CHUNK`/`LONG_TABLE`，docx 版在 `p3lib.py` 的 `book_split`。
 - 行尾注释按编辑器列宽对齐（汉字占 2 列），用各目录 `tools/cmt.py`。
+- docx 版书中显示的程序行不超过 70 列（汉字按 2 列计），再长行尾注释会折行（项目六实测 75 列折行）。
 - 资源包版本号（`book/pack.py` 的 `VER`/`VER_TAG`/`BOOK_VER`）要与书中“本书使用说明·5. 配套资源”一起改。
 
 ## 体例

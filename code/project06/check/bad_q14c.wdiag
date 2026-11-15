@@ -1,0 +1,9 @@
+bad_q14c.c: In function 'main':
+bad_q14c.c:13:15: warning: format '%f' expects argument of type 'float *', but argument 2 has type 'double' [-Wformat=]
+   13 |         scanf("%f", v);
+      |               ^~~~  ~
+      |                     |
+      |                     double
+bad_q14c.c:13:9: warning: 'v' may be used uninitialized [-Wmaybe-uninitialized]
+   13 |         scanf("%f", v);
+      |         ^~~~~~~~~~~~~~

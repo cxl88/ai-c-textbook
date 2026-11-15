@@ -1,0 +1,4 @@
+bad_brk.c: In function 'main':
+bad_brk.c:14:9: error: break statement not within loop or switch
+   14 |         break;
+      |         ^~~~~
