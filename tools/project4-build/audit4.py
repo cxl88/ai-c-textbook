@@ -10,6 +10,7 @@ N = json.load(open(sys.argv[2] if len(sys.argv) > 2 else 'fig/nums.json'))
 FG, TB, EX = N['fig'], N['tab'], N['ex']
 
 d = Document()
+d.settings.element.find(qn('w:zoom')).set(qn('w:percent'), '100')  # 默认模板的 w:zoom 缺少必需的 w:percent，补上才能通过 OOXML 校验
 for s in d.sections:
     s.page_width, s.page_height = Cm(21), Cm(29.7)
     s.left_margin = s.right_margin = Cm(2.2)
@@ -121,6 +122,6 @@ p('说明：本环境无法直接打开 undraw.co 核对许可原文，上表根
 
 h('六、验证')
 li('配套资源中的 59 个程序在小熊猫C++ 3.4 自带的 MinGW-w64 GCC 11.5.0 下重新编译运行（编译选项与默认 Debug 配置相同，含 -Wall）。书中示例 17 个、参考答案 10 个、答案核对 16 个：零错误零警告，返回值都是 0。错误示范 16 个只编译不运行，编译提示与书中的说法一致。书中的运行结果截图由实测输出生成，终稿复跑后逐字节一致。')
-li('Word 文档经 OOXML 结构校验，正文（document.xml）没有错误。styles.xml 有 1 处样式元素顺序问题，沿用自项目一 v5 模板（v5 原文件同样存在），不影响 Word 打开和显示。')
+li('Word 文档经 OOXML 结构校验，没有错误。项目一 v5 模板（WPS 保存）的 styles.xml 中有样式子元素顺序不合规范的问题，打包时已按规范顺序重排。')
 li('预览 PDF 由 LibreOffice 渲染，共 50 页，逐页检查了插图、栏目框、编号和跨页。用程序检查了预览稿中所有代码的行尾注释，同一组注释的起点偏差都在 2.5 磅以内。Word 中打开时分页会略有不同。')
 d.save(OUT)

@@ -15,6 +15,7 @@ if os.path.exists('build/p6.pdf'):
     PAGES = len(PdfReader('build/p6.pdf').pages)
 
 d = Document()
+d.settings.element.find(qn('w:zoom')).set(qn('w:percent'), '100')  # 默认模板的 w:zoom 缺少必需的 w:percent，补上才能通过 OOXML 校验
 for s in d.sections:
     s.page_width, s.page_height = Cm(21), Cm(29.7)
     s.left_margin = s.right_margin = Cm(2.2)
@@ -142,6 +143,7 @@ li('配套资源中的 73 个程序在小熊猫C++ 3.4 自带的 MinGW-w64 GCC 1
 li(f'预览 PDF 由 LibreOffice 渲染，共 {PAGES} 页，逐页检查了插图、栏目框、编号和跨页；用程序检查了预览稿中所有代码的行尾注释，同一组注释的起点偏差都在 2.5 磅以内；书中显示的程序行都不超过 70 列；图、表、例题的编号引用都在范围内（图 {len(FG)} 幅、表 {len(TB)} 个、例题 {len(EX)} 个）。')
 NA = open('build/asserts.txt').read().strip() if os.path.exists('build/asserts.txt') else '多'
 li(f'编写说明中的参考答案在生成时逐条与实测输出核对（{NA} 处），与实测不符时文档无法生成。')
-li('未做：Word 文档的 OOXML 结构校验（docx 技能中的 office/validate.py 不在本机和测试服务器上），建议在原环境中补做一次；带批注回复版不适用（项目六客户框架中的 5 条批注都是编写要求，已在编写说明第一部分逐条落实）。')
+li('Word 文档的 OOXML 结构校验（docx 技能的 office/validate.py，2026-11-15 补做）：正文、编写说明、审计说明全部通过；python-docx 默认模板中 w:zoom 缺少 w:percent 属性的问题已在生成脚本中补上。')
+li('带批注回复版不适用（项目六客户框架中的 5 条批注都是编写要求，已在编写说明第一部分逐条落实）。')
 d.save(OUT)
 print('audit ok', PAGES)

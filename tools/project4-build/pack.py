@@ -18,6 +18,18 @@ for m in re.finditer(r'<Relationship [^>]*/>', rels):
     keep.append(r)
 rels = re.sub(r'<Relationship [^>]*/>', '', rels).replace('</Relationships>', ''.join(keep) + '</Relationships>')
 open(rp, 'w', encoding='utf8').write(rels)
+# 模板（WPS 保存）样式的子元素顺序不合 OOXML（如 qFormat 在 uiPriority 前面），按规范顺序重排（与项目二修订稿起的 pack 脚本相同）
+from lxml import etree
+ORDER = 'name aliases basedOn next link autoRedefine hidden uiPriority semiHidden unhideWhenUsed qFormat locked personal personalCompose personalReply rsid pPr rPr tblPr trPr tcPr tblStylePr'.split()
+WNS = '{http://schemas.openxmlformats.org/wordprocessingml/2006/main}'
+sp = f'{D}/word/styles.xml'
+stree = etree.parse(sp)
+for style in stree.getroot().iter(WNS + 'style'):
+    kids = list(style)
+    kids.sort(key=lambda e: ORDER.index(e.tag[len(WNS):]) if e.tag.startswith(WNS) and e.tag[len(WNS):] in ORDER else len(ORDER))
+    for k in kids:
+        style.append(k)
+stree.write(sp, xml_declaration=True, encoding='UTF-8', standalone=True)
 cp = f'{D}/docProps/core.xml'
 if os.path.exists(cp):
     s = open(cp, encoding='utf8').read()
