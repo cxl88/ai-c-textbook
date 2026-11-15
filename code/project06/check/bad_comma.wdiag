@@ -1,0 +1,9 @@
+bad_comma.c: In function 'main':
+bad_comma.c:9:15: warning: right-hand operand of comma expression has no effect [-Wunused-value]
+    9 |     for (i = 1, i <= 100, i++)
+      |               ^
+bad_comma.c:9:30: error: expected ';' before ')' token
+    9 |     for (i = 1, i <= 100, i++)
+      |                              ^
+      |                              ;
+bad_comma.c:9:30: error: expected expression before ')' token

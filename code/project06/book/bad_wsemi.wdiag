@@ -1,0 +1,7 @@
+bad_wsemi.c: In function 'main':
+bad_wsemi.c:11:5: warning: this 'while' clause does not guard... [-Wmisleading-indentation]
+   11 |     while (i <= 100);                  // 多写了一个分号
+      |     ^~~~~
+bad_wsemi.c:12:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'while'
+   12 |     {
+      |     ^

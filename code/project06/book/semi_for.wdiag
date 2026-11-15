@@ -1,0 +1,7 @@
+semi_for.c: In function 'main':
+semi_for.c:9:5: warning: this 'for' clause does not guard... [-Wmisleading-indentation]
+    9 |     for (i = 1; i <= 100; i++);        // 多写了一个分号
+      |     ^~~
+semi_for.c:10:5: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the 'for'
+   10 |     {
+      |     ^
