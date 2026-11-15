@@ -65,6 +65,7 @@ def ok(cond, what):
 
 
 d = Document()
+d.settings.element.find(qn('w:zoom')).set(qn('w:percent'), '100')  # 默认模板的 w:zoom 缺少必需的 w:percent，补上才能通过 OOXML 校验
 for sec in d.sections:
     sec.page_width, sec.page_height = Cm(21), Cm(29.7)
     sec.left_margin = sec.right_margin = Cm(2.2)
