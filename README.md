@@ -34,6 +34,7 @@ code/project06/       项目六书中程序（book/）与核对、参考答案�
 fonts/                字体（不入库，见 fonts/README.md）
 tools/
   word-export/        由排版结果生成可编辑 Word 版（v4）
+  review/             审读辅助：读客户框架（readreq.py）、预览 PDF 缩略图（pagesheet.py）、成品大纲统计（outline.py）
   project1-v5-revise/ 对作者批注稿项目一的 v5 修订脚本（p1fix.py 为 v5.1 统一序号）
   project2-build/     项目二修订稿生成脚本（以 v5 清洁版为版式模板；另有批注回复、修改意见、审计说明和配套资源的生成脚本）
   project3-build/     项目三 Word 生成脚本（以 v5 清洁版为版式模板，build.sh 一键生成；assets/ 为第二稿用到的图标和插画）
@@ -41,7 +42,7 @@ tools/
   project4-build/     项目四 Word 生成脚本（以 v5 清洁版为版式模板；另有编写说明、审计说明和配套资源的生成脚本）
   project5-build/     项目五 Word 生成脚本（同上；build5.sh 一键生成，说明见其中的 README.txt）
   project6-build/     项目六 Word 生成脚本（同上；build6.sh 一键生成；wcap.sh 限时运行死循环程序）
-  build-env/          生成环境的 Docker 镜像（Wine + 小熊猫C++、LibreOffice、Playwright），run.sh 在容器中运行命令
+  build-env/          生成环境的 Docker 镜像（Wine + 小熊猫C++、LibreOffice、Playwright），run.sh 在容器中运行命令，sync.sh 在本机与服务器之间同步
 docs/
   requirements/       客户给的章节模板（项目一至项目六）
   history/            各版修订说明、v5 修改意见与处理说明
