@@ -26,9 +26,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. **docx 模板拼装（项目二～六）**：以项目一 v5 清洁版 docx 为版式模板，`p3lib.py` 复制模板里的版式块（标题、代码框、AI 卡片、课堂验收、趣味小站等）换上新内容。各项目目录结构相同：
    - `contentN.py` 正文；图/表/例题编号由 `FIGS`/`TABS`/`EXS` 列表按出现顺序生成，正文用 `fg()`/`tb()`/`ex()` 引用，**不要手写编号**；写出 `fig/nums.json` 供说明文档使用。`A(批注号, 段落)` 标作者批注锚点。
    - `figs*.py`（HTML/SVG）+ `shot.js` 截图；`consN.py` 由 `.wout` 拼出运行结果截图，键盘输入加下划线。
-   - `repliesN.py`（有作者批注的稿子才有）放回作者原批注（`author_comments.xml`）并逐条回复；`notesN.py` 修改意见/编写说明（含参考答案），`auditN.py` 师生体验审计，`resN.py` 配套资源 zip。
+   - `repliesN.py`（有作者批注的稿子才有）放回作者原批注（`author_comments.xml`）并逐条回复；`notesN.py` 修改意见/编写说明（含参考答案），`auditN.py` 师生体验审计，`resN.py` 配套资源 zip。项目五起 `notesN.py` 把答案中的运行结果与实测输出逐条断言核对，不符时报错、不生成文档：改了程序或答案，生成失败先看断言。
+   - `pack*.py` 把解包的 docx 目录重新打包，并把样式子元素排回 OOXML 规定的顺序（模板由 WPS 保存，顺序不合规）；用 python-docx 新建的说明文档要给 `<w:zoom>` 补 `w:percent`。两处都是为通过 docx 技能的 `office/validate.py`。
    - 预览 PDF 用另一份 docx 渲染，只按 LibreOffice 替代字体重算代码注释前的空格（`CODE_LATIN_EM`），其余与清洁版相同。
-   - **`p3lib.py` 在各目录各有一份副本，版本不同**（project2-build 与 project3-build3 相同，project4-build、project3-build 较旧；project5-build 加了 switch/case/break/default 高亮，project6-build 又加了 continue）。改版式块只改当前项目那份，别顺手同步到别的项目。
+   - **`p3lib.py` 在各目录各有一份副本，版本不同**（project2-build 与 project3-build3 相同，project4-build、project3-build 较旧；project5-build 加了 switch/case/break/default 高亮，project6-build 又加了 continue）。改版式块只改当前项目那份，别顺手同步到别的项目。新项目复制上一项目的整个 `tools/projectN-build/` 改号，再改 `contentN.py` 等。
 
 ## 常用命令
 
@@ -51,6 +52,8 @@ CODE_DIR=<程序目录> bash wrun.sh 程序名…   # WEXTRA=-Wconversion 附加
 bash build2.sh [程序目录]            # 项目二，默认 ../../code/project02；FIGS=1 强制重画插图
 bash build3.sh /tmp/p3code           # 项目三，先把 examples/ 和 answers/ 复制到同一目录
 bash build.sh <code/project04/book 的绝对路径>   # 项目四
+FIGS=1 bash build6.sh [程序目录]     # 项目五、六（build5.sh 同理），默认 code/projectNN/book，CHECK= 指定 check 目录
+                                     # 输出 build/：pN.docx 清洁版、pN.pdf 预览、notesN.docx、auditN.docx、resN.zip
 python3 tools/cmtchk.py build/pN.pdf # 行尾注释对齐，应输出 groups off by >2.5pt: 0
 
 # 本机 <-> home-server（服务器地址用环境变量给出，不写进仓库）
