@@ -1,0 +1,4 @@
+eq_str.c: In function 'main':
+eq_str.c:12:11: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   12 |     if (s == "正常")                   // 错误：比较的是存放的位置
+      |           ^~

@@ -1,0 +1,10 @@
+bad_q14.c: In function 'main':
+bad_q14.c:8:5: error: ISO C90 forbids variable length array 'r' [-Werror=vla]
+    8 |     float r[n], sum, avg;              // 阻值、阻值之和、平均值
+      |     ^~~~~
+bad_q14.c:14:15: warning: format '%f' expects argument of type 'float *', but argument 2 has type 'double' [-Wformat=]
+   14 |         scanf("%f", r[i]);
+      |               ^~~~  ~~~~
+      |                      |
+      |                      double
+cc1.exe: some warnings being treated as errors

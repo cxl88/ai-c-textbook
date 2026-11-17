@@ -1,0 +1,7 @@
+bad_fidx.c: In function 'main':
+bad_fidx.c:9:23: error: array subscript is not an integer
+    9 |     printf("%.2f\n", v[1.5]);
+      |                       ^
+bad_fidx.c:7:11: warning: variable 'v' set but not used [-Wunused-but-set-variable]
+    7 |     float v[8] = {0};
+      |           ^

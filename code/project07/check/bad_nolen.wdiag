@@ -1,0 +1,5 @@
+bad_nolen.c: In function 'main':
+bad_nolen.c:7:9: error: array size missing in 'a'
+    7 |     int a[];
+      |         ^
+bad_nolen.c:7:9: warning: unused variable 'a' [-Wunused-variable]

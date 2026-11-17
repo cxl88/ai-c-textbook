@@ -18,18 +18,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | 项目四 | 初稿 Word | `tools/project4-build/content4.py` | `code/project04/{book,check}/` |
 | 项目五 | 初稿 Word | `tools/project5-build/content5.py`（`build5.sh` 一键生成） | `code/project05/{book,check}/` |
 | 项目六 | 初稿 Word | `tools/project6-build/content6.py`（`build6.sh` 一键生成） | `code/project06/{book,check}/` |
+| 项目七 | 初稿 Word | `tools/project7-build/content7.py`（`build7.sh` 一键生成） | `code/project07/{book,check}/` |
 | 附录A | v4 HTML | `book/parts/90_appx.html` | — |
 
 两类流水线：
 
 1. **HTML → 印刷 PDF（`book/`，v4）**：`parts/*.html` 用自定义标签写正文，`build.py` 预处理（代码高亮、运行窗口、自动编号 `⟦图…⟧`、不换行空格）→ Playwright/Chromium 打印 → `pdftotext` 读回页码回填目录和“第×页”、保证项目首页在奇数页 → pypdf 写 TrimBox/BleedBox、书签、合封面，另出电子阅读版。新增部分要加进 `build.py` 的 `BODY_PARTS`。`tools/word-export/` 从它的输出反向生成可编辑 Word（只是副本）。v5 起的 Word 稿都还没有并回 `book/parts/`。
-2. **docx 模板拼装（项目二～六）**：以项目一 v5 清洁版 docx 为版式模板，`p3lib.py` 复制模板里的版式块（标题、代码框、AI 卡片、课堂验收、趣味小站等）换上新内容。各项目目录结构相同：
+2. **docx 模板拼装（项目二～七）**：以项目一 v5 清洁版 docx 为版式模板，`p3lib.py` 复制模板里的版式块（标题、代码框、AI 卡片、课堂验收、趣味小站等）换上新内容。各项目目录结构相同：
    - `contentN.py` 正文；图/表/例题编号由 `FIGS`/`TABS`/`EXS` 列表按出现顺序生成，正文用 `fg()`/`tb()`/`ex()` 引用，**不要手写编号**；写出 `fig/nums.json` 供说明文档使用。`A(批注号, 段落)` 标作者批注锚点。
    - `figs*.py`（HTML/SVG）+ `shot.js` 截图；`consN.py` 由 `.wout` 拼出运行结果截图，键盘输入加下划线。
    - `repliesN.py`（有作者批注的稿子才有）放回作者原批注（`author_comments.xml`）并逐条回复；`notesN.py` 修改意见/编写说明（含参考答案），`auditN.py` 师生体验审计，`resN.py` 配套资源 zip。项目五起 `notesN.py` 把答案中的运行结果与实测输出逐条断言核对，不符时报错、不生成文档：改了程序或答案，生成失败先看断言。
    - `pack*.py` 把解包的 docx 目录重新打包，并把样式子元素排回 OOXML 规定的顺序（模板由 WPS 保存，顺序不合规）；用 python-docx 新建的说明文档要给 `<w:zoom>` 补 `w:percent`。两处都是为通过 docx 技能的 `office/validate.py`。
    - 预览 PDF 用另一份 docx 渲染，只按 LibreOffice 替代字体重算代码注释前的空格（`CODE_LATIN_EM`），其余与清洁版相同。
-   - **`p3lib.py` 在各目录各有一份副本，版本不同**（project2-build 与 project3-build3 相同，project4-build、project3-build 较旧；project5-build 加了 switch/case/break/default 高亮，project6-build 又加了 continue）。改版式块只改当前项目那份，别顺手同步到别的项目。新项目复制上一项目的整个 `tools/projectN-build/` 改号，再改 `contentN.py` 等。
+   - **`p3lib.py` 在各目录各有一份副本，版本不同**（project2-build 与 project3-build3 相同，project4-build、project3-build 较旧；project5-build 加了 switch/case/break/default 高亮，project6-build 又加了 continue，project7-build 与 project6-build 相同）。改版式块只改当前项目那份，别顺手同步到别的项目。新项目复制上一项目的整个 `tools/projectN-build/` 改号，再改 `contentN.py` 等。
 
 ## 常用命令
 
@@ -52,7 +53,7 @@ CODE_DIR=<程序目录> bash wrun.sh 程序名…   # WEXTRA=-Wconversion 附加
 bash build2.sh [程序目录]            # 项目二，默认 ../../code/project02；FIGS=1 强制重画插图
 bash build3.sh /tmp/p3code           # 项目三，先把 examples/ 和 answers/ 复制到同一目录
 bash build.sh <code/project04/book 的绝对路径>   # 项目四
-FIGS=1 bash build6.sh [程序目录]     # 项目五、六（build5.sh 同理），默认 code/projectNN/book，CHECK= 指定 check 目录
+FIGS=1 bash build6.sh [程序目录]     # 项目五～七（build5.sh、build7.sh 同理），默认 code/projectNN/book，CHECK= 指定 check 目录
                                      # 输出 build/：pN.docx 清洁版、pN.pdf 预览、notesN.docx、auditN.docx、resN.zip
 python3 tools/cmtchk.py build/pN.pdf # 行尾注释对齐，应输出 groups off by >2.5pt: 0
 
@@ -79,6 +80,7 @@ python tools/review/outline.py 输出目录 成品.docx…   # 成品的大纲�
 - `bad_` 开头：含编译错误或未定义行为，只编译不运行；`wc_` 开头：加 `-Wconversion` 的补充验证结果。
 - 死循环（项目六起）：先用 `wrun.sh` 编译，再在**同一个容器中**用 `tools/project6-build/wcap.sh` 限时运行（默认 5 秒），得到 `x.wcap`（开头的输出）和 `x.wcapret`（`timeout 5s lines=N bytes=M`），键盘输入放 `x.cin`。
 - 程序名不要以 `if_`、`for_` 等 cmd 内部命令开头：`wrun.sh` 生成的批处理会把它们当作命令解析出错。
+- 键盘输入含汉字时（项目七起）：`.in` 以 UTF-8 存放，`tools/project7-build/wrun.sh` 运行时转为 GBK 再送给程序，与在控制台中用输入法输入汉字时程序读到的字节相同；更早项目的 `wrun.sh` 把 `.in` 原样送入，不能用来实测中文输入。
 - 核对参考答案用的改动版程序：v4 在 `book/check/`，项目四在 `code/project04/check/`。配套资源包里的分组和改名由各项目的 `res*.py` / `prep_pack.py` 生成，仓库里不按资源包结构存放。
 - 示例头文件尽量只用 `stdio.h`、`math.h`、`string.h`（`code/project01-v5/snake.c` 仅 Windows，展示用）。
 - `<conwin ins="…">` 中多个输入用 `;;` 分隔，提示文字必须能在输出中找到。
