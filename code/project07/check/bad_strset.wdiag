@@ -1,0 +1,4 @@
+bad_strset.c: In function 'main':
+bad_strset.c:9:7: error: assignment to expression with array type
+    9 |     s = "正常";
+      |       ^

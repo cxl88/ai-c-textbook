@@ -1,0 +1,4 @@
+mut_repair.c: In function 'main':
+mut_repair.c:25:22: warning: comparison with string literal results in unspecified behavior [-Waddress]
+   25 |         if (state[i] != "支路正常")
+      |                      ^~

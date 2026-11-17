@@ -1,0 +1,9 @@
+cp_init2.c: In function 'main':
+cp_init2.c:8:18: warning: missing braces around initializer [-Wmissing-braces]
+    8 |     int b[][4] = {1, 2, 3, 4, 5};
+      |                  ^
+      |                   {         } {}
+cp_init2.c:9:19: warning: missing braces around initializer [-Wmissing-braces]
+    9 |     int c[2][3] = {1, 2, 3, 4, 5, 6};
+      |                   ^
+      |                    {      } {      }

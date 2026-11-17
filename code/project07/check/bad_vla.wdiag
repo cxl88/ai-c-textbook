@@ -1,0 +1,5 @@
+bad_vla.c: In function 'main':
+bad_vla.c:8:5: error: ISO C90 forbids variable length array 'v' [-Werror=vla]
+    8 |     float v[n];
+      |     ^~~~~
+cc1.exe: some warnings being treated as errors

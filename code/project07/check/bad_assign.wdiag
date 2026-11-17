@@ -1,0 +1,13 @@
+bad_assign.c: In function 'main':
+bad_assign.c:9:7: error: assignment to expression with array type
+    9 |     b = a;
+      |       ^
+bad_assign.c:10:9: error: expected expression before '{' token
+   10 |     c = {1, 2, 3};
+      |         ^
+bad_assign.c:7:33: warning: variable 'c' set but not used [-Wunused-but-set-variable]
+    7 |     int a[3] = {1, 2, 3}, b[3], c[3];
+      |                                 ^
+bad_assign.c:7:27: warning: variable 'b' set but not used [-Wunused-but-set-variable]
+    7 |     int a[3] = {1, 2, 3}, b[3], c[3];
+      |                           ^

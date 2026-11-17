@@ -1,0 +1,6 @@
+bad_amp.c: In function 'main':
+bad_amp.c:9:11: warning: format '%s' expects argument of type 'char *', but argument 2 has type 'char (*)[20]' [-Wformat=]
+    9 |     scanf("%s", &name);
+      |           ^~~~  ~~~~~
+      |                 |
+      |                 char (*)[20]

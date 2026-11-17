@@ -1,0 +1,6 @@
+a的长度：4
+a：Voltage  b：Volt
+strcmp(a, b)：1
+strcmp(b, a)：-1
+strcmp(b, "Volt")：0
+"支路正常"的长度：8

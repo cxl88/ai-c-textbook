@@ -1,0 +1,5 @@
+init2.c: In function 'main':
+init2.c:8:19: warning: missing braces around initializer [-Wmissing-braces]
+    8 |     int b[2][3] = {1, 2, 3, 4, 5, 6};      // 不分行，按行的顺序赋初值
+      |                   ^
+      |                    {      } {      }

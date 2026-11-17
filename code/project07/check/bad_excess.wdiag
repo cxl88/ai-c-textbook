@@ -1,0 +1,5 @@
+bad_excess.c: In function 'main':
+bad_excess.c:7:26: warning: excess elements in array initializer
+    7 |     int d[3] = {1, 2, 3, 4};
+      |                          ^
+bad_excess.c:7:26: note: (near initialization for 'd')

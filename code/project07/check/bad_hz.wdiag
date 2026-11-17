@@ -1,0 +1,5 @@
+bad_hz.c: In function 'main':
+bad_hz.c:7:14: warning: multi-character character constant [-Wmultichar]
+    7 |     char c = '开';
+      |              ^~~~
+bad_hz.c:7:14: warning: overflow in conversion from 'int' to 'char' changes value from '49066' to '-86' [-Woverflow]
